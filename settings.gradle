@@ -1,2 +1,4 @@
+include ':core-impl'
+include ':core-api'
 include ':app'
 rootProject.name = "PolyGo"
