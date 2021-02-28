@@ -1,4 +1,12 @@
 package com.mishok.polygo.app
 
-class ComponentInitializer {
+import com.mishok.polygo.utils.ComponentRegistry
+
+class ComponentInitializer(private val app: PolyGoApplication) {
+
+    fun initAppComponent() {
+        ComponentRegistry.register {
+            PolyGoApplication
+        }
+    }
 }

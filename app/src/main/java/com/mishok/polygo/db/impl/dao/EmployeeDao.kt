@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 interface EmployeeDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertEmployees(employees: List<LocalEmployees>): Flow<Long>
+    fun insertEmployees(employees: List<LocalEmployees>)
 
     @Query(value = LocalEmployees.QUERY_GET_ALL)
     fun getAllEmployee(): Flow<List<LocalEmployees>>

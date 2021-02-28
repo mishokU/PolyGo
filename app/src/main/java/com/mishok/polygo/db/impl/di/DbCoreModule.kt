@@ -3,8 +3,10 @@ package com.mishok.polygo.db.impl.di
 import android.content.Context
 import androidx.room.Room
 import com.mishok.polygo.db.PolyGoDatabase
+import dagger.Module
 import dagger.Provides
 
+@Module
 class DbCoreModule {
 
     @Provides
