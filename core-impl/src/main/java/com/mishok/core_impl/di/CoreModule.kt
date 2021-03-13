@@ -2,6 +2,8 @@ package com.mishok.core_impl.di
 
 import android.app.Application
 import android.content.Context
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.GoogleApiAvailability
 import com.mishok.core_api.di.GooglePlayAvailable
 import com.mishok.core_api.utils.LocaleManager
 import com.mishok.core_impl.utils.LocaleManagerImpl

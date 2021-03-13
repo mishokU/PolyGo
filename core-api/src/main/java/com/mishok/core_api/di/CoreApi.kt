@@ -10,5 +10,11 @@ interface CoreApi {
     fun context(): Context
     fun application(): Application
 
+    @IsDebug
+    fun isDebug(): Boolean
+    @AppVersion
+    fun appVersion(): String
+    @GooglePlayAvailable
+    fun googlePlayAvailable(): Boolean
 
 }
