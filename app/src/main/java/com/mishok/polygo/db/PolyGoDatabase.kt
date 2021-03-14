@@ -6,9 +6,9 @@ import com.mishok.polygo.db.api.models.LocalEmployees
 import com.mishok.polygo.db.impl.dao.EmployeeDao
 
 @Database(
-    entities = [
-        LocalEmployees::class,
-    ], version = 1
+        entities = [
+            LocalEmployees::class,
+        ], version = 1, exportSchema = false
 )
 abstract class PolyGoDatabase : RoomDatabase() {
 

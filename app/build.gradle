@@ -3,8 +3,6 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
-    id 'com.google.gms.google-services'
-    id 'com.google.firebase.crashlytics'
     id 'androidx.navigation.safeargs.kotlin'
 }
 
@@ -54,7 +52,11 @@ dependencies {
     implementation project(':core-api')
     implementation project(':core-impl')
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin"
+    // Kotlin coroutines
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9"
+
     implementation 'androidx.core:core-ktx:1.3.2'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.3.0'
@@ -63,19 +65,18 @@ dependencies {
     // UI
     implementation "com.google.android.material:material:1.3.0"
 
+
     //Navigation
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.3'
 
     //Room
-    implementation "androidx.room:room-runtime:2.2.6"
-    implementation "androidx.room:room-coroutines:2.1.0-alpha04"
-    kapt "androidx.room:room-compiler:2.2.6"
+    implementation "androidx.room:room-runtime:2.2.5"
+    implementation "androidx.room:room-ktx:2.2.5"
+
+    kapt "androidx.room:room-compiler:2.2.5"
 
     implementation 'com.google.android.gms:play-services-base:17.6.0'
-
-    testImplementation "androidx.room:room-ktx:2.2.6"
-    testImplementation "androidx.room:room-runtime:2.2.6"
 
     //Dagger
     implementation "com.google.dagger:dagger-android:2.27"
@@ -99,9 +100,12 @@ dependencies {
     // Add the Firebase Crashlytics SDK.
     implementation 'com.google.firebase:firebase-crashlytics-ktx:17.3.1'
 
-    // Kotlin coroutines
-    def coroutines_version = "1.3.6"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+    // ViewModel and LiveData
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0"
+
+    kapt 'androidx.lifecycle:lifecycle-compiler:2.3.0'
 
     //ArCore
     implementation 'com.google.ar:core:1.23.0'

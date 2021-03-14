@@ -10,7 +10,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:name=".app.PolyGoApplication"
         android:theme="@style/splash_screen_theme">
+
         <activity android:name=".tab"></activity>
         <!--
          "AR Optional" app, contains non-AR features that can be used when
