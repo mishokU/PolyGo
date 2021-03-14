@@ -10,13 +10,18 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.PolyGo">
-
-        <!-- "AR Optional" app, contains non-AR features that can be used when
-         "Google Play Services for AR" (ARCore) is not available. -->
+        android:theme="@style/splash_screen_theme">
+        <activity android:name=".tab"></activity>
+        <!--
+         "AR Optional" app, contains non-AR features that can be used when
+         "Google Play Services for AR" (ARCore) is not available.
+        -->
         <meta-data
             android:name="com.google.ar.core"
             android:value="optional" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".main.MainActivity">
             <intent-filter>
