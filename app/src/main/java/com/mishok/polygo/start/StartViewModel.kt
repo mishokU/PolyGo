@@ -13,7 +13,7 @@ class StartViewModel : BaseViewModelImpl<StartState>() {
         get() = StartState()
 
     fun finishApplication() {
-
+        state = state.copy(finish = true)
     }
 
 }

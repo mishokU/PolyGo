@@ -14,7 +14,7 @@ inline fun <reified VM : ViewModel> LifecycleOwner.retrieveViewModel(factory: Vi
 }
 
 inline fun <reified VM : ViewModel> Fragment.retrieveSharedViewModel(factory: ViewModelProvider.Factory): VM {
-    return ViewModelProviders.of(requireActivity(), factory).get(VM::class.java)
+    return ViewModelProvider(requireActivity(), factory).get(VM::class.java)
 }
 
 private object UninitializedValue

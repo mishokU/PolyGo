@@ -5,6 +5,7 @@ import android.content.Context
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import com.mishok.core_api.di.GooglePlayAvailable
+import com.mishok.core_api.utils.AppCodeProvider
 import com.mishok.core_api.utils.LocaleManager
 import com.mishok.core_impl.utils.LocaleManagerImpl
 import dagger.Module
@@ -21,6 +22,12 @@ class CoreModule {
         @JvmStatic
         fun providesContext(application: Application): Context {
             return application
+        }
+
+        @Provides
+        @JvmStatic
+        fun provideAppCodeProvider(context: Context): AppCodeProvider {
+            return context.applicationContext as AppCodeProvider
         }
 
         @Provides

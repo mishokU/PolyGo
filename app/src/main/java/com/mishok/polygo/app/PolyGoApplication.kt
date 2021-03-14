@@ -20,8 +20,7 @@ class PolyGoApplication : DaggerApplication(), AppCodeProvider {
     private val localeManager: LocaleManager
         get() = ComponentRegistry.get<AppComponent>().localeManager()
 
-
-    private val applicationInjector = DaggerAppComponent.builder().application(this).build()
+    private val applicationInjector = ComponentInitializer(this).initAppComponent()
 
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
         return applicationInjector
@@ -31,7 +30,7 @@ class PolyGoApplication : DaggerApplication(), AppCodeProvider {
         super.onCreate()
         appCodeString = UUID.randomUUID().toString()
         initTimber()
-        localeManager.setLocale()
+        //localeManager.setLocale()
     }
 
     private fun initTimber() {

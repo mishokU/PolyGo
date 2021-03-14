@@ -1,16 +1,21 @@
 package com.mishok.polygo.db.impl.di
 
+import com.mishok.core_api.di.CoreApi
+import com.mishok.polygo.db.api.di.DbCoreApi
 import dagger.Component
 
 
 @Component(
-    modules = [
-        DbProvidersModule::class,
-        DbCoreModule::class
-    ]
+        dependencies = [
+            DbCoreDependencies::class
+        ],
+        modules = [
+            DbProvidersModule::class,
+            DbCoreModule::class
+        ]
 )
-interface DbCoreComponent {
+interface DbCoreComponent : DbCoreApi {
 
-    @Component
-    interface DbCoreDependencies
+    @Component(dependencies = [CoreApi::class])
+    interface DbCoreDependenciesComponent : DbCoreDependencies
 }

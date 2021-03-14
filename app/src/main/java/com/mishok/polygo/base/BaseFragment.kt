@@ -1,16 +1,15 @@
 package com.mishok.polygo.base
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.mishok.polygo.base.api.BaseViewModel
 import com.mishok.polygo.base.api.BaseViewState
@@ -18,6 +17,7 @@ import com.mishok.polygo.utils.SharedViewModelFactory
 import com.mishok.polygo.utils.lifecycleAwareLazy
 import com.mishok.polygo.utils.retrieveSharedViewModel
 import com.mishok.polygo.utils.retrieveViewModel
+import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.DaggerFragment
 
 
@@ -38,6 +38,11 @@ abstract class BaseFragment<VS : BaseViewState, VM : BaseViewModel<VS>> : Dagger
             lifecycleAwareLazy(this) {
                 retrieveSharedViewModel(viewModelFactory)
             }
+
+    override fun onAttach(context: Context) {
+        AndroidSupportInjection.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(layoutRes, container, false)
@@ -70,7 +75,7 @@ abstract class BaseFragment<VS : BaseViewState, VM : BaseViewModel<VS>> : Dagger
     protected abstract fun onStateChange(state: VS)
 
     private fun observeNavigationEvent() {
-        viewModel.navigationEvent.observe(viewLifecycleOwner, Observer { navEvent ->
+        viewModel.navigationEvent.observe(viewLifecycleOwner, { navEvent ->
             val consume = navEvent?.consume()
             consume?.invoke(findNavController())
         })

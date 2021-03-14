@@ -13,6 +13,8 @@ import javax.inject.Singleton
 @Component(
         modules = [
             AndroidInjectionModule::class,
+            ActivityModule::class,
+            FragmentModule::class,
             AppModule::class
         ],
         dependencies = [
@@ -33,6 +35,7 @@ interface AppComponent :
 
         fun dbCoreApi(dbCoreApi: DbCoreApi): Builder
         fun coreApi(coreApi: CoreApi): Builder
+
         fun build(): AppComponent
     }
 
