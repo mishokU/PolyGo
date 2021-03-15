@@ -1,12 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainNavGraph"
     app:startDestination="@id/startFragment">
 
     <fragment
         android:id="@+id/startFragment"
-        android:name="com.mishok.polygo.start.StartFragment"
-        android:label="StartFragment" />
+        android:name="com.mishok.polygo.ui.start.StartFragment"
+        android:label="StartFragment">
+        <action
+            android:id="@+id/action_startFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+        <action
+            android:id="@+id/action_startFragment_to_bookmarksFragment"
+            app:destination="@id/bookmarksFragment" />
+        <action
+            android:id="@+id/action_startFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_startFragment_to_radarFragment"
+            app:destination="@id/radarFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.mishok.polygo.ui.map.MapsFragment"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_maps" />
+
+    <fragment
+        android:id="@+id/bookmarksFragment"
+        android:name="com.mishok.polygo.ui.bookmarks.BookmarksFragment"
+        android:label="fragment_bookmarks"
+        tools:layout="@layout/fragment_bookmarks" />
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.mishok.polygo.ui.search.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/radarFragment"
+        android:name="com.mishok.polygo.ui.radar.RadarFragment"
+        android:label="fragment_radar"
+        tools:layout="@layout/fragment_radar" />
 
 </navigation>

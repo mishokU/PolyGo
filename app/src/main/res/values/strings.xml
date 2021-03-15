@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">PolyGo</string>
     <string name="button">Button</string>
+    <string name="search">Поиск</string>
+    <string name="seve_to_the_bookmarks_text">Сохраняйте в закладки всё что вам нужно в Политехе.</string>
+    <string name="radar_desription">Радар позволяет узнать что находится в любом здании или вокруг него.</string>
+    <string name="campus_map">Карта кампуса</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
