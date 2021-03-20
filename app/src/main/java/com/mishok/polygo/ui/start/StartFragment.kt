@@ -4,13 +4,18 @@ import android.os.Bundle
 import android.view.View
 import com.mishok.polygo.R
 import com.mishok.polygo.base.BaseFragment
+import com.mishok.polygo.base.FragmentConfiguration
 import kotlinx.android.synthetic.main.fragment_start.*
 
 class StartFragment : BaseFragment<StartState, StartViewModel>() {
 
     override val viewModel: StartViewModel by lazyViewModel()
 
-    override val layoutRes: Int = R.layout.fragment_start
+    override fun baseConfiguration(configuration: FragmentConfiguration) {
+        super.baseConfiguration(configuration.copy(
+                layoutRes = R.layout.fragment_start
+        ))
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

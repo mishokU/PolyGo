@@ -14,13 +14,20 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.mishok.polygo.R
 import com.mishok.polygo.base.BaseFragment
+import com.mishok.polygo.base.FragmentConfiguration
 import javax.inject.Inject
 
 class MapsFragment : BaseFragment<MapsState, MapsViewModel>() {
 
     override val viewModel: MapsViewModel by lazyViewModel()
 
-    override val layoutRes: Int = R.layout.fragment_maps
+
+    override fun baseConfiguration(configuration: FragmentConfiguration) {
+        super.baseConfiguration(configuration.copy(
+                layoutRes = R.layout.fragment_maps
+        )
+        )
+    }
 
     private val callback = OnMapReadyCallback { googleMap ->
         /**

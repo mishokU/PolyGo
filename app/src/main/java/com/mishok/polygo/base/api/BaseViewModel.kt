@@ -12,6 +12,7 @@ interface BaseViewModel<VS : BaseViewState> {
     val initialState: VS
     val viewState: MutableLiveData<VS>
     val navigationEvent: MutableLiveData<SingleEvent<NavController.() -> Any>>
+
     var state: VS
     var stateAsync: VS
 

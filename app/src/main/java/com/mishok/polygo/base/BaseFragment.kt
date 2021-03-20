@@ -11,6 +11,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
 import com.mishok.polygo.base.api.BaseViewModel
 import com.mishok.polygo.base.api.BaseViewState
 import com.mishok.polygo.utils.SharedViewModelFactory
@@ -27,7 +30,17 @@ abstract class BaseFragment<VS : BaseViewState, VM : BaseViewModel<VS>> : Dagger
 
     protected abstract val viewModel: VM
 
-    abstract val layoutRes: Int
+    protected var asyncAdapter: AsyncListDifferDelegationAdapter<Any>? = null
+    protected var layoutRes: Int? = null
+    protected var recycerView: Any? = null
+    protected var orientation: Int = RecyclerView.VERTICAL
+
+    open fun baseConfiguration(configuration: FragmentConfiguration) {
+        this.layoutRes = configuration.layoutRes
+        this.asyncAdapter = configuration.adapter
+        this.recycerView = configuration.recyclerView
+        this.orientation = configuration.orientation
+    }
 
     protected inline fun <reified VM : ViewModel> lazyViewModel(): Lazy<VM> =
             lifecycleAwareLazy(this) {
@@ -45,7 +58,7 @@ abstract class BaseFragment<VS : BaseViewState, VM : BaseViewModel<VS>> : Dagger
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(layoutRes, container, false)
+        return layoutRes?.let { inflater.inflate(it, container, false) }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -57,6 +70,13 @@ abstract class BaseFragment<VS : BaseViewState, VM : BaseViewModel<VS>> : Dagger
                         onBackPressed()
                     }
                 })
+        initList()
+    }
+
+    private fun initList() = with(recycerView as RecyclerView) {
+        layoutManager = LinearLayoutManager(context, orientation, false)
+        adapter = asyncAdapter
+        setHasFixedSize(true)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
