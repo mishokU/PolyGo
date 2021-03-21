@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface SearchProvider {
 
-    suspend fun saveSearch(search: LocalSearching)
+    fun saveSearch(search: LocalSearching)
 
     suspend fun getAllSearching(): Flow<List<LocalSearching>>
 }

@@ -23,6 +23,4 @@ abstract class FragmentModule {
     @ContributesAndroidInjector
     abstract fun contributeRadarFragment(): RadarFragment
 
-    @ContributesAndroidInjector
-    abstract fun contributeSearchFragment(): SearchFragment
 }

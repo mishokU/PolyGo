@@ -15,7 +15,6 @@ class SharedViewModelFactory : ViewModelProvider.Factory {
             StartViewModel::class.java -> StartViewModel() as T
             MapsViewModel::class.java -> MapsViewModel() as T
             BookmarksViewModel::class.java -> BookmarksViewModel() as T
-            SearchViewModel::class.java -> SearchViewModel() as T
             RadarViewModel::class.java -> RadarViewModel() as T
             else -> throw IllegalAccessException(modelClass.name)
         }

@@ -9,25 +9,25 @@ import com.mishok.polygo.base.BaseFragment
 import com.mishok.polygo.base.FragmentConfiguration
 import com.mishok.polygo.ui.search.adapter.SearchAdapter
 import kotlinx.android.synthetic.main.fragment_search.*
+import javax.inject.Inject
 
 class SearchFragment : BaseFragment<SearchState, SearchViewModel>() {
 
-    override val viewModel: SearchViewModel by lazyViewModel()
+    @Inject
+    override lateinit var viewModel: SearchViewModel
 
-    override fun baseConfiguration(configuration: FragmentConfiguration) {
-        super.baseConfiguration(
-                configuration.copy(
-                        layoutRes = R.layout.fragment_search,
-                        recyclerView = itemsRecyclerView,
-                        orientation = RecyclerView.VERTICAL,
-                        adapter = SearchAdapter(viewModel)
-                )
-        )
-    }
+    override var configuration: FragmentConfiguration = FragmentConfiguration(
+            layoutRes = R.layout.fragment_search,
+            recyclerView = itemsRecyclerView,
+            orientation = RecyclerView.VERTICAL,
+            adapter = SearchAdapter {
+
+            }
+    )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        viewModel.loadSearching()
     }
 
     override fun onStateChange(state: SearchState) {

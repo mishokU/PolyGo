@@ -1,5 +1,6 @@
 package com.mishok.polygo.ui.search
 
+import androidx.lifecycle.LifecycleObserver
 import com.mishok.polygo.base.BaseViewModelImpl
 import com.mishok.polygo.db.api.models.LocalSearching
 import com.mishok.polygo.domain.search.SearchInteractor
@@ -11,25 +12,19 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class SearchViewModel : BaseViewModelImpl<SearchState>(), SearchCallback {
-
-    @Inject
-    lateinit var searchInteractor: SearchInteractor
-
-    @Inject
-    @CoroutineScopeIO
-    lateinit var coroutineScope: CoroutineScope
+class SearchViewModel @Inject constructor(
+        private val searchInteractor: SearchInteractor,
+        private val coroutineScope: CoroutineScope
+) : BaseViewModelImpl<SearchState>(), LifecycleObserver, SearchCallback {
 
     override val initialState: SearchState = SearchState()
 
-    init {
-        loadSearching()
-    }
-
-    private fun loadSearching() {
+    fun loadSearching() {
         coroutineScope.launch {
             searchInteractor.loadAllSearching().collect {
-                state = state.copy(list = it)
+                withContext(Dispatchers.Main) {
+                    state = state.copy(list = it)
+                }
             }
         }
     }

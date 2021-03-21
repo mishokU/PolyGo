@@ -6,6 +6,7 @@ import com.mishok.core_api.di.IsDebug
 import com.mishok.polygo.db.PolyGoDatabase
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 @Module
 class DbCoreModule {
@@ -19,5 +20,7 @@ class DbCoreModule {
     @Provides
     fun provideEmployeeDao(db: PolyGoDatabase) = db.employeeDao()
 
+    @Provides
+    fun provideSearchDao(db: PolyGoDatabase) = db.searchDao()
 
 }

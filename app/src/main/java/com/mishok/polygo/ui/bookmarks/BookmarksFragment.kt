@@ -11,16 +11,9 @@ import com.mishok.polygo.base.FragmentConfiguration
 import javax.inject.Inject
 
 
-class BookmarksFragment : BaseFragment<BookmarksState, BookmarksViewModel>() {
+class BookmarksFragment(override var configuration: FragmentConfiguration) : BaseFragment<BookmarksState, BookmarksViewModel>() {
 
     override val viewModel: BookmarksViewModel by lazyViewModel()
-
-    override fun baseConfiguration(configuration: FragmentConfiguration) {
-        super.baseConfiguration(configuration.copy(
-                layoutRes = R.layout.fragment_bookmarks
-        )
-        )
-    }
 
     override fun onStateChange(state: BookmarksState) {
 

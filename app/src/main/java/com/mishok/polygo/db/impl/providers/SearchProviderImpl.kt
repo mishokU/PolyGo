@@ -10,7 +10,7 @@ class SearchProviderImpl @Inject constructor(
         private val searchDao: SearchDao
 ) : SearchProvider {
 
-    override suspend fun saveSearch(search: LocalSearching) {
+    override fun saveSearch(search: LocalSearching) {
         searchDao.insert(search)
     }
 

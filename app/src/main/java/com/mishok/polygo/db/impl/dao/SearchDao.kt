@@ -1,14 +1,19 @@
 package com.mishok.polygo.db.impl.dao
 
 import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import com.mishok.polygo.db.api.models.LocalSearching
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface SearchDao {
 
-    suspend fun insert(search: LocalSearching)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(search: LocalSearching)
 
-    suspend fun getAllSearching(): Flow<List<LocalSearching>>
+    @Query(value = LocalSearching.QUERY_GET_ALL)
+    fun getAllSearching(): Flow<List<LocalSearching>>
 
 }

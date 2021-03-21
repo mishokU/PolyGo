@@ -30,17 +30,7 @@ abstract class BaseFragment<VS : BaseViewState, VM : BaseViewModel<VS>> : Dagger
 
     protected abstract val viewModel: VM
 
-    protected var asyncAdapter: AsyncListDifferDelegationAdapter<Any>? = null
-    protected var layoutRes: Int? = null
-    protected var recycerView: Any? = null
-    protected var orientation: Int = RecyclerView.VERTICAL
-
-    open fun baseConfiguration(configuration: FragmentConfiguration) {
-        this.layoutRes = configuration.layoutRes
-        this.asyncAdapter = configuration.adapter
-        this.recycerView = configuration.recyclerView
-        this.orientation = configuration.orientation
-    }
+    abstract var configuration: FragmentConfiguration
 
     protected inline fun <reified VM : ViewModel> lazyViewModel(): Lazy<VM> =
             lifecycleAwareLazy(this) {
@@ -58,7 +48,7 @@ abstract class BaseFragment<VS : BaseViewState, VM : BaseViewModel<VS>> : Dagger
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return layoutRes?.let { inflater.inflate(it, container, false) }
+        return inflater.inflate(configuration.layoutRes, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -73,16 +63,17 @@ abstract class BaseFragment<VS : BaseViewState, VM : BaseViewModel<VS>> : Dagger
         initList()
     }
 
-    private fun initList() = with(recycerView as RecyclerView) {
-        layoutManager = LinearLayoutManager(context, orientation, false)
-        adapter = asyncAdapter
-        setHasFixedSize(true)
+    private fun initList() = with(configuration.recyclerView) {
+        this?.layoutManager = LinearLayoutManager(context, configuration.orientation, false)
+        this?.adapter = configuration.adapter
+        this?.setHasFixedSize(true)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         observeState(::onStateChange)
         observeNavigationEvent()
+
     }
 
     private fun observeState(callback: (state: VS) -> Unit) {

@@ -6,11 +6,11 @@ import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegate
 import com.mishok.polygo.ui.base.CreateAdapterListItem
 import com.mishok.polygo.ui.search.deletegates.SearchAdapterDelegate
 
-class SearchAdapter(callback: SearchCallback) : AsyncListDifferDelegationAdapter<Any>(SearchItemCallback()) {
+class SearchAdapter(callback: (SearchCallback) -> Unit) : AsyncListDifferDelegationAdapter<Any>(SearchItemCallback()) {
 
     init {
         sequenceOf(
-                SearchAdapterDelegate(callback::onSearchClick)
+                SearchAdapterDelegate(callback)
         ).forEach {
             delegatesManager.addDelegate(it)
         }

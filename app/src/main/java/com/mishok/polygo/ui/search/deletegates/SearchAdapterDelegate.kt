@@ -7,10 +7,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.AbsListItemAdapterDelegate
 import com.mishok.polygo.R
 import com.mishok.polygo.ui.base.CreateAdapterListItem
+import com.mishok.polygo.ui.search.adapter.SearchCallback
 import kotlinx.android.extensions.LayoutContainer
 
 class SearchAdapterDelegate(
-        private val onClick: (CreateAdapterListItem.SearchItem) -> Unit
+        private val onClick: (SearchCallback) -> Unit
 ) : AbsListItemAdapterDelegate<
         CreateAdapterListItem.SearchItem, Any,
         SearchAdapterDelegate.ViewHolder
@@ -31,7 +32,7 @@ class SearchAdapterDelegate(
 
     class ViewHolder(
             override val containerView: View,
-            onClick: (CreateAdapterListItem.SearchItem) -> Unit
+            onClick: (SearchCallback) -> Unit
     ) : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
         fun bind(item: CreateAdapterListItem.SearchItem) {
