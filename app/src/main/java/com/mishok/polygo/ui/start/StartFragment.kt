@@ -9,12 +9,9 @@ import kotlinx.android.synthetic.main.fragment_start.*
 
 class StartFragment : BaseFragment<StartState, StartViewModel>() {
 
-
     override val viewModel: StartViewModel by lazyViewModel()
 
-    override var configuration: FragmentConfiguration = FragmentConfiguration(
-            layoutRes = R.layout.fragment_start
-    )
+    override val layoutRes: Int = R.layout.fragment_start
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

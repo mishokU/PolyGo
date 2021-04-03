@@ -2,6 +2,7 @@ package com.mishok.polygo.app
 
 import com.mishok.core_api.utils.AppCodeProvider
 import com.mishok.core_api.utils.LocaleManager
+import com.mishok.core_api.utils.PolyGoLocationManager
 import com.mishok.polygo.BuildConfig
 import com.mishok.polygo.di.AppComponent
 import com.mishok.polygo.di.DaggerAppComponent
@@ -16,9 +17,6 @@ class PolyGoApplication : DaggerApplication(), AppCodeProvider {
 
     override val appCode: String
         get() = appCodeString
-
-    private val localeManager: LocaleManager
-        get() = ComponentRegistry.get<AppComponent>().localeManager()
 
     private val applicationInjector = ComponentInitializer(this).initAppComponent()
 

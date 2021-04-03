@@ -11,13 +11,14 @@ import com.mishok.polygo.base.FragmentConfiguration
 import javax.inject.Inject
 
 
-class RadarFragment(override var configuration: FragmentConfiguration) : BaseFragment<RadarState, RadarViewModel>() {
+class RadarFragment : BaseFragment<RadarState, RadarViewModel>() {
 
     override val viewModel: RadarViewModel by lazyViewModel()
+
+    override val layoutRes: Int = R.layout.fragment_radar
 
     override fun onStateChange(state: RadarState) {
 
     }
-
 
 }

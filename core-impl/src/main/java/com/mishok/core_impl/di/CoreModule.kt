@@ -7,9 +7,12 @@ import com.google.android.gms.common.GoogleApiAvailability
 import com.mishok.core_api.di.GooglePlayAvailable
 import com.mishok.core_api.utils.AppCodeProvider
 import com.mishok.core_api.utils.LocaleManager
+import com.mishok.core_api.utils.PolyGoLocationManager
 import com.mishok.core_impl.utils.LocaleManagerImpl
+import com.mishok.core_impl.utils.PolyGoLocationManagerImpl
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 
 @Module
@@ -33,6 +36,12 @@ class CoreModule {
         @Provides
         @JvmStatic
         fun provideLocaleManager(context: Context): LocaleManager = LocaleManagerImpl(context)
+
+        @Provides
+        @Singleton
+        @JvmStatic
+        fun providePolyGoLocationManager(context: Context): PolyGoLocationManager =
+            PolyGoLocationManagerImpl(context)
 
         @Provides
         @JvmStatic

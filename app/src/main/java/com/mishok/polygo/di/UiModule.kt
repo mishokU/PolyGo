@@ -7,9 +7,13 @@ import dagger.Provides
 import javax.inject.Provider
 
 
-@Module(includes = [
-    SearchModule::class
-])
+@Module(
+    includes = [
+        SearchModule::class,
+        BookmarksModule::class,
+        MapsModule::class
+    ]
+)
 class UiModule {
 
     @Provides

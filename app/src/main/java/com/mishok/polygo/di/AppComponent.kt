@@ -11,18 +11,19 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(
-        modules = [
-            AndroidInjectionModule::class,
-            ActivityModule::class,
-            FragmentModule::class,
-            SearchModule::class,
-            UiModule::class,
-            AppModule::class
-        ],
-        dependencies = [
-            DbCoreApi::class,
-            CoreApi::class
-        ]
+    modules = [
+        AndroidInjectionModule::class,
+        ActivityModule::class,
+        FragmentModule::class,
+        SearchModule::class,
+        BookmarksModule::class,
+        UiModule::class,
+        AppModule::class
+    ],
+    dependencies = [
+        DbCoreApi::class,
+        CoreApi::class
+    ]
 )
 interface AppComponent :
         CoreApi,

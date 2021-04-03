@@ -11,18 +11,19 @@ import com.mishok.polygo.ui.search.adapter.SearchCallback
 import kotlinx.android.extensions.LayoutContainer
 
 class SearchAdapterDelegate(
-        private val onClick: (SearchCallback) -> Unit
+    private val onClick: SearchCallback
 ) : AbsListItemAdapterDelegate<
         CreateAdapterListItem.SearchItem, Any,
-        SearchAdapterDelegate.ViewHolder
-        >() {
+        SearchAdapterDelegate.ViewHolder>() {
 
-    override fun isForViewType(item: Any, items: MutableList<Any>, position: Int): Boolean = item is CreateAdapterListItem.SearchItem
+    override fun isForViewType(item: Any, items: MutableList<Any>, position: Int): Boolean =
+        item is CreateAdapterListItem.SearchItem
 
     override fun onCreateViewHolder(parent: ViewGroup): ViewHolder {
         return ViewHolder(
-                containerView = LayoutInflater.from(parent.context).inflate(R.layout.item_search, parent, false),
-                onClick = onClick
+            containerView = LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_search, parent, false),
+            onClick = onClick
         )
     }
 
@@ -31,8 +32,8 @@ class SearchAdapterDelegate(
     }
 
     class ViewHolder(
-            override val containerView: View,
-            onClick: (SearchCallback) -> Unit
+        override val containerView: View,
+        onClick: SearchCallback
     ) : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
         fun bind(item: CreateAdapterListItem.SearchItem) {

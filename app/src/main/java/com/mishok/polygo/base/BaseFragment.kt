@@ -30,7 +30,7 @@ abstract class BaseFragment<VS : BaseViewState, VM : BaseViewModel<VS>> : Dagger
 
     protected abstract val viewModel: VM
 
-    abstract var configuration: FragmentConfiguration
+    abstract val layoutRes: Int
 
     protected inline fun <reified VM : ViewModel> lazyViewModel(): Lazy<VM> =
             lifecycleAwareLazy(this) {
@@ -48,7 +48,7 @@ abstract class BaseFragment<VS : BaseViewState, VM : BaseViewModel<VS>> : Dagger
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(configuration.layoutRes, container, false)
+        return inflater.inflate(layoutRes, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -60,13 +60,6 @@ abstract class BaseFragment<VS : BaseViewState, VM : BaseViewModel<VS>> : Dagger
                         onBackPressed()
                     }
                 })
-        initList()
-    }
-
-    private fun initList() = with(configuration.recyclerView) {
-        this?.layoutManager = LinearLayoutManager(context, configuration.orientation, false)
-        this?.adapter = configuration.adapter
-        this?.setHasFixedSize(true)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

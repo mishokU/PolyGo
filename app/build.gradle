@@ -21,13 +21,16 @@ android {
     }
 
     buildTypes {
+
         debug {
             applicationIdSuffix '.debug'
             versionNameSuffix '-DEBUG'
+            resValue "string", 'YandexKey','0c16d14c-e671-4897-9c62-b813223c1395'
         }
 
         release {
             minifyEnabled false
+            resValue "string", 'YandexKey','0c16d14c-e671-4897-9c62-b813223c1395'
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -100,18 +103,21 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.11.0'
 
     // Add the Firebase Crashlytics SDK.
-    implementation 'com.google.firebase:firebase-crashlytics-ktx:17.4.0'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx:17.4.1'
 
     // ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.0"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
 
     //noinspection LifecycleAnnotationProcessorWithJava8
-    kapt 'androidx.lifecycle:lifecycle-compiler:2.3.0'
+    kapt 'androidx.lifecycle:lifecycle-compiler:2.3.1'
 
     //ArCore
     implementation 'com.google.ar:core:1.23.0'
+
+    // Основная библиотека MapKit.
+    implementation 'com.yandex.android:mapkit:3.5.0'
 
     implementation 'com.hannesdorfmann:adapterdelegates4-kotlin-dsl:4.3.0'
 

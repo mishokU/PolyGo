@@ -6,11 +6,13 @@ import com.mishok.core_api.di.CoreApi
 import com.mishok.core_api.di.IsDebug
 import dagger.BindsInstance
 import dagger.Component
+import javax.inject.Singleton
 
 @Component(
     modules = [CoreModule::class],
     dependencies = [CoreDependencies::class]
 )
+@Singleton
 interface CoreComponent : CoreApi {
 
     @Component

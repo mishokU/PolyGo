@@ -11,4 +11,6 @@
     <string name="search_people">Люди</string>
     <string name="search_all">Все</string>
     <string name="search_places">Места</string>
+    <string name="near">Рядом</string>
+    <string name="no_near_objects">Поблизости нет зданий</string>
 </resources>

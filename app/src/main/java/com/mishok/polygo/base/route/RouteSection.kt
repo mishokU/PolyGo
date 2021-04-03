@@ -19,6 +19,8 @@ sealed class RouteDestination(@IdRes val destination: Int) {
 
     object Radar : RouteDestination(R.id.radarFragment)
 
+    object EmployeeDetailed : RouteDestination(R.id.employeeBottomSheetDialogFragment)
+
     sealed class Login(@IdRes destination: Int) : RouteDestination(destination) {
 
         //object Credentials : Login(R.id.credentialsFragment)
