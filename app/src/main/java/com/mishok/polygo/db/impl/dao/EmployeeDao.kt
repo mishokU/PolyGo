@@ -16,4 +16,7 @@ interface EmployeeDao {
 
     @Query(value = LocalEmployees.QUERY_GET_ALL)
     fun getAllEmployee(): Flow<List<LocalEmployees>>
+
+    @Query(value = LocalEmployees.QUERY_GET_SAVED)
+    fun getSavedEmployees(): Flow<List<LocalEmployees>>
 }

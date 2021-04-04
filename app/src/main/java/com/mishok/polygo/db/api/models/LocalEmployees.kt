@@ -8,24 +8,28 @@ import org.jetbrains.annotations.PropertyKey
 @Entity(tableName = LocalEmployees.TABLE_NAME)
 data class LocalEmployees(
 
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = COLUMN_ID)
-    val id: Long,
+        @PrimaryKey(autoGenerate = true)
+        @ColumnInfo(name = COLUMN_ID)
+        val id: Long,
 
-    @ColumnInfo(name = COLUMN_NAME)
-    val name: String,
+        @ColumnInfo(name = COLUMN_NAME)
+        val name: String,
 
-    @ColumnInfo(name = COLUMN_AVATAR_URL)
-    val avatar: String,
+        @ColumnInfo(name = COLUMN_AVATAR_URL)
+        val avatar: String,
 
-    @ColumnInfo(name = COLUMN_CONTACTS)
-    val contacts: String,
+        @ColumnInfo(name = COLUMN_CONTACTS)
+        val contacts: String,
 
-    @ColumnInfo(name = COLUMN_POSITION)
-    val position: String,
+        @ColumnInfo(name = COLUMN_POSITION)
+        val position: String,
 
-    @ColumnInfo(name = COLUMN_SCHEDULE_URL)
-    val scheduleUrl: String
+        @ColumnInfo(name = COLUMN_SCHEDULE_URL)
+        val scheduleUrl: String,
+
+        @ColumnInfo(name = COLUMN_BOOKMARK)
+        val saved: Boolean
+
 ) {
     companion object {
 
@@ -36,9 +40,14 @@ data class LocalEmployees(
         const val COLUMN_AVATAR_URL = "avatar_url"
         const val COLUMN_POSITION = "position"
         const val COLUMN_SCHEDULE_URL = "schedule_url"
+        const val COLUMN_BOOKMARK = "saved"
 
         const val QUERY_GET_ALL = """
             SELECT * FROM $TABLE_NAME
+        """
+
+        const val QUERY_GET_SAVED = """
+            SELECT * FROM $TABLE_NAME WHERE $COLUMN_BOOKMARK = true
         """
 
     }

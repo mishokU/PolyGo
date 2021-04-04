@@ -1,33 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
         android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:fontFamily="@font/pt_mono"
-            android:textStyle="bold"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/pt_sans_bold"
+            android:textAllCaps="true"
+            android:textColor="@color/greenTextColor"
             android:textSize="18sp"
-            android:textColor="@color/mineShaft"
-            android:layout_marginBottom="32dp"
+            android:textStyle="bold"
             tools:text="Закладки" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            app:cardCornerRadius="16dp">
+            app:cardCornerRadius="24dp">
 
             <View
                 android:layout_width="match_parent"
@@ -38,12 +45,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textSize="24sp"
-                android:textStyle="normal"
-                android:textColor="@color/black"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:background="@null" />
+                android:background="@null"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="normal" />
 
         </androidx.cardview.widget.CardView>
 
@@ -51,12 +58,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:fontFamily="@font/pt_mono"
-            android:textStyle="normal"
             android:layout_marginTop="8dp"
+            android:fontFamily="@font/pt_mono"
+            android:text="@string/search_in_bookmarks"
+            android:textColor="@color/text_color"
             android:textSize="16sp"
-            android:textColor="@color/mineShaft"
-            android:text="@string/search_in_bookmarks" />
+            android:textStyle="normal" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -65,10 +72,13 @@
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/employeeFilterButton"
                 android:layout_width="match_parent"
-                android:layout_weight="1"
                 android:layout_height="30dp"
-                android:layout_marginEnd="8dp">
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardCornerRadius="34dp">
 
                 <View
                     android:layout_width="match_parent"
@@ -78,19 +88,23 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/pt_mono"
                     android:layout_gravity="center"
-                    android:text="@string/search_people" />
+                    android:fontFamily="@font/pt_sans_bold"
+                    android:text="@string/search_people"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
 
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/searchAllButton"
                 android:layout_width="match_parent"
+                android:layout_height="30dp"
                 android:layout_weight="1"
-                android:layout_height="30dp">
+                android:foreground="?attr/selectableItemBackground"
+                app:cardCornerRadius="34dp">
 
                 <View
                     android:layout_width="match_parent"
@@ -100,20 +114,24 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
                     android:layout_gravity="center"
-                    android:fontFamily="@font/pt_mono"
-                    android:text="@string/search_all" />
+                    android:fontFamily="@font/pt_sans_bold"
+                    android:text="@string/search_all"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
 
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/buildingFilterButton"
                 android:layout_width="match_parent"
-                android:layout_weight="1"
                 android:layout_height="30dp"
-                android:layout_marginStart="8dp">
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardCornerRadius="34dp">
 
                 <View
                     android:layout_width="match_parent"
@@ -124,25 +142,32 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:fontFamily="@font/pt_sans_bold"
+                    android:text="@string/search_places"
+                    android:textAllCaps="true"
                     android:textColor="@color/white"
-                    android:textStyle="normal"
                     android:textSize="16sp"
-                    android:fontFamily="@font/pt_mono"
-                    android:text="@string/search_places" />
+                    android:textStyle="normal" />
 
             </androidx.cardview.widget.CardView>
 
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/itemsRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_bookmark" />
-
     </LinearLayout>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/itemsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.0"
+        tools:listitem="@layout/item_bookmark" />
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

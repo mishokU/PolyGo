@@ -20,4 +20,8 @@ class EmployeeProviderImpl @Inject constructor(
         return employeeDao.getAllEmployee()
     }
 
+    override suspend fun getSavedEmployees(): Flow<List<LocalEmployees>> {
+        return employeeDao.getSavedEmployees()
+    }
+
 }

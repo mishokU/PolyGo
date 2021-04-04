@@ -21,10 +21,14 @@ class BuildingsProviderImpl @Inject constructor(
 
     override suspend fun getBuildingsByPoint(point: Point): Flow<List<LocalBuildings>> {
         return buildingDao.getBuildingsByPoint(
-            point.latitude - LocalBuildings.DELTA_DISTANCE,
-            point.latitude + LocalBuildings.DELTA_DISTANCE,
-            point.longitude - LocalBuildings.DELTA_DISTANCE,
-            point.longitude + LocalBuildings.DELTA_DISTANCE
+                point.latitude - LocalBuildings.DELTA_DISTANCE,
+                point.latitude + LocalBuildings.DELTA_DISTANCE,
+                point.longitude - LocalBuildings.DELTA_DISTANCE,
+                point.longitude + LocalBuildings.DELTA_DISTANCE
         )
+    }
+
+    override suspend fun getSavedBuildings(): Flow<List<LocalBuildings>> {
+        return buildingDao.getSavedBuildings()
     }
 }

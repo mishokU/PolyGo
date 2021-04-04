@@ -7,6 +7,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface SearchInteractor {
     suspend fun loadAllSearching(): Flow<List<CreateAdapterListItem>>
+    suspend fun loadEmployees(): Flow<List<CreateAdapterListItem>>
+    suspend fun loadBuildings(): Flow<List<CreateAdapterListItem>>
     suspend fun addSearching(list: MutableList<LocalEmployees>)
     suspend fun addBuildings(buildings: MutableList<LocalBuildings>)
 }

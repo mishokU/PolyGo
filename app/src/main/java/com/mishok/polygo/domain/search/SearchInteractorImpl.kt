@@ -10,6 +10,7 @@ import com.mishok.polygo.domain.mappers.toUIEmployeeModel
 import com.mishok.polygo.ui.base.CreateAdapterListItem
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class SearchInteractorImpl @Inject constructor(
@@ -20,10 +21,22 @@ class SearchInteractorImpl @Inject constructor(
 
     override suspend fun loadAllSearching(): Flow<List<CreateAdapterListItem>> {
         return combine(
-            employeesProvider.getAllEmployee(),
-            buildingsProvider.getAllBuildings()
+                employeesProvider.getAllEmployee(),
+                buildingsProvider.getAllBuildings()
         ) { employee, buildings ->
             employee.toUIEmployeeModel() + buildings.toUIBuildingModel()
+        }
+    }
+
+    override suspend fun loadEmployees(): Flow<List<CreateAdapterListItem>> {
+        return employeesProvider.getAllEmployee().map {
+            it.toUIEmployeeModel()
+        }
+    }
+
+    override suspend fun loadBuildings(): Flow<List<CreateAdapterListItem>> {
+        return buildingsProvider.getAllBuildings().map {
+            it.toUIBuildingModel()
         }
     }
 

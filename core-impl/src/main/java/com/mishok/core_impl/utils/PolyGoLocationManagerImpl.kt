@@ -30,7 +30,6 @@ class PolyGoLocationManagerImpl @Inject constructor(
             val locationManager =
                 context.applicationContext.getSystemService(Context.LOCATION_SERVICE) as LocationManager
             locationManager.requestLocationUpdates(GPS_PROVIDER, 100, 2F) {
-                Log.d("location", it.latitude.toString())
                 this.latitude = it.latitude
                 this.longitude = it.longitude
             }

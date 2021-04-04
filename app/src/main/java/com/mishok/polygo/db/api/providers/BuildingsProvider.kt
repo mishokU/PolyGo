@@ -10,4 +10,5 @@ interface BuildingsProvider {
 
     suspend fun getAllBuildings(): Flow<List<LocalBuildings>>
     suspend fun getBuildingsByPoint(point: Point): Flow<List<LocalBuildings>>
+    suspend fun getSavedBuildings(): Flow<List<LocalBuildings>>
 }

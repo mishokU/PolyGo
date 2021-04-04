@@ -23,17 +23,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="32dp"
-            android:fontFamily="@font/pt_mono"
-            android:textColor="@color/mineShaft"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/pt_sans_bold"
+            android:text="Поиск"
+            android:textAllCaps="true"
+            android:textColor="@color/greenTextColor"
             android:textSize="18sp"
-            android:textStyle="bold"
-            tools:text="Закладки" />
+            android:textStyle="bold" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            app:cardCornerRadius="16dp">
+            app:cardCornerRadius="24dp">
 
             <View
                 android:layout_width="match_parent"
@@ -60,7 +61,7 @@
             android:layout_marginTop="8dp"
             android:fontFamily="@font/pt_mono"
             android:text="@string/search_in_bookmarks"
-            android:textColor="@color/mineShaft"
+            android:textColor="#24353A"
             android:textSize="16sp"
             android:textStyle="normal" />
 
@@ -71,10 +72,13 @@
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/employeeFilterButton"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_marginEnd="8dp"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardCornerRadius="34dp">
 
                 <View
                     android:layout_width="match_parent"
@@ -85,8 +89,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:fontFamily="@font/pt_mono"
+                    android:fontFamily="@font/pt_sans_bold"
                     android:text="@string/search_people"
+                    android:textAllCaps="true"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:textStyle="normal" />
@@ -97,7 +102,9 @@
                 android:id="@+id/searchAllButton"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardCornerRadius="34dp">
 
                 <View
                     android:layout_width="match_parent"
@@ -108,8 +115,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:fontFamily="@font/pt_mono"
+                    android:fontFamily="@font/pt_sans_bold"
                     android:text="@string/search_all"
+                    android:textAllCaps="true"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:textStyle="normal" />
@@ -117,10 +125,13 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/buildingFilterButton"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_marginStart="8dp"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardCornerRadius="34dp">
 
                 <View
                     android:layout_width="match_parent"
@@ -131,8 +142,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:fontFamily="@font/pt_mono"
+                    android:fontFamily="@font/pt_sans_bold"
                     android:text="@string/search_places"
+                    android:textAllCaps="true"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:textStyle="normal" />
@@ -147,14 +159,15 @@
         android:id="@+id/itemsRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="32dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        tools:listitem="@layout/item_bookmark" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

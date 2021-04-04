@@ -1,18 +1,14 @@
 package com.mishok.polygo.ui.bookmarks
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mishok.polygo.R
 import com.mishok.polygo.base.BaseFragment
-import com.mishok.polygo.base.FragmentConfiguration
-import com.mishok.polygo.ui.search.SearchState
 import com.mishok.polygo.ui.search.adapter.SearchAdapter
 import com.mishok.polygo.utils.AutoClearedValue
+import com.mishok.polygo.utils.filter.SearchFilter
 import kotlinx.android.synthetic.main.fragment_search.*
 import javax.inject.Inject
 
@@ -30,7 +26,11 @@ class BookmarksFragment : BaseFragment<BookmarksState, BookmarksViewModel>() {
         super.onViewCreated(view, savedInstanceState)
         initViews()
         initList()
-        viewModel.loadBookmarks()
+        loadData()
+    }
+
+    private fun loadData() {
+        viewModel.loadBookmarks(SearchFilter.ALL)
     }
 
     private fun initList() = with(itemsRecyclerView) {
@@ -41,7 +41,15 @@ class BookmarksFragment : BaseFragment<BookmarksState, BookmarksViewModel>() {
     }
 
     private fun initViews() {
-        //searchAllButton.setOnClickListener { }
+        searchAllButton.setOnClickListener {
+            viewModel.loadBookmarks(SearchFilter.ALL)
+        }
+        buildingFilterButton.setOnClickListener {
+            viewModel.loadBookmarks(SearchFilter.BUILDINGS)
+        }
+        employeeFilterButton.setOnClickListener {
+            viewModel.loadBookmarks(SearchFilter.EMPLOYEE)
+        }
     }
 
     override fun onStateChange(state: BookmarksState) {

@@ -4,15 +4,13 @@ import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
 import com.mishok.polygo.R
 import com.mishok.polygo.base.BaseFragment
-import com.mishok.polygo.base.FragmentConfiguration
-import com.mishok.polygo.base.route.RouteDestination
 import com.mishok.polygo.ui.base.CreateAdapterListItem
 import com.mishok.polygo.ui.employee_card.EmployeeBottomSheetDialogFragment
 import com.mishok.polygo.ui.search.adapter.SearchAdapter
 import com.mishok.polygo.utils.AutoClearedValue
+import com.mishok.polygo.utils.filter.SearchFilter
 import kotlinx.android.synthetic.main.fragment_search.*
 import javax.inject.Inject
 
@@ -29,7 +27,11 @@ class SearchFragment : BaseFragment<SearchState, SearchViewModel>() {
         super.onViewCreated(view, savedInstanceState)
         initViews()
         initList()
-        viewModel.loadSearching()
+        loadData()
+    }
+
+    private fun loadData() {
+        viewModel.loadSearching(SearchFilter.ALL)
     }
 
     private fun initList() = with(itemsRecyclerView) {
@@ -40,7 +42,15 @@ class SearchFragment : BaseFragment<SearchState, SearchViewModel>() {
     }
 
     private fun initViews() {
-        searchAllButton.setOnClickListener { viewModel.populateDataBase() }
+        searchAllButton.setOnClickListener {
+            viewModel.loadSearching(SearchFilter.ALL)
+        }
+        buildingFilterButton.setOnClickListener {
+            viewModel.loadSearching(SearchFilter.BUILDINGS)
+        }
+        employeeFilterButton.setOnClickListener {
+            viewModel.loadSearching(SearchFilter.EMPLOYEE)
+        }
     }
 
     override fun onStateChange(state: SearchState) {
@@ -53,7 +63,7 @@ class SearchFragment : BaseFragment<SearchState, SearchViewModel>() {
     }
 
     private fun openEmployeeCard(employee: CreateAdapterListItem.EmployeeItem) {
-        //EmployeeBottomSheetDialogFragment.newInstance().show(childFragmentManager,"employee")
+        EmployeeBottomSheetDialogFragment.newInstance(Bundle()).show(childFragmentManager, "employee")
     }
 
 }
