@@ -10,6 +10,8 @@ import com.mishok.core_api.utils.PolyGoLocationManager
 import com.mishok.polygo.R
 import com.mishok.polygo.base.BaseFragment
 import com.mishok.polygo.ui.base.CreateAdapterListItem
+import com.mishok.polygo.ui.building_card.BuildingBottomSheetDialogFragment
+import com.mishok.polygo.ui.employee_card.EmployeeBottomSheetDialogFragment
 import com.yandex.mapkit.Animation
 import com.yandex.mapkit.MapKitFactory
 import com.yandex.mapkit.geometry.Point
@@ -40,6 +42,14 @@ class MapsFragment : BaseFragment<MapsState, MapsViewModel>() {
         }
         locationButton.setOnClickListener {
             viewModel.getCurrentPosition(requireContext())
+        }
+
+        buildingName.setOnClickListener {
+            BuildingBottomSheetDialogFragment.newInstance(
+                BuildingBottomSheetDialogFragment.NavigationData(
+                    buildingName = buildingName.text.toString()
+                )
+            ).show(childFragmentManager, "building")
         }
     }
 

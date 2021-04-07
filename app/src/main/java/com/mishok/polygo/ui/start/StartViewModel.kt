@@ -33,5 +33,4 @@ class StartViewModel : BaseViewModelImpl<StartState>() {
         navigateTo(RouteDestination.Map)
     }
 
-
 }

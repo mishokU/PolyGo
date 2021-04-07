@@ -1,6 +1,7 @@
 package com.mishok.polygo.di
 
 import com.mishok.polygo.ui.bookmarks.BookmarksFragment
+import com.mishok.polygo.ui.building_card.BuildingBottomSheetDialogFragment
 import com.mishok.polygo.ui.employee_card.EmployeeBottomSheetDialogFragment
 import com.mishok.polygo.ui.map.MapsFragment
 import com.mishok.polygo.ui.radar.RadarFragment
@@ -21,4 +22,6 @@ abstract class FragmentModule {
     @ContributesAndroidInjector
     abstract fun contributeEmployeeBottomSheetDialogFragment(): EmployeeBottomSheetDialogFragment
 
+    @ContributesAndroidInjector
+    abstract fun contributeBuildingBottomSheetDialogFragment(): BuildingBottomSheetDialogFragment
 }

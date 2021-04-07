@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="36dp"
@@ -13,54 +14,64 @@
         android:layout_gravity="center"
         android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_mark_button_enabled" />
-
         <TextView
-            android:id="@+id/employeeName"
+            android:id="@+id/buildingNameTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:fontFamily="sans-serif"
-            android:textColor="@color/black"
+            android:textColor="@color/greenTextColor"
             android:textSize="18sp"
+            android:textAllCaps="true"
             android:textStyle="bold"
-            android:text="ЖУК АЛЕКСАНДР ЕВГЕНЬЕВИЧ" />
+            android:text="Главное здание" />
 
-        <androidx.cardview.widget.CardView
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
             android:layout_gravity="center"
-            app:cardCornerRadius="16dp">
+            android:layout_marginBottom="4dp"
+            android:fontFamily="sans-serif"
+            android:textAlignment="center"
+            android:textColor="@color/greenTextColor"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:text="Сейчас открыт" />
 
-            <ImageView
-                android:id="@+id/employeeImage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/human" />
-
-        </androidx.cardview.widget.CardView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="4dp"
+            android:fontFamily="sans-serif"
+            android:textAlignment="center"
+            android:textColor="@color/greenTextColor"
+            android:textSize="12sp"
+            android:textStyle="normal"
+            android:text="часы работы:" />
 
         <TextView
             android:id="@+id/employeeDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
             android:fontFamily="sans-serif"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="@color/greenTextColor"
             android:textSize="12sp"
             android:textStyle="normal"
-            android:text="Доцент - Высшая школа физики и технологий материалов, ведущий научный сотрудник - Лаборатория Синтез новых материалов и конструкций." />
+            android:text="пн-пт:9:00 - 18:00 сб-вс 10.00-16:00" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/employeeEmailButton"
@@ -69,7 +80,7 @@
             android:layout_marginStart="26dp"
             android:layout_marginEnd="26dp"
             android:background="@drawable/dark_green_gradient"
-            android:text="NOVIK@SPBSTU."
+            android:text="Показать вход"
             app:backgroundTint="@null"
             app:cornerRadius="20dp" />
 
@@ -82,7 +93,7 @@
             android:layout_marginEnd="26dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/dark_green_gradient"
-            android:text="Расписание"
+            android:text="Что внутри?"
             app:backgroundTint="@null"
             app:cornerRadius="20dp" />
 

@@ -27,4 +27,7 @@ class DbCoreModule {
     @Provides
     fun provideBuildingsDao(db: PolyGoDatabase) = db.buildingsDao()
 
+    @Provides
+    fun provideBuildingInfoDao(db: PolyGoDatabase) = db.buildingInfoDao()
+
 }
