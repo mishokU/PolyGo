@@ -4,3 +4,8 @@ include(
         ":core-impl"
 )
 rootProject.name = "PolyGo"
+include ':core-ar-api'
+include ':core-ar-impl'
+include ':core-db-api'
+include ':core-db-impl'
+include ':common-registry'

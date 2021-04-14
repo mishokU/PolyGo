@@ -6,16 +6,23 @@ import com.mishok.polygo.R
 import com.mishok.polygo.base.BaseFragment
 import com.mishok.polygo.base.FragmentConfiguration
 import kotlinx.android.synthetic.main.fragment_start.*
+import javax.inject.Inject
 
 class StartFragment : BaseFragment<StartState, StartViewModel>() {
 
-    override val viewModel: StartViewModel by lazyViewModel()
+    @Inject
+    override lateinit var viewModel: StartViewModel
 
     override val layoutRes: Int = R.layout.fragment_start
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
+        initLocalDatabase()
+    }
+
+    private fun initLocalDatabase() {
+        viewModel
     }
 
     private fun initViews() {

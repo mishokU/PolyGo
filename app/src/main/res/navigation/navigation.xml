@@ -28,7 +28,11 @@
         android:id="@+id/mapsFragment"
         android:name="com.mishok.polygo.ui.map.MapsFragment"
         android:label="fragment_maps"
-        tools:layout="@layout/fragment_maps" />
+        tools:layout="@layout/fragment_maps">
+        <action
+            android:id="@+id/action_mapsFragment_to_buildingBottomSheetDialogFragment"
+            app:destination="@id/buildingBottomSheetDialogFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/bookmarksFragment"
@@ -53,10 +57,30 @@
         android:id="@+id/radarFragment"
         android:name="com.mishok.polygo.ui.radar.RadarFragment"
         android:label="fragment_radar"
-        tools:layout="@layout/fragment_radar" />
+        tools:layout="@layout/fragment_radar">
+        <action
+            android:id="@+id/action_radarFragment_to_baseArFragment"
+            app:destination="@id/baseArFragment" />
+    </fragment>
     <fragment
         android:id="@+id/employeeBottomSheetDialogFragment"
         android:name="com.mishok.polygo.ui.employee_card.EmployeeBottomSheetDialogFragment"
         android:label="EmployeeBottomSheetDialogFragment" />
+    <fragment
+        android:id="@+id/buildingInsideFragment"
+        android:name="com.mishok.polygo.ui.building_inside.BuildingInsideFragment"
+        android:label="BuildingInsideFragment" />
+    <fragment
+        android:id="@+id/buildingBottomSheetDialogFragment"
+        android:name="com.mishok.polygo.ui.building_card.BuildingBottomSheetDialogFragment"
+        android:label="BuildingBottomSheetDialogFragment">
+        <action
+            android:id="@+id/action_buildingBottomSheetDialogFragment_to_buildingInsideFragment"
+            app:destination="@id/buildingInsideFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/baseArFragment"
+        android:name="com.mishok.core_ar_impl.ui.BaseArFragment"
+        android:label="BaseArFragment" />
 
 </navigation>

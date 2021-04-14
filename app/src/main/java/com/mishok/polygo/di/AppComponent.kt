@@ -1,8 +1,8 @@
 package com.mishok.polygo.di
 
 import com.mishok.core_api.di.CoreApi
+import com.mishok.core_db_api.di.DbCoreApi
 import com.mishok.polygo.app.PolyGoApplication
-import com.mishok.polygo.db.api.di.DbCoreApi
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
@@ -17,6 +17,9 @@ import javax.inject.Singleton
         FragmentModule::class,
         SearchModule::class,
         BookmarksModule::class,
+        BuildingInsideModule::class,
+        RadarModule::class,
+        StartModule::class,
         UiModule::class,
         AppModule::class
     ],

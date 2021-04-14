@@ -1,7 +1,7 @@
 package com.mishok.polygo.domain.search
 
-import com.mishok.polygo.db.api.models.LocalBuildings
-import com.mishok.polygo.db.api.models.LocalEmployees
+import com.mishok.core_db_api.models.LocalBuildings
+import com.mishok.core_db_api.models.LocalEmployees
 import com.mishok.polygo.ui.base.CreateAdapterListItem
 import kotlinx.coroutines.flow.Flow
 

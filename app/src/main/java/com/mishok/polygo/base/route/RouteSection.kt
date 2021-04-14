@@ -17,6 +17,10 @@ sealed class RouteDestination(@IdRes val destination: Int) {
 
     object Bookmark : RouteDestination(R.id.bookmarksFragment)
 
+    object BuildingInside : RouteDestination(R.id.buildingInsideFragment)
+
+    object ArFragment : RouteDestination(R.id.sceneForm)
+
     object Radar : RouteDestination(R.id.radarFragment)
 
     object EmployeeDetailed : RouteDestination(R.id.employeeBottomSheetDialogFragment)

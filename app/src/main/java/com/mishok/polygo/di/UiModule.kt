@@ -11,7 +11,10 @@ import javax.inject.Provider
     includes = [
         SearchModule::class,
         BookmarksModule::class,
-        MapsModule::class
+        MapsModule::class,
+        RadarModule::class,
+        StartModule::class,
+        BuildingInsideModule::class
     ]
 )
 class UiModule {

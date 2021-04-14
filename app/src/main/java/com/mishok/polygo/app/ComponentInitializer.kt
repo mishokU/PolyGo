@@ -1,15 +1,15 @@
 package com.mishok.polygo.app
 
+import com.mishok.common_registry.ComponentRegistry
 import com.mishok.core_api.di.CoreApi
+import com.mishok.core_db_api.di.DbCoreApi
+import com.mishok.core_db_impl.di.DaggerDbCoreComponent
+import com.mishok.core_db_impl.di.DaggerDbCoreComponent_DbCoreDependenciesComponent
 import com.mishok.core_impl.di.DaggerCoreComponent
 import com.mishok.core_impl.di.DaggerCoreComponent_CoreDependenciesComponent
 import com.mishok.polygo.BuildConfig
-import com.mishok.polygo.db.api.di.DbCoreApi
-import com.mishok.polygo.db.impl.di.DaggerDbCoreComponent
-import com.mishok.polygo.db.impl.di.DaggerDbCoreComponent_DbCoreDependenciesComponent
 import com.mishok.polygo.di.AppComponent
 import com.mishok.polygo.di.DaggerAppComponent
-import com.mishok.polygo.utils.ComponentRegistry
 
 class ComponentInitializer(val app: PolyGoApplication) {
 

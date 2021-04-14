@@ -1,28 +1,26 @@
 package com.mishok.polygo.ui.map
 
 
-import android.annotation.SuppressLint
-import android.content.Context
-import android.location.LocationManager
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import com.mishok.core_api.utils.PolyGoLocationManager
 import com.mishok.polygo.R
 import com.mishok.polygo.base.BaseFragment
 import com.mishok.polygo.ui.base.CreateAdapterListItem
 import com.mishok.polygo.ui.building_card.BuildingBottomSheetDialogFragment
-import com.mishok.polygo.ui.employee_card.EmployeeBottomSheetDialogFragment
+import com.mishok.polygo.ui.building_card.BuildingListener
 import com.yandex.mapkit.Animation
 import com.yandex.mapkit.MapKitFactory
 import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.map.CameraPosition
 import com.yandex.mapkit.map.CameraUpdateSource
-import com.yandex.runtime.Runtime.getApplicationContext
+import com.yandex.runtime.ui_view.ViewProvider
 import kotlinx.android.synthetic.main.fragment_maps.*
 import javax.inject.Inject
 
 
-class MapsFragment : BaseFragment<MapsState, MapsViewModel>() {
+class MapsFragment : BaseFragment<MapsState, MapsViewModel>(), BuildingListener {
 
     @Inject
     override lateinit var viewModel: MapsViewModel
@@ -34,22 +32,32 @@ class MapsFragment : BaseFragment<MapsState, MapsViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        moveCamera(POLITECH_LATITUDE, POLITECH_LONGITUDE)
-        mapview.map.addCameraListener { _, cameraPosition, cameraUpdateSource, _ ->
-            if (cameraUpdateSource == CameraUpdateSource.GESTURES) {
-                viewModel.checkOnNearCorp(cameraPosition.target)
-            }
-        }
+        initCameraMode()
+        initViews()
+    }
+
+    private fun initViews() {
         locationButton.setOnClickListener {
             viewModel.getCurrentPosition(requireContext())
         }
 
         buildingName.setOnClickListener {
+            val building = viewModel.state.building
             BuildingBottomSheetDialogFragment.newInstance(
                 BuildingBottomSheetDialogFragment.NavigationData(
-                    buildingName = buildingName.text.toString()
+                    buildingId = building.id,
+                    buildingName = building.title
                 )
             ).show(childFragmentManager, "building")
+        }
+    }
+
+    private fun initCameraMode() {
+        moveCamera(POLITECH_LATITUDE, POLITECH_LONGITUDE)
+        mapview.map.addCameraListener { _, cameraPosition, cameraUpdateSource, _ ->
+            if (cameraUpdateSource == CameraUpdateSource.GESTURES) {
+                viewModel.checkOnNearCorp(cameraPosition.target)
+            }
         }
     }
 
@@ -92,9 +100,23 @@ class MapsFragment : BaseFragment<MapsState, MapsViewModel>() {
         )
     }
 
+    override fun showBuildingEntrance() {
+        val building = viewModel.state.building
+        mapview.map.mapObjects.addPlacemark(
+            Point(
+                building.latitude, building.longitude
+            ), ViewProvider(View(requireContext()).apply {
+                background = ContextCompat.getDrawable(requireContext(), R.drawable.ic_door_img)
+            })
+        ).addTapListener { _, _ ->
+            moveCamera(building.latitude, building.longitude)
+            true
+        }
+    }
+
     companion object {
-        private const val POLITECH_LONGITUDE = 30.37202657040532
-        private const val POLITECH_LATITUDE = 60.007587978274294
-        private const val START_ZOOM = 20.0F
+        const val POLITECH_LONGITUDE = 30.372888
+        const val POLITECH_LATITUDE = 60.007193
+        private const val START_ZOOM = 18.0F
     }
 }

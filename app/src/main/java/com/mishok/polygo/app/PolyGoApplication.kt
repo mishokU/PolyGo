@@ -1,12 +1,7 @@
 package com.mishok.polygo.app
 
 import com.mishok.core_api.utils.AppCodeProvider
-import com.mishok.core_api.utils.LocaleManager
-import com.mishok.core_api.utils.PolyGoLocationManager
 import com.mishok.polygo.BuildConfig
-import com.mishok.polygo.di.AppComponent
-import com.mishok.polygo.di.DaggerAppComponent
-import com.mishok.polygo.utils.ComponentRegistry
 import com.mishok.polygo.utils.woods.ReleaseTree
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication

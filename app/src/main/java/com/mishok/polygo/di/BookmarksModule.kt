@@ -2,23 +2,16 @@ package com.mishok.polygo.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.mishok.polygo.db.api.providers.SearchProvider
 import com.mishok.polygo.domain.bookmarks.BookmarksInteractor
 import com.mishok.polygo.domain.bookmarks.BookmarksInteractorImpl
-import com.mishok.polygo.domain.search.SearchInteractor
-import com.mishok.polygo.domain.search.SearchInteractorImpl
-import com.mishok.polygo.ui.base.CreateAdapterListItem
 import com.mishok.polygo.ui.bookmarks.BookmarksFragment
 import com.mishok.polygo.ui.bookmarks.BookmarksViewModel
-import com.mishok.polygo.ui.search.SearchFragment
-import com.mishok.polygo.ui.search.SearchViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
 import dagger.multibindings.IntoMap
 import kotlinx.coroutines.CoroutineScope
-import javax.inject.Singleton
 
 @Module(
     includes = [

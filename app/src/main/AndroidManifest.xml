@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dist="http://schemas.android.com/apk/distribution"
     package="com.mishok.polygo">
+
+    <dist:module dist:instant="true" />
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -8,12 +11,16 @@
     <application
         android:name=".app.PolyGoApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_polygo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher_polygo_round"
         android:supportsRtl="true"
         android:theme="@style/splash_screen_theme">
-
+        <activity
+            android:name=".ui.radar.RadarActivity"
+            android:exported="true"
+            android:label="@string/title_activity_radar"
+            android:theme="@style/splash_screen_theme.NoActionBar" />
         <!--
          "AR Optional" app, contains non-AR features that can be used when
          "Google Play Services for AR" (ARCore) is not available.

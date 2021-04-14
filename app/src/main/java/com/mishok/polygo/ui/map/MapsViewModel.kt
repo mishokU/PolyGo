@@ -6,6 +6,7 @@ import com.markodevcic.peko.Peko
 import com.markodevcic.peko.PermissionResult
 import com.mishok.polygo.base.BaseViewModelImpl
 import com.mishok.polygo.domain.map.MapInteractor
+import com.mishok.polygo.ui.base.CreateAdapterListItem
 import com.yandex.mapkit.geometry.Point
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -26,6 +27,9 @@ class MapsViewModel @Inject constructor(
             mapsInteractor.loadNearCorps(point).collect {
                 withContext(Dispatchers.Main) {
                     state = state.copy(items = it)
+                    if (it.isNotEmpty()) {
+                        state = state.copy(building = it[0] as CreateAdapterListItem.BuildingItem)
+                    }
                 }
             }
         }

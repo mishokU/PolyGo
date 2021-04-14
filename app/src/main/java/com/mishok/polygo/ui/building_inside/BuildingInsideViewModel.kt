@@ -2,43 +2,32 @@ package com.mishok.polygo.ui.building_inside
 
 import androidx.lifecycle.LifecycleObserver
 import com.mishok.polygo.base.BaseViewModelImpl
-import com.mishok.polygo.db.api.models.LocalBuildings
-import com.mishok.polygo.db.api.models.LocalEmployees
-import com.mishok.polygo.domain.search.SearchInteractor
+import com.mishok.polygo.domain.building_inside.BuildingInsideInteractor
 import com.mishok.polygo.ui.base.CreateAdapterListItem
+import com.mishok.polygo.ui.building_inside.adapter.ChipCallback
 import com.mishok.polygo.ui.search.adapter.SearchCallback
-import com.mishok.polygo.utils.filter.SearchFilter
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class BuildingInsideViewModel @Inject constructor(
-    private val searchInteractor: SearchInteractor,
+    private val buildingInsideInteractor: BuildingInsideInteractor,
     private val coroutineScope: CoroutineScope
-) : BaseViewModelImpl<BuildingInsideState>(), LifecycleObserver, SearchCallback {
+) : BaseViewModelImpl<BuildingInsideState>(), LifecycleObserver, SearchCallback, ChipCallback {
 
     override val initialState: BuildingInsideState = BuildingInsideState()
 
-    fun loadSearching(filter: SearchFilter) {
+    fun loadBuildingInfo(buildingId: Long) {
         coroutineScope.launch {
-            when (filter) {
-                SearchFilter.ALL -> {
-                    searchInteractor.loadAllSearching().collect {
-                        switchDispatcher(it)
-                    }
-                }
-                SearchFilter.EMPLOYEE -> {
-                    searchInteractor.loadEmployees().collect {
-                        switchDispatcher(it)
-                    }
-                }
-                SearchFilter.BUILDINGS -> {
-                    searchInteractor.loadBuildings().collect {
-                        switchDispatcher(it)
-                    }
-                }
+            buildingInsideInteractor.loadBuildingInfoByBuildingId(buildingId).collect {
+                switchDispatcher(it)
             }
         }
+        populateChips()
+        populateInfo()
     }
 
     private suspend fun switchDispatcher(it: List<CreateAdapterListItem>) {
@@ -55,43 +44,27 @@ class BuildingInsideViewModel @Inject constructor(
         state = state.copy(employee = employee)
     }
 
-    fun populateDataBase() {
-        val list: MutableList<LocalEmployees> = mutableListOf()
+    override fun onChipClick(building: CreateAdapterListItem.ChipItem) {
+
+    }
+
+    private fun populateChips() {
+        val chips: MutableList<CreateAdapterListItem.ChipItem> = mutableListOf()
+        for (i in 0..10) {
+            chips.add(CreateAdapterListItem.ChipItem("ЕДА"))
+        }
+        state = state.copy(chips = chips)
+    }
+
+    private fun populateInfo() {
+        val list: MutableList<CreateAdapterListItem> = mutableListOf()
         for (i in 0..10) {
             list.add(
-                LocalEmployees(
+                CreateAdapterListItem.BuildingInfoItem(
                     id = 0,
-                    name = "feifwifwe",
-                    avatar = "fefefwe",
-                    position = "efiejwfiwjfwfjwefw",
-                    contacts = "ekfwiejwe",
-                    scheduleUrl = "fjeifefwj$i",
-                    saved = false
+                    title = "ejfiejfwi"
                 )
             )
-        }
-        val buildings: MutableList<LocalBuildings> = mutableListOf()
-        for (i in 0..10) {
-            buildings.add(
-                LocalBuildings(
-                    audienceId = 0,
-                    distance = 0,
-                    id = 0,
-                    latitude = (0 + i * 20).toLong(),
-                    corpId = 0,
-                    floorId = 0,
-                    longitude = (0 + i * 10).toLong(),
-                    time = 10,
-                    title = "iewjfweifjiwe$i",
-                    saved = false
-                )
-            )
-        }
-
-
-        coroutineScope.launch {
-            searchInteractor.addSearching(list)
-            searchInteractor.addBuildings(buildings)
         }
     }
 

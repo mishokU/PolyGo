@@ -2,9 +2,9 @@ package com.mishok.polygo.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.mishok.polygo.db.api.providers.BuildingsProvider
-import com.mishok.polygo.db.api.providers.EmployeesProvider
-import com.mishok.polygo.db.api.providers.SearchProvider
+import com.mishok.core_db_api.providers.BuildingsProvider
+import com.mishok.core_db_api.providers.EmployeesProvider
+import com.mishok.core_db_api.providers.SearchProvider
 import com.mishok.polygo.domain.search.SearchInteractor
 import com.mishok.polygo.domain.search.SearchInteractorImpl
 import com.mishok.polygo.ui.search.SearchFragment

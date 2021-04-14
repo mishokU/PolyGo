@@ -1,10 +1,10 @@
 package com.mishok.polygo.domain.search
 
-import com.mishok.polygo.db.api.models.LocalBuildings
-import com.mishok.polygo.db.api.models.LocalEmployees
-import com.mishok.polygo.db.api.providers.BuildingsProvider
-import com.mishok.polygo.db.api.providers.EmployeesProvider
-import com.mishok.polygo.db.api.providers.SearchProvider
+import com.mishok.core_db_api.models.LocalBuildings
+import com.mishok.core_db_api.models.LocalEmployees
+import com.mishok.core_db_api.providers.BuildingsProvider
+import com.mishok.core_db_api.providers.EmployeesProvider
+import com.mishok.core_db_api.providers.SearchProvider
 import com.mishok.polygo.domain.mappers.toUIBuildingModel
 import com.mishok.polygo.domain.mappers.toUIEmployeeModel
 import com.mishok.polygo.ui.base.CreateAdapterListItem

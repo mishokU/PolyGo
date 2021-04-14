@@ -1,15 +1,11 @@
 package com.mishok.polygo.ui.building_card
 
-import android.app.Dialog
 import android.content.Context
-import android.content.DialogInterface
-import android.graphics.Color
 import android.os.Bundle
-import android.text.style.BulletSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.google.android.material.bottomsheet.BottomSheetDialog
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.mishok.polygo.R
 import dagger.android.AndroidInjector
@@ -28,7 +24,8 @@ class BuildingBottomSheetDialogFragment : BottomSheetDialogFragment(), HasAndroi
         return androidInjector
     }
 
-    private val buildingName: String = arguments?.getString(KEY_BUILDING_NAME).toString()
+    private val resultListener: BuildingListener
+        get() = parentFragment as BuildingListener
 
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
@@ -50,20 +47,29 @@ class BuildingBottomSheetDialogFragment : BottomSheetDialogFragment(), HasAndroi
 
     private fun setUpViews() {
         buildingNameTv.text = arguments?.getString(KEY_BUILDING_NAME).toString()
+        insideBuildingButton.setOnClickListener {
+            this.findNavController().navigate(R.id.buildingInsideFragment)
+        }
+        showEntranceButton.setOnClickListener {
+            resultListener.showBuildingEntrance()
+        }
     }
 
     data class NavigationData(
-        val buildingName: String
+        val buildingName: String,
+        val buildingId: Long
     )
 
     companion object {
 
         const val KEY_BUILDING_NAME = "key_building_name"
+        const val KEY_BUILDING_ID = "key_building_id"
 
         @JvmStatic
         fun newInstance(data: NavigationData): BuildingBottomSheetDialogFragment {
             val bundle = Bundle()
             bundle.putString(KEY_BUILDING_NAME, data.buildingName)
+            bundle.putLong(KEY_BUILDING_ID, data.buildingId)
             val fragment = BuildingBottomSheetDialogFragment()
             fragment.arguments = bundle
             return fragment

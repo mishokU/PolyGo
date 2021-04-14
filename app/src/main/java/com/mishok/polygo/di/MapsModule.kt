@@ -2,12 +2,8 @@ package com.mishok.polygo.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.mishok.polygo.domain.bookmarks.BookmarksInteractor
-import com.mishok.polygo.domain.bookmarks.BookmarksInteractorImpl
 import com.mishok.polygo.domain.map.MapInteractor
 import com.mishok.polygo.domain.map.MapInteractorImpl
-import com.mishok.polygo.ui.bookmarks.BookmarksFragment
-import com.mishok.polygo.ui.bookmarks.BookmarksViewModel
 import com.mishok.polygo.ui.map.MapsFragment
 import com.mishok.polygo.ui.map.MapsViewModel
 import dagger.Binds

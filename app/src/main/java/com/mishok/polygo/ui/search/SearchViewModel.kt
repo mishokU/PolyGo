@@ -1,15 +1,18 @@
 package com.mishok.polygo.ui.search
 
 import androidx.lifecycle.LifecycleObserver
+import com.mishok.core_db_api.models.LocalBuildings
+import com.mishok.core_db_api.models.LocalEmployees
 import com.mishok.polygo.base.BaseViewModelImpl
-import com.mishok.polygo.db.api.models.LocalBuildings
-import com.mishok.polygo.db.api.models.LocalEmployees
 import com.mishok.polygo.domain.search.SearchInteractor
 import com.mishok.polygo.ui.base.CreateAdapterListItem
 import com.mishok.polygo.ui.search.adapter.SearchCallback
 import com.mishok.polygo.utils.filter.SearchFilter
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class SearchViewModel @Inject constructor(
@@ -74,16 +77,16 @@ class SearchViewModel @Inject constructor(
         for (i in 0..10) {
             buildings.add(
                     LocalBuildings(
-                            audienceId = 0,
-                            distance = 0,
-                            id = 0,
-                            latitude = (0 + i * 20).toLong(),
-                            corpId = 0,
-                            floorId = 0,
-                            longitude = (0 + i * 10).toLong(),
-                            time = 10,
-                            title = "iewjfweifjiwe$i",
-                            saved = false
+                        audienceId = 0,
+                        distance = 0,
+                        id = 0,
+                        latitude = (0 + i * 20).toDouble(),
+                        corpId = 0,
+                        floorId = 0,
+                        longitude = (0 + i * 10).toDouble(),
+                        time = 10,
+                        title = "iewjfweifjiwe$i",
+                        saved = false
                     )
             )
         }

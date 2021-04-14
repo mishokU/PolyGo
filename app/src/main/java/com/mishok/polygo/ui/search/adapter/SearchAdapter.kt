@@ -8,6 +8,7 @@ import com.mishok.polygo.ui.base.CreateAdapterListItem
 import com.mishok.polygo.ui.search.deletegates.BuildingsAdapterDelegate
 import com.mishok.polygo.ui.search.deletegates.EmployeeAdapterDelegate
 import com.mishok.polygo.ui.search.deletegates.SearchAdapterDelegate
+import com.mishok.polygo.ui.search.deletegates.TextAdapterDelegate
 
 class SearchAdapter(callback: SearchCallback) :
     AsyncListDifferDelegationAdapter<Any>(SearchItemCallback()) {
@@ -16,7 +17,8 @@ class SearchAdapter(callback: SearchCallback) :
         sequenceOf(
             SearchAdapterDelegate(callback),
             BuildingsAdapterDelegate(callback),
-            EmployeeAdapterDelegate(callback)
+            EmployeeAdapterDelegate(callback),
+            TextAdapterDelegate()
         ).forEach {
             delegatesManager.addDelegate(it)
         }
@@ -30,6 +32,8 @@ class SearchAdapter(callback: SearchCallback) :
                 is CreateAdapterListItem.BuildingItem -> true
                 is CreateAdapterListItem.EmployeeItem -> true
                 is CreateAdapterListItem.BookmarkItem -> true
+                is CreateAdapterListItem.BuildingInfoItem -> true
+                is CreateAdapterListItem.BuildingTitleItem -> true
                 else -> error("Incompatible item received: ${oldItem.javaClass}")
             }
         }

@@ -1,6 +1,6 @@
 package com.mishok.polygo.domain.map
 
-import com.mishok.polygo.db.api.providers.BuildingsProvider
+import com.mishok.core_db_api.providers.BuildingsProvider
 import com.mishok.polygo.domain.mappers.toUIBuildingModel
 import com.mishok.polygo.ui.base.CreateAdapterListItem
 import com.yandex.mapkit.geometry.Point

@@ -2,16 +2,16 @@ package com.mishok.polygo.ui.building_inside
 
 import android.os.Bundle
 import android.view.View
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mishok.polygo.R
 import com.mishok.polygo.base.BaseFragment
-import com.mishok.polygo.ui.base.CreateAdapterListItem
-import com.mishok.polygo.ui.employee_card.EmployeeBottomSheetDialogFragment
+import com.mishok.polygo.ui.building_inside.adapter.ChipAdapter
 import com.mishok.polygo.ui.search.adapter.SearchAdapter
 import com.mishok.polygo.utils.AutoClearedValue
-import com.mishok.polygo.utils.filter.SearchFilter
-import kotlinx.android.synthetic.main.fragment_search.*
+import kotlinx.android.synthetic.main.fragment_building_inside.*
+import kotlinx.android.synthetic.main.fragment_search.itemsRecyclerView
 import javax.inject.Inject
 
 class BuildingInsideFragment : BaseFragment<BuildingInsideState, BuildingInsideViewModel>() {
@@ -19,19 +19,34 @@ class BuildingInsideFragment : BaseFragment<BuildingInsideState, BuildingInsideV
     @Inject
     override lateinit var viewModel: BuildingInsideViewModel
 
-    override val layoutRes: Int = R.layout.fragment_search
+    override val layoutRes: Int = R.layout.fragment_building_inside
 
+    private var buildingId: Long = 0
+    private var chipAdapter: ChipAdapter by AutoClearedValue()
     private var searchAdapter: SearchAdapter by AutoClearedValue()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        getData()
         initViews()
         initList()
+        initChips()
         loadData()
     }
 
+    private fun getData() {
+        buildingId = arguments?.getLong(KEY_BUILDING_ID) ?: 0
+    }
+
     private fun loadData() {
-        viewModel.loadSearching(SearchFilter.ALL)
+        viewModel.loadBuildingInfo(buildingId)
+    }
+
+    private fun initChips() = with(chipRecyclerView) {
+        layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.HORIZONTAL, false);
+        chipAdapter = ChipAdapter(viewModel)
+        adapter = chipAdapter
+        setHasFixedSize(true)
     }
 
     private fun initList() = with(itemsRecyclerView) {
@@ -42,29 +57,20 @@ class BuildingInsideFragment : BaseFragment<BuildingInsideState, BuildingInsideV
     }
 
     private fun initViews() {
-        searchAllButton.setOnClickListener {
-            viewModel.loadSearching(SearchFilter.ALL)
-        }
-        buildingFilterButton.setOnClickListener {
-            viewModel.loadSearching(SearchFilter.BUILDINGS)
-        }
-        employeeFilterButton.setOnClickListener {
-            viewModel.loadSearching(SearchFilter.EMPLOYEE)
-        }
+
     }
 
     override fun onStateChange(state: BuildingInsideState) {
         if (state.list.isNotEmpty()) {
             searchAdapter.items = state.list
         }
-        if (state.employee != null) {
-            openEmployeeCard(state.employee)
+        if (state.chips.isNotEmpty()) {
+            chipAdapter.items = state.chips
         }
     }
 
-    private fun openEmployeeCard(employee: CreateAdapterListItem.EmployeeItem) {
-        EmployeeBottomSheetDialogFragment.newInstance(Bundle())
-            .show(childFragmentManager, "employee")
+    companion object {
+        const val KEY_BUILDING_ID = "KEY_BUILDING_ID"
     }
 
 }

@@ -3,9 +3,14 @@ package com.mishok.polygo.ui.start
 import com.mishok.core_api.utils.LocaleManager
 import com.mishok.polygo.base.BaseViewModelImpl
 import com.mishok.polygo.base.route.RouteDestination
+import com.mishok.polygo.domain.start.StartInteractor
+import kotlinx.coroutines.CoroutineScope
 import javax.inject.Inject
 
-class StartViewModel : BaseViewModelImpl<StartState>() {
+class StartViewModel @Inject constructor(
+    private val startInteractor: StartInteractor,
+    private val coroutineScope: CoroutineScope
+) : BaseViewModelImpl<StartState>() {
 
     @Inject
     lateinit var localeManager: LocaleManager

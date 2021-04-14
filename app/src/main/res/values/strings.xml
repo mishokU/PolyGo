@@ -13,4 +13,8 @@
     <string name="search_places">Места</string>
     <string name="near">Рядом</string>
     <string name="no_near_objects">Поблизости нет зданий</string>
+    <string name="title_activity_radar">RadarActivity</string>
+    <string name="title_ar">Ar Module</string>
+    <string name="title_arr">Module Title</string>
+    <string name="title_core_arr">Module Title</string>
 </resources>
