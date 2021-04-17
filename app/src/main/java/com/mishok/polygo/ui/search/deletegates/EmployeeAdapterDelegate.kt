@@ -3,6 +3,7 @@ package com.mishok.polygo.ui.search.deletegates
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.AbsListItemAdapterDelegate
 import com.mishok.polygo.R
@@ -31,18 +32,56 @@ class EmployeeAdapterDelegate(
         holder: ViewHolder,
         payloads: MutableList<Any>
     ) {
-        holder.bind(item)
+        if (payloads.isEmpty()) {
+            holder.bind(item)
+        } else {
+            holder.applyPayload(payloads.first() as ItemPayload)
+        }
     }
 
     class ViewHolder(override val containerView: View, val onClick: SearchCallback) :
         RecyclerView.ViewHolder(containerView), LayoutContainer {
 
-        fun bind(item: CreateAdapterListItem.EmployeeItem) {
-            name.text = item.title
+        private var item: CreateAdapterListItem.EmployeeItem? = null
+
+        init {
             containerView.setOnClickListener {
-                onClick.onEmployeeClick(item)
+                item?.let(onClick::onEmployeeClick)
+            }
+            bookmarkImage.setOnClickListener {
+                item?.let(onClick::onEmployeeBookmarkClick)
             }
         }
 
+        fun bind(item: CreateAdapterListItem.EmployeeItem) {
+            this.item = item
+            name.text = item.title
+            description.text = item.description
+            toggleBookmark(item.inBookmark)
+        }
+
+        private fun toggleBookmark(inBookmark: Boolean) {
+            if (inBookmark) {
+                bookmarkImage.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        containerView.context,
+                        R.drawable.ic_mark_button_enabled_left
+                    )
+                )
+            } else {
+                bookmarkImage.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        containerView.context,
+                        R.drawable.ic_mark_button_disabled
+                    )
+                )
+            }
+        }
+
+        fun applyPayload(itemPayload: ItemPayload) {
+            toggleBookmark(itemPayload.inBookmark)
+        }
     }
+
+    data class ItemPayload(val inBookmark: Boolean)
 }

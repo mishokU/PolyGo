@@ -11,7 +11,8 @@ class BuildingInsideInteractorImpl @Inject constructor(
     private val buildingInfoProvider: BuildingInfoProvider
 ) : BuildingInsideInteractor {
 
-    override suspend fun loadBuildingInfoByBuildingId(buildingId: Long): Flow<List<CreateAdapterListItem>> {
+    override suspend fun loadBuildingInfoByBuildingId(buildingId: Long)
+            : Flow<List<CreateAdapterListItem.BuildingInfoItem>> {
         return buildingInfoProvider.getAllBuildingInfoByBuildingId(buildingId).map {
             it.toUIBuildingInfoModel()
         }

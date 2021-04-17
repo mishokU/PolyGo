@@ -19,10 +19,16 @@ interface BuildingDao {
     @Query(value = LocalBuildings.QUERY_GET_SAVED)
     fun getSavedBuildings(): Flow<List<LocalBuildings>>
 
+    @Query(value = LocalBuildings.QUERY_GET_BY_QUERY)
+    fun getSearchedBuildings(query: String): Flow<List<LocalBuildings>>
+
     @Query(value = LocalBuildings.QUERY_GET_BY_COORDINATES)
     fun getBuildingsByPoint(
-            latitudeFrom: Double, latitudeTo: Double,
-            longitudeFrom: Double, longitudeTo: Double
+        latitudeFrom: Double, latitudeTo: Double,
+        longitudeFrom: Double, longitudeTo: Double
     ): Flow<List<LocalBuildings>>
+
+    @Query(value = LocalBuildings.QUERY_UPDATE_BOOKMARK)
+    fun updateBookmark(buildingId: Long, state: Int)
 
 }

@@ -3,6 +3,7 @@ package com.mishok.polygo.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.mishok.polygo.domain.bookmarks.BookmarksInteractor
 import com.mishok.polygo.domain.building_inside.BuildingInsideInteractor
 import com.mishok.polygo.domain.building_inside.BuildingInsideInteractorImpl
 import com.mishok.polygo.ui.building_inside.BuildingInsideFragment
@@ -46,8 +47,9 @@ abstract class BuildingInsideModule {
         @ViewModelKey(BuildingInsideViewModel::class)
         fun provideFeatureViewModel(
             expensive: BuildingInsideInteractor,
+            bookmark: BookmarksInteractor,
             coroutineScope: CoroutineScope
-        ): ViewModel = BuildingInsideViewModel(expensive, coroutineScope)
+        ): ViewModel = BuildingInsideViewModel(expensive, bookmark, coroutineScope)
 
     }
 

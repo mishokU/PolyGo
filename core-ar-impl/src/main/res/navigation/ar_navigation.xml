@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ar_navigation"
+    app:startDestination="@id/baseArFragment">
+
+
+    <fragment
+        android:id="@+id/baseArFragment"
+        android:name="com.mishok.core_ar_impl.ui.BaseArFragment"
+        android:label="BaseArFragment" />
+
+</navigation>

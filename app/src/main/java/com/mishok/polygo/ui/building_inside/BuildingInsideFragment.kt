@@ -1,14 +1,17 @@
 package com.mishok.polygo.ui.building_inside
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mishok.polygo.R
 import com.mishok.polygo.base.BaseFragment
+import com.mishok.polygo.ui.base.CreateAdapterListItem
 import com.mishok.polygo.ui.building_inside.adapter.ChipAdapter
 import com.mishok.polygo.ui.search.adapter.SearchAdapter
+import com.mishok.polygo.ui.search.adapter.SearchCallbackWrapper
 import com.mishok.polygo.utils.AutoClearedValue
 import kotlinx.android.synthetic.main.fragment_building_inside.*
 import kotlinx.android.synthetic.main.fragment_search.itemsRecyclerView
@@ -51,7 +54,15 @@ class BuildingInsideFragment : BaseFragment<BuildingInsideState, BuildingInsideV
 
     private fun initList() = with(itemsRecyclerView) {
         layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        searchAdapter = SearchAdapter(viewModel)
+        searchAdapter = SearchAdapter(object : SearchCallbackWrapper() {
+            override fun onBuildingInfoItemClick(item: CreateAdapterListItem.BuildingInfoItem) {
+                viewModel.onBuildingInfoItemClick(item)
+            }
+
+            override fun onBuildingInfoBookmarkClick(item: CreateAdapterListItem.BuildingInfoItem) {
+                viewModel.onBuildingInfoBookmarkClick(item)
+            }
+        })
         adapter = searchAdapter
         setHasFixedSize(true)
     }
@@ -61,8 +72,12 @@ class BuildingInsideFragment : BaseFragment<BuildingInsideState, BuildingInsideV
     }
 
     override fun onStateChange(state: BuildingInsideState) {
-        if (state.list.isNotEmpty()) {
-            searchAdapter.items = state.list
+        if (state.map.isNotEmpty()) {
+            val items = state.map.map {
+                listOf(it.key.toTitleModel()) + it.value
+            }.flatten()
+            Log.d("items", items.toString())
+            //searchAdapter.items =
         }
         if (state.chips.isNotEmpty()) {
             chipAdapter.items = state.chips

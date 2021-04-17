@@ -28,22 +28,13 @@ class RadarFragment : BaseFragment<RadarState, RadarViewModel>() {
 
     private fun initViews() {
         openARButton.setOnClickListener {
-            viewModel.requestPermission()
+            viewModel.requestPermission(requireContext())
         }
     }
 
     override fun onStateChange(state: RadarState) {
         if (state.isCamera) {
-            this.findNavController().navigate(
-                ArModuleFactory
-                    .starter()
-                    .startArFeature(
-                        configuration = ArFeatureConfiguration(
-                            tag = "ar"
-                        )
-                    )
-            )
-            //viewModel.openAR()
+            viewModel.openAR()
         }
     }
 

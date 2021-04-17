@@ -47,4 +47,13 @@ class SearchInteractorImpl @Inject constructor(
     override suspend fun addBuildings(buildings: MutableList<LocalBuildings>) {
         buildingsProvider.saveBuildings(buildings)
     }
+
+    override suspend fun search(query: String): Flow<List<CreateAdapterListItem>> {
+        return combine(
+            employeesProvider.getSearchedEmployees(query),
+            buildingsProvider.getSearchedBuildings(query),
+        ) { employee, buildings ->
+            employee.toUIEmployeeModel() + buildings.toUIBuildingModel()
+        }
+    }
 }

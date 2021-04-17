@@ -2,10 +2,11 @@ package com.mishok.polygo.ui.building_inside
 
 import androidx.lifecycle.LifecycleObserver
 import com.mishok.polygo.base.BaseViewModelImpl
+import com.mishok.polygo.domain.bookmarks.BookmarksInteractor
 import com.mishok.polygo.domain.building_inside.BuildingInsideInteractor
 import com.mishok.polygo.ui.base.CreateAdapterListItem
 import com.mishok.polygo.ui.building_inside.adapter.ChipCallback
-import com.mishok.polygo.ui.search.adapter.SearchCallback
+import com.mishok.polygo.ui.search.adapter.OnBuildingInfoItemClickCallback
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -15,33 +16,49 @@ import javax.inject.Inject
 
 class BuildingInsideViewModel @Inject constructor(
     private val buildingInsideInteractor: BuildingInsideInteractor,
+    private val bookmarkInteractor: BookmarksInteractor,
     private val coroutineScope: CoroutineScope
-) : BaseViewModelImpl<BuildingInsideState>(), LifecycleObserver, SearchCallback, ChipCallback {
+) : BaseViewModelImpl<BuildingInsideState>(),
+    LifecycleObserver,
+    OnBuildingInfoItemClickCallback,
+    ChipCallback {
 
     override val initialState: BuildingInsideState = BuildingInsideState()
 
+    private var buildingId: Long = 0
+
     fun loadBuildingInfo(buildingId: Long) {
+        this.buildingId = buildingId
         coroutineScope.launch {
             buildingInsideInteractor.loadBuildingInfoByBuildingId(buildingId).collect {
-                switchDispatcher(it)
+                switchDispatcher(it.groupBy {
+                    it.category
+                })
             }
         }
         populateChips()
-        populateInfo()
     }
 
-    private suspend fun switchDispatcher(it: List<CreateAdapterListItem>) {
+    private suspend fun switchDispatcher(it: Map<String, List<CreateAdapterListItem.BuildingInfoItem>>) {
         withContext(Dispatchers.Main) {
-            state = state.copy(list = it)
+            state = state.copy(map = it)
         }
     }
 
-    override fun onBuildingClick(building: CreateAdapterListItem.BuildingItem) {
-        state = state.copy(building = building)
+    fun onBuildingInfoBookmarkClick(item: CreateAdapterListItem.BuildingInfoItem) {
+        coroutineScope.launch {
+            if (item.inBookmark) {
+                bookmarkInteractor.addBuildingInfoBookmark(item.id)
+            } else {
+                bookmarkInteractor.removeBuildingInfoBookmark(item.id)
+            }
+        }.invokeOnCompletion {
+            loadBuildingInfo(buildingId = buildingId)
+        }
     }
 
-    override fun onEmployeeClick(employee: CreateAdapterListItem.EmployeeItem) {
-        state = state.copy(employee = employee)
+    override fun onBuildingInfoItemClick(item: CreateAdapterListItem.BuildingInfoItem) {
+
     }
 
     override fun onChipClick(building: CreateAdapterListItem.ChipItem) {
@@ -55,17 +72,10 @@ class BuildingInsideViewModel @Inject constructor(
         }
         state = state.copy(chips = chips)
     }
+}
 
-    private fun populateInfo() {
-        val list: MutableList<CreateAdapterListItem> = mutableListOf()
-        for (i in 0..10) {
-            list.add(
-                CreateAdapterListItem.BuildingInfoItem(
-                    id = 0,
-                    title = "ejfiejfwi"
-                )
-            )
-        }
-    }
-
+fun String.toTitleModel(): CreateAdapterListItem.BuildingTitleItem {
+    return CreateAdapterListItem.BuildingTitleItem(
+        title = this
+    )
 }

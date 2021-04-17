@@ -14,6 +14,18 @@ class EmployeeProviderImpl @Inject constructor(
         return employeeDao.insertEmployees(employees)
     }
 
+    override fun addBookmark(employeeId: Long) {
+        employeeDao.updateBookmark(employeeId, true)
+    }
+
+    override fun removeBookmark(employeeId: Long) {
+        employeeDao.updateBookmark(employeeId, false)
+    }
+
+    override suspend fun getSearchedEmployees(query: String): Flow<List<LocalEmployees>> {
+        return employeeDao.getSearchedEmployees("%$query%")
+    }
+
     override suspend fun getAllEmployee(): Flow<List<LocalEmployees>> {
         return employeeDao.getAllEmployee()
     }

@@ -1,5 +1,6 @@
 package com.mishok.polygo.utils
 
+import android.content.SharedPreferences
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.*
@@ -17,6 +18,10 @@ inline fun <reified VM : ViewModel> Fragment.retrieveSharedViewModel(factory: Vi
     return ViewModelProvider(requireActivity(), factory).get(VM::class.java)
 }
 
+fun SharedPreferences.putBoolean(keyFirstTime: String, b: Boolean) {
+    this.edit().putBoolean(keyFirstTime, b).apply()
+}
+
 private object UninitializedValue
 
 /**
@@ -24,7 +29,7 @@ private object UninitializedValue
  */
 @Suppress("ClassName")
 class lifecycleAwareLazy<out T>(private val owner: LifecycleOwner, initializer: () -> T) : Lazy<T>,
-        Serializable {
+    Serializable {
     private var initializer: (() -> T)? = initializer
 
     @Volatile

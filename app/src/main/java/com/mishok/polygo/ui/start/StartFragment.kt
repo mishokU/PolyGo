@@ -22,7 +22,7 @@ class StartFragment : BaseFragment<StartState, StartViewModel>() {
     }
 
     private fun initLocalDatabase() {
-        viewModel
+        viewModel.initLocalDatabase()
     }
 
     private fun initViews() {

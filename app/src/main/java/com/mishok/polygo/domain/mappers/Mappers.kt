@@ -9,7 +9,11 @@ fun List<LocalEmployees>.toUIEmployeeModel(): List<CreateAdapterListItem> {
     return map {
         CreateAdapterListItem.EmployeeItem(
             id = it.id,
-            title = it.name
+            title = it.name,
+            email = it.contacts,
+            schedule = it.scheduleUrl,
+            description = it.contacts,
+            inBookmark = it.saved
         )
     }
 }
@@ -20,16 +24,20 @@ fun List<LocalBuildings>.toUIBuildingModel(): List<CreateAdapterListItem> {
             id = it.id,
             title = it.title,
             longitude = it.longitude,
-            latitude = it.latitude
+            latitude = it.latitude,
+            inBookmark = it.saved
         )
     }
 }
 
-fun List<LocalBuildingInfo>.toUIBuildingInfoModel(): List<CreateAdapterListItem> {
+fun List<LocalBuildingInfo>.toUIBuildingInfoModel(): List<CreateAdapterListItem.BuildingInfoItem> {
     return map {
         CreateAdapterListItem.BuildingInfoItem(
             id = it.id,
-            title = it.title
+            title = it.title,
+            description = it.category,
+            inBookmark = it.saved,
+            category = it.category
         )
     }
 }

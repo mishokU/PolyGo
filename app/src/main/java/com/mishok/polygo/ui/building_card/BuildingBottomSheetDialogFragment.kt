@@ -52,6 +52,7 @@ class BuildingBottomSheetDialogFragment : BottomSheetDialogFragment(), HasAndroi
         }
         showEntranceButton.setOnClickListener {
             resultListener.showBuildingEntrance()
+            this.dismiss()
         }
     }
 

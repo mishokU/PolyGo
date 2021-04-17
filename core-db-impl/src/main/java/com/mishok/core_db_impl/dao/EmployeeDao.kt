@@ -18,4 +18,11 @@ interface EmployeeDao {
 
     @Query(value = LocalEmployees.QUERY_GET_SAVED)
     fun getSavedEmployees(): Flow<List<LocalEmployees>>
+
+    @Query(value = LocalEmployees.QUERY_GET_BY_QUERY)
+    fun getSearchedEmployees(query: String): Flow<List<LocalEmployees>>
+
+    @Query(value = LocalEmployees.QUERY_UPDATE_BOOKMARK)
+    fun updateBookmark(employeeId: Long, state: Boolean)
+
 }

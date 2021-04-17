@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.mishok.polygo.domain.bookmarks.BookmarksInteractor
 import com.mishok.polygo.domain.bookmarks.BookmarksInteractorImpl
+import com.mishok.polygo.domain.search.SearchInteractor
 import com.mishok.polygo.ui.bookmarks.BookmarksFragment
 import com.mishok.polygo.ui.bookmarks.BookmarksViewModel
 import dagger.Binds
@@ -45,8 +46,9 @@ abstract class BookmarksModule {
         @ViewModelKey(BookmarksViewModel::class)
         fun provideFeatureViewModel(
             expensive: BookmarksInteractor,
+            searchInteractor: SearchInteractor,
             coroutineScope: CoroutineScope
-        ): ViewModel = BookmarksViewModel(expensive, coroutineScope)
+        ): ViewModel = BookmarksViewModel(searchInteractor, expensive, coroutineScope)
 
     }
 

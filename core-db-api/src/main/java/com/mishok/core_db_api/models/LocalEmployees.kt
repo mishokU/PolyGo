@@ -7,18 +7,18 @@ import androidx.room.PrimaryKey
 @Entity(tableName = LocalEmployees.TABLE_NAME)
 data class LocalEmployees(
 
-        @PrimaryKey(autoGenerate = true)
-        @ColumnInfo(name = COLUMN_ID)
-        val id: Long,
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = COLUMN_ID)
+    val id: Long = 0,
 
-        @ColumnInfo(name = COLUMN_NAME)
-        val name: String,
+    @ColumnInfo(name = COLUMN_NAME)
+    val name: String,
 
-        @ColumnInfo(name = COLUMN_AVATAR_URL)
-        val avatar: String,
+    @ColumnInfo(name = COLUMN_AVATAR_URL)
+    val avatar: String,
 
-        @ColumnInfo(name = COLUMN_CONTACTS)
-        val contacts: String,
+    @ColumnInfo(name = COLUMN_CONTACTS)
+    val contacts: String,
 
         @ColumnInfo(name = COLUMN_POSITION)
         val position: String,
@@ -45,8 +45,16 @@ data class LocalEmployees(
             SELECT * FROM $TABLE_NAME
         """
 
+        const val QUERY_UPDATE_BOOKMARK = """
+            UPDATE $TABLE_NAME SET $COLUMN_BOOKMARK = :state WHERE $COLUMN_ID = :employeeId
+        """
+
         const val QUERY_GET_SAVED = """
-            SELECT * FROM $TABLE_NAME WHERE $COLUMN_BOOKMARK = true
+            SELECT * FROM $TABLE_NAME WHERE $COLUMN_BOOKMARK = 1
+        """
+
+        const val QUERY_GET_BY_QUERY = """
+            SELECT * FROM $TABLE_NAME WHERE $COLUMN_NAME like (:query)
         """
 
     }

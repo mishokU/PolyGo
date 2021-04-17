@@ -8,7 +8,8 @@ import androidx.room.PrimaryKey
 data class LocalBuildingInfo(
 
     @PrimaryKey(autoGenerate = true)
-    val id: Long,
+    @ColumnInfo(name = COLUMN_ID)
+    val id: Long = 0,
 
     @ColumnInfo(name = COLUMN_BUILDING_ID)
     val buildingId: Long,
@@ -20,7 +21,10 @@ data class LocalBuildingInfo(
     val title: String,
 
     @ColumnInfo(name = COLUMN_LOCATION)
-    val location: String
+    val location: String,
+
+    @ColumnInfo(name = COLUMN_BOOKMARK)
+    val saved: Boolean
 
 ) {
     companion object {
@@ -28,10 +32,18 @@ data class LocalBuildingInfo(
         const val COLUMN_BUILDING_ID = "building_id"
         const val COLUMN_CATEGORY = "category"
         const val COLUMN_TITLE = "title"
+        const val COLUMN_ID = "id"
         const val COLUMN_LOCATION = "location"
+        const val COLUMN_BOOKMARK = "saved"
 
         const val QUERY_GET_BY_BUILDING_ID = """
-            SELECT * FROM $TABLE_NAME WHERE $COLUMN_BUILDING_ID = :buildingId
+            SELECT * FROM $TABLE_NAME 
+        """
+
+
+        //WHERE $COLUMN_BUILDING_ID = :buildingId
+        const val QUERY_UPDATE_BOOKMARK = """
+            UPDATE $TABLE_NAME SET $COLUMN_BOOKMARK = :state WHERE $COLUMN_ID = :buildingInfoId
         """
     }
 }

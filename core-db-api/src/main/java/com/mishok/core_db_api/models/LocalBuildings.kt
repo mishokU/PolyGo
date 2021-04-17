@@ -8,6 +8,7 @@ import androidx.room.PrimaryKey
 data class LocalBuildings(
 
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = COLUMN_ID)
     val id: Long,
 
     @ColumnInfo(name = COLUMN_LONGITUDE)
@@ -22,20 +23,20 @@ data class LocalBuildings(
     @ColumnInfo(name = COLUMN_FLOOR)
     val floorId: Long,
 
-    @ColumnInfo(name = COLUMN_ID)
+    @ColumnInfo(name = COLUMN_AUDIENCE_ID)
     val audienceId: Long,
 
-        @ColumnInfo(name = COLUMN_TIME)
-        val time: Long,
+    @ColumnInfo(name = COLUMN_TIME)
+    val time: Long,
 
-        @ColumnInfo(name = COLUMN_DISTANCE)
-        val distance: Long,
+    @ColumnInfo(name = COLUMN_DISTANCE)
+    val distance: Long,
 
-        @ColumnInfo(name = COLUMN_TITLE)
-        val title: String,
+    @ColumnInfo(name = COLUMN_TITLE)
+    val title: String,
 
-        @ColumnInfo(name = COLUMN_BOOKMARK)
-        val saved: Boolean
+    @ColumnInfo(name = COLUMN_BOOKMARK)
+    val saved: Boolean
 
 ) {
     companion object {
@@ -45,7 +46,8 @@ data class LocalBuildings(
         const val COLUMN_CORP = "corp"
         const val COLUMN_TITLE = "title"
         const val COLUMN_FLOOR = "floor"
-        const val COLUMN_ID = "audience_id"
+        const val COLUMN_ID = "id"
+        const val COLUMN_AUDIENCE_ID = "audience_id"
         const val COLUMN_TIME = "time"
         const val COLUMN_DISTANCE = "distance"
         const val COLUMN_BOOKMARK = "saved"
@@ -62,8 +64,16 @@ data class LocalBuildings(
             $COLUMN_LONGITUDE BETWEEN :longitudeFrom AND :longitudeTo
         """
 
+        const val QUERY_UPDATE_BOOKMARK = """
+            UPDATE $TABLE_NAME SET $COLUMN_BOOKMARK = :state WHERE $COLUMN_ID = :buildingId
+        """
+
         const val QUERY_GET_SAVED = """
-            SELECT * FROM $TABLE_NAME WHERE $COLUMN_BOOKMARK = true
+            SELECT * FROM $TABLE_NAME WHERE $COLUMN_BOOKMARK = 1
+        """
+
+        const val QUERY_GET_BY_QUERY = """
+            SELECT * FROM $TABLE_NAME WHERE $COLUMN_TITLE like (:query)
         """
 
     }

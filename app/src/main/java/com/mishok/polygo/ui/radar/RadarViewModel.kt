@@ -16,7 +16,6 @@ import kotlin.coroutines.coroutineContext
 class RadarViewModel @Inject constructor(
     private val expensive: MapInteractor,
     private val coroutineScope: CoroutineScope,
-    private val context: Application
 ) : BaseViewModelImpl<RadarState>() {
 
     override val initialState: RadarState = RadarState()
@@ -25,7 +24,7 @@ class RadarViewModel @Inject constructor(
         navigateTo(RouteDestination.ArFragment)
     }
 
-    fun requestPermission() {
+    fun requestPermission(context: Context) {
         coroutineScope.launch {
             val result = Peko.requestPermissionsAsync(context, Manifest.permission.CAMERA)
             withContext(Dispatchers.Main) {

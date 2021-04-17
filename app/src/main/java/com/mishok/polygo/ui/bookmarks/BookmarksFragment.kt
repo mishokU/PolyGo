@@ -6,10 +6,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mishok.polygo.R
 import com.mishok.polygo.base.BaseFragment
+import com.mishok.polygo.ui.base.CreateAdapterListItem
+import com.mishok.polygo.ui.employee_card.EmployeeBottomSheetDialogFragment
 import com.mishok.polygo.ui.search.adapter.SearchAdapter
+import com.mishok.polygo.ui.search.adapter.SearchCallbackWrapper
 import com.mishok.polygo.utils.AutoClearedValue
+import com.mishok.polygo.utils.TextWatcherAdapter
 import com.mishok.polygo.utils.filter.SearchFilter
-import kotlinx.android.synthetic.main.fragment_search.*
+import kotlinx.android.synthetic.main.fragment_bookmarks.*
+import kotlinx.android.synthetic.main.fragment_search.buildingFilterButton
+import kotlinx.android.synthetic.main.fragment_search.employeeFilterButton
+import kotlinx.android.synthetic.main.fragment_search.itemsRecyclerView
+import kotlinx.android.synthetic.main.fragment_search.searchAllButton
 import javax.inject.Inject
 
 
@@ -35,7 +43,19 @@ class BookmarksFragment : BaseFragment<BookmarksState, BookmarksViewModel>() {
 
     private fun initList() = with(itemsRecyclerView) {
         layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        bookmarkAdapter = SearchAdapter(viewModel)
+        bookmarkAdapter = SearchAdapter(object : SearchCallbackWrapper() {
+            override fun onBuildingBookmarkClick(item: CreateAdapterListItem.BuildingItem) {
+                viewModel.onBuildingBookmarkClick(item)
+            }
+
+            override fun onEmployeeBookmarkClick(item: CreateAdapterListItem.EmployeeItem) {
+                viewModel.onEmployeeBookmarkClick(item)
+            }
+
+            override fun onEmployeeClick(employee: CreateAdapterListItem.EmployeeItem) {
+                viewModel.onEmployeeClick(employee)
+            }
+        })
         adapter = bookmarkAdapter
         setHasFixedSize(true)
     }
@@ -50,11 +70,30 @@ class BookmarksFragment : BaseFragment<BookmarksState, BookmarksViewModel>() {
         employeeFilterButton.setOnClickListener {
             viewModel.loadBookmarks(SearchFilter.EMPLOYEE)
         }
+        searchField.addTextChangedListener(object : TextWatcherAdapter() {
+            override fun onTextChanged(query: CharSequence?, start: Int, before: Int, count: Int) {
+                viewModel.search(query.toString())
+            }
+        })
     }
 
     override fun onStateChange(state: BookmarksState) {
-        if (state.list.isNotEmpty()) {
-            bookmarkAdapter.items = state.list
+        bookmarkAdapter.items = state.list
+        if (state.employee != null) {
+            openEmployeeCard(state.employee)
+            viewModel.resetEmployee()
         }
+    }
+
+    private fun openEmployeeCard(employee: CreateAdapterListItem.EmployeeItem) {
+        EmployeeBottomSheetDialogFragment.newInstance(
+            EmployeeBottomSheetDialogFragment.NavigationData(
+                name = employee.title,
+                schedule = employee.schedule,
+                position = employee.description,
+                avatar = "",
+                email = employee.email
+            )
+        ).show(childFragmentManager, "employee")
     }
 }

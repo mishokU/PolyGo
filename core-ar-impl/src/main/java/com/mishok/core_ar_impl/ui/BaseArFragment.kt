@@ -5,10 +5,8 @@ import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.google.ar.core.ArCoreApk
 import com.google.ar.sceneform.ux.ArFragment
-import com.mishok.core_ar_api.starter.ArFeatureConfiguration
 import com.mishok.core_ar_impl.R
 
 
@@ -42,19 +40,6 @@ class BaseArFragment : ArFragment() {
         } else { // The device is unsupported or unknown.
             //mArButton.visibility = View.INVISIBLE
             //mArButton.isEnabled = false
-        }
-    }
-
-    companion object {
-
-        private const val KEY_TAG = "key_tag"
-
-        @JvmStatic
-        fun getInstance(configuration: ArFeatureConfiguration): BaseArFragment {
-            val bundle = Bundle()
-            val fragment = BaseArFragment()
-            fragment.arguments = bundle
-            return fragment
         }
     }
 }

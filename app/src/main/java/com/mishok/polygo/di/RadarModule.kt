@@ -42,9 +42,8 @@ abstract class RadarModule {
         @ViewModelKey(RadarViewModel::class)
         fun provideFeatureViewModel(
             expensive: MapInteractor,
-            coroutineScope: CoroutineScope,
-            context: Application
-        ): ViewModel = RadarViewModel(expensive, coroutineScope, context)
+            coroutineScope: CoroutineScope
+        ): ViewModel = RadarViewModel(expensive, coroutineScope)
 
     }
 

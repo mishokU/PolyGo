@@ -10,7 +10,8 @@ data class MapsState(
         title = "Поблизости нет зданий",
         longitude = MapsFragment.POLITECH_LONGITUDE,
         latitude = MapsFragment.POLITECH_LATITUDE,
-        id = 0
+        id = 0,
+        inBookmark = false
     ),
     val isFineLocationGranted: Boolean = false,
     val moveCamera: Boolean = false

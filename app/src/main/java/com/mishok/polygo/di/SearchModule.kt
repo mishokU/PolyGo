@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.mishok.core_db_api.providers.BuildingsProvider
 import com.mishok.core_db_api.providers.EmployeesProvider
 import com.mishok.core_db_api.providers.SearchProvider
+import com.mishok.polygo.domain.bookmarks.BookmarksInteractor
 import com.mishok.polygo.domain.search.SearchInteractor
 import com.mishok.polygo.domain.search.SearchInteractorImpl
 import com.mishok.polygo.ui.search.SearchFragment
@@ -42,9 +43,10 @@ abstract class SearchModule {
         @IntoMap
         @ViewModelKey(SearchViewModel::class)
         fun provideFeatureViewModel(
-                expensive: SearchInteractor,
-                coroutineScope: CoroutineScope
-        ): ViewModel = SearchViewModel(expensive, coroutineScope)
+            expensive: SearchInteractor,
+            bookmarkInteractor: BookmarksInteractor,
+            coroutineScope: CoroutineScope
+        ): ViewModel = SearchViewModel(expensive, bookmarkInteractor, coroutineScope)
 
     }
 

@@ -2,6 +2,8 @@ package com.mishok.core_impl.di
 
 import android.app.Application
 import android.content.Context
+import android.content.SharedPreferences
+import android.preference.PreferenceManager
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import com.mishok.core_api.di.GooglePlayAvailable
@@ -36,6 +38,12 @@ class CoreModule {
         @Provides
         @JvmStatic
         fun provideLocaleManager(context: Context): LocaleManager = LocaleManagerImpl(context)
+
+        @Provides
+        @JvmStatic
+        fun provideSharedPreference(context: Context): SharedPreferences {
+            return PreferenceManager.getDefaultSharedPreferences(context)
+        }
 
         @Provides
         @Singleton

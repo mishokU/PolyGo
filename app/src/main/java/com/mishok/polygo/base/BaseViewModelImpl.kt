@@ -9,6 +9,7 @@ import com.mishok.polygo.base.api.BaseViewModel
 import com.mishok.polygo.base.api.BaseViewState
 import com.mishok.polygo.base.route.RouteDestination
 import com.mishok.polygo.base.route.RouteSection
+import com.mishok.polygo.ui.search.adapter.SearchCallbackWrapper
 import com.mishok.polygo.utils.SingleEvent
 import com.mishok.polygo.utils.defaultNavOptions
 

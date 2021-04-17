@@ -15,15 +15,27 @@ class BuildingsProviderImpl @Inject constructor(
         buildingDao.insertBuildings(buildings)
     }
 
+    override fun addBookmark(buildingId: Long) {
+        buildingDao.updateBookmark(buildingId, 1)
+    }
+
+    override fun removeBookmark(buildingId: Long) {
+        buildingDao.updateBookmark(buildingId, 0)
+    }
+
+    override suspend fun getSearchedBuildings(query: String): Flow<List<LocalBuildings>> {
+        return buildingDao.getSearchedBuildings("%$query%")
+    }
+
     override suspend fun getAllBuildings(): Flow<List<LocalBuildings>> {
         return buildingDao.getAllBuildings()
     }
 
     override suspend fun getBuildingsByPoint(point: Point): Flow<List<LocalBuildings>> {
         return buildingDao.getBuildingsByPoint(
-                point.latitude - LocalBuildings.DELTA_DISTANCE,
-                point.latitude + LocalBuildings.DELTA_DISTANCE,
-                point.longitude - LocalBuildings.DELTA_DISTANCE,
+            point.latitude - LocalBuildings.DELTA_DISTANCE,
+            point.latitude + LocalBuildings.DELTA_DISTANCE,
+            point.longitude - LocalBuildings.DELTA_DISTANCE,
                 point.longitude + LocalBuildings.DELTA_DISTANCE
         )
     }

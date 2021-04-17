@@ -38,4 +38,8 @@ class StartViewModel @Inject constructor(
         navigateTo(RouteDestination.Map)
     }
 
+    fun initLocalDatabase() {
+        startInteractor.initLocalDatabase()
+    }
+
 }

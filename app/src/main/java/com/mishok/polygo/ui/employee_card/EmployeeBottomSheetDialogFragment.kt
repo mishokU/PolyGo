@@ -15,6 +15,7 @@ import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import dagger.android.support.AndroidSupportInjection
+import kotlinx.android.synthetic.main.fragment_bottom_sheet_item.*
 import javax.inject.Inject
 
 class EmployeeBottomSheetDialogFragment : BottomSheetDialogFragment(), HasAndroidInjector {
@@ -44,29 +45,47 @@ class EmployeeBottomSheetDialogFragment : BottomSheetDialogFragment(), HasAndroi
         setUpViews()
     }
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val dialog = super.onCreateDialog(savedInstanceState) as BottomSheetDialog
-        dialog.setOnShowListener { setupBottomSheet(it) }
-        return dialog
-    }
-
-    private fun setupBottomSheet(dialogInterface: DialogInterface) {
-//        val bottomSheetDialog = dialogInterface as BottomSheetDialog
-//        val bottomSheet = bottomSheetDialog.findViewById<View>(
-//            com.google.android.material.R.id.design_bottom_sheet
-//        )
-//            ?: return
-    }
-
     private fun setUpViews() {
+        employeeName.text = arguments?.get(KEY_NAME).toString()
+        employeeDescription.text = arguments?.get(KEY_POSITION).toString()
+        employeeEmailButton.text = arguments?.get(KEY_EMAIL).toString()
 
+        //Open gmail to write message
+        employeeEmailButton.setOnClickListener {
+
+        }
+
+        //Open web view with schedule
+        employeeScheduleButton.setOnClickListener {
+
+        }
     }
+
+    data class NavigationData(
+        val name: String,
+        val email: String,
+        val schedule: String,
+        val avatar: String,
+        val position: String
+    )
 
     companion object {
 
+        private const val KEY_NAME = "name"
+        private const val KEY_EMAIL = "email"
+        private const val KEY_SCHEDULE = "schedule"
+        private const val KEY_AVATAR = "avatar"
+        private const val KEY_POSITION = "position"
+
         @JvmStatic
-        fun newInstance(bundle: Bundle): EmployeeBottomSheetDialogFragment {
+        fun newInstance(data: NavigationData): EmployeeBottomSheetDialogFragment {
             val fragment = EmployeeBottomSheetDialogFragment()
+            val bundle = Bundle()
+            bundle.putString(KEY_EMAIL, data.email)
+            bundle.putString(KEY_AVATAR, data.avatar)
+            bundle.putString(KEY_POSITION, data.position)
+            bundle.putString(KEY_NAME, data.name)
+            bundle.putString(KEY_SCHEDULE, data.schedule)
             fragment.arguments = bundle
             return fragment
         }

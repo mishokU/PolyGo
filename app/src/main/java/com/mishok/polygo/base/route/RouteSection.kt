@@ -19,7 +19,7 @@ sealed class RouteDestination(@IdRes val destination: Int) {
 
     object BuildingInside : RouteDestination(R.id.buildingInsideFragment)
 
-    object ArFragment : RouteDestination(R.id.sceneForm)
+    object ArFragment : RouteDestination(R.id.baseArFragment)
 
     object Radar : RouteDestination(R.id.radarFragment)
 

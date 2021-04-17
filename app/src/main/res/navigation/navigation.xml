@@ -5,6 +5,8 @@
     android:id="@+id/mainNavGraph"
     app:startDestination="@id/startFragment">
 
+    <include app:graph="@navigation/ar_navigation" />
+
     <fragment
         android:id="@+id/startFragment"
         android:name="com.mishok.polygo.ui.start.StartFragment"

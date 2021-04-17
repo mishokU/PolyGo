@@ -3,22 +3,21 @@ package com.mishok.polygo.ui.search.adapter
 import android.annotation.SuppressLint
 import androidx.recyclerview.widget.DiffUtil
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
-import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegate
 import com.mishok.polygo.ui.base.CreateAdapterListItem
-import com.mishok.polygo.ui.search.deletegates.BuildingsAdapterDelegate
-import com.mishok.polygo.ui.search.deletegates.EmployeeAdapterDelegate
-import com.mishok.polygo.ui.search.deletegates.SearchAdapterDelegate
-import com.mishok.polygo.ui.search.deletegates.TextAdapterDelegate
+import com.mishok.polygo.ui.search.deletegates.BuildingInfoAdapterDelegate
+import com.mishok.polygo.ui.search.deletegates.*
 
-class SearchAdapter(callback: SearchCallback) :
-    AsyncListDifferDelegationAdapter<Any>(SearchItemCallback()) {
+class SearchAdapter(
+    callback: SearchCallbackWrapper
+) : AsyncListDifferDelegationAdapter<Any>(SearchItemCallback()) {
 
     init {
         sequenceOf(
             SearchAdapterDelegate(callback),
             BuildingsAdapterDelegate(callback),
+            BuildingInfoAdapterDelegate(callback),
             EmployeeAdapterDelegate(callback),
-            TextAdapterDelegate()
+            TextAdapterDelegate(callback)
         ).forEach {
             delegatesManager.addDelegate(it)
         }

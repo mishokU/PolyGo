@@ -4,8 +4,12 @@ import androidx.lifecycle.LifecycleObserver
 import com.mishok.core_db_api.models.LocalBuildings
 import com.mishok.core_db_api.models.LocalEmployees
 import com.mishok.polygo.base.BaseViewModelImpl
+import com.mishok.polygo.domain.bookmarks.BookmarksInteractor
 import com.mishok.polygo.domain.search.SearchInteractor
 import com.mishok.polygo.ui.base.CreateAdapterListItem
+import com.mishok.polygo.ui.search.adapter.OnBuildingBookmarkClickCallback
+import com.mishok.polygo.ui.search.adapter.OnEmployeeBookmarkClickCallback
+import com.mishok.polygo.ui.search.adapter.OnEmployeeClickCallback
 import com.mishok.polygo.ui.search.adapter.SearchCallback
 import com.mishok.polygo.utils.filter.SearchFilter
 import kotlinx.coroutines.CoroutineScope
@@ -16,9 +20,14 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class SearchViewModel @Inject constructor(
-        private val searchInteractor: SearchInteractor,
-        private val coroutineScope: CoroutineScope
-) : BaseViewModelImpl<SearchState>(), LifecycleObserver, SearchCallback {
+    private val searchInteractor: SearchInteractor,
+    private val bookmarksInteractor: BookmarksInteractor,
+    private val coroutineScope: CoroutineScope
+) : BaseViewModelImpl<SearchState>(),
+    LifecycleObserver,
+    OnBuildingBookmarkClickCallback,
+    OnEmployeeBookmarkClickCallback,
+    OnEmployeeClickCallback {
 
     override val initialState: SearchState = SearchState()
 
@@ -41,6 +50,9 @@ class SearchViewModel @Inject constructor(
                     }
                 }
             }
+            withContext(Dispatchers.Main) {
+                state = state.copy(lastFilter = filter)
+            }
         }
     }
 
@@ -50,51 +62,43 @@ class SearchViewModel @Inject constructor(
         }
     }
 
-    override fun onBuildingClick(building: CreateAdapterListItem.BuildingItem) {
-        state = state.copy(building = building)
+    override fun onBuildingBookmarkClick(item: CreateAdapterListItem.BuildingItem) {
+        coroutineScope.launch {
+            if (item.inBookmark) {
+                bookmarksInteractor.removeBuildingBookmark(item.id)
+            } else {
+                bookmarksInteractor.addBuildingBookmark(item.id)
+            }
+        }.invokeOnCompletion {
+            loadSearching(state.lastFilter)
+        }
+    }
+
+    override fun onEmployeeBookmarkClick(item: CreateAdapterListItem.EmployeeItem) {
+        coroutineScope.launch {
+            if (item.inBookmark) {
+                bookmarksInteractor.removeEmployeeBookmark(item.id)
+            } else {
+                bookmarksInteractor.addEmployeeBookmark(item.id)
+            }
+        }.invokeOnCompletion {
+            loadSearching(state.lastFilter)
+        }
     }
 
     override fun onEmployeeClick(employee: CreateAdapterListItem.EmployeeItem) {
         state = state.copy(employee = employee)
     }
 
-    fun populateDataBase() {
-        val list: MutableList<LocalEmployees> = mutableListOf()
-        for (i in 0..10) {
-            list.add(
-                    LocalEmployees(
-                            id = 0,
-                            name = "feifwifwe",
-                            avatar = "fefefwe",
-                            position = "efiejwfiwjfwfjwefw",
-                            contacts = "ekfwiejwe",
-                            scheduleUrl = "fjeifefwj$i",
-                            saved = false
-                    )
-            )
-        }
-        val buildings: MutableList<LocalBuildings> = mutableListOf()
-        for (i in 0..10) {
-            buildings.add(
-                    LocalBuildings(
-                        audienceId = 0,
-                        distance = 0,
-                        id = 0,
-                        latitude = (0 + i * 20).toDouble(),
-                        corpId = 0,
-                        floorId = 0,
-                        longitude = (0 + i * 10).toDouble(),
-                        time = 10,
-                        title = "iewjfweifjiwe$i",
-                        saved = false
-                    )
-            )
-        }
+    fun resetEmployee() {
+        state = state.copy(employee = null)
+    }
 
-
+    fun search(query: String) {
         coroutineScope.launch {
-            searchInteractor.addSearching(list)
-            searchInteractor.addBuildings(buildings)
+            searchInteractor.search(query).collect {
+                switchDispatcher(it)
+            }
         }
     }
 

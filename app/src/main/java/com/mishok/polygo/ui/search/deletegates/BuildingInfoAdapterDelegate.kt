@@ -12,12 +12,14 @@ import com.mishok.polygo.ui.search.adapter.SearchCallback
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_search.*
 
-class BuildingsAdapterDelegate(
+class BuildingInfoAdapterDelegate(
     private val onClick: SearchCallback
-) : AbsListItemAdapterDelegate<CreateAdapterListItem.BuildingItem, Any, BuildingsAdapterDelegate.ViewHolder>() {
+) : AbsListItemAdapterDelegate<
+        CreateAdapterListItem.BuildingInfoItem, Any,
+        BuildingInfoAdapterDelegate.ViewHolder>() {
 
     override fun isForViewType(item: Any, items: MutableList<Any>, position: Int): Boolean =
-        item is CreateAdapterListItem.BuildingItem
+        item is CreateAdapterListItem.BuildingInfoItem
 
     override fun onCreateViewHolder(parent: ViewGroup): ViewHolder {
         return ViewHolder(
@@ -28,7 +30,7 @@ class BuildingsAdapterDelegate(
     }
 
     override fun onBindViewHolder(
-        item: CreateAdapterListItem.BuildingItem,
+        item: CreateAdapterListItem.BuildingInfoItem,
         holder: ViewHolder,
         payloads: MutableList<Any>
     ) {
@@ -39,21 +41,24 @@ class BuildingsAdapterDelegate(
         }
     }
 
-    class ViewHolder(
-        override val containerView: View, val onClick: SearchCallback
-    ) : RecyclerView.ViewHolder(containerView), LayoutContainer {
+    class ViewHolder(override val containerView: View, val onClick: SearchCallback) :
+        RecyclerView.ViewHolder(containerView), LayoutContainer {
 
-        private var item: CreateAdapterListItem.BuildingItem? = null
+        private var item: CreateAdapterListItem.BuildingInfoItem? = null
 
         init {
             bookmarkImage.setOnClickListener {
-                item?.let(onClick::onBuildingBookmarkClick)
+                item?.let(onClick::onBuildingInfoItemClick)
+            }
+            bookmarkImage.setOnClickListener {
+                item?.let(onClick::onBuildingInfoBookmarkClick)
             }
         }
 
-        fun bind(item: CreateAdapterListItem.BuildingItem) {
+        fun bind(item: CreateAdapterListItem.BuildingInfoItem) {
             this.item = item
             name.text = item.title
+            description.text = item.description
             toggleBookmark(item.inBookmark)
         }
 
