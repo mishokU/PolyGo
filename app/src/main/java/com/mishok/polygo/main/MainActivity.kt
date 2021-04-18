@@ -16,17 +16,10 @@ class MainActivity : DaggerAppCompatActivity() {
         super.onCreate(savedInstanceState)
         setTheme(R.style.Theme_PolyGo)
         setContentView(R.layout.activity_main)
-        initMap()
         initStartLocation()
     }
 
     private fun initStartLocation() {
         polyGoLocationManager.loadCurrentLocation()
     }
-
-    private fun initMap() {
-        MapKitFactory.setApiKey(getString(R.string.YandexKey))
-        MapKitFactory.initialize(this)
-    }
-
 }

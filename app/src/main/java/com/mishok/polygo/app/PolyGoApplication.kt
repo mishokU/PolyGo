@@ -2,7 +2,9 @@ package com.mishok.polygo.app
 
 import com.mishok.core_api.utils.AppCodeProvider
 import com.mishok.polygo.BuildConfig
+import com.mishok.polygo.R
 import com.mishok.polygo.utils.woods.ReleaseTree
+import com.yandex.mapkit.MapKitFactory
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
 import timber.log.Timber
@@ -23,6 +25,10 @@ class PolyGoApplication : DaggerApplication(), AppCodeProvider {
         super.onCreate()
         appCodeString = UUID.randomUUID().toString()
         initTimber()
+
+        MapKitFactory.setApiKey(getString(R.string.YandexKey))
+        MapKitFactory.initialize(this)
+
         //localeManager.setLocale()
     }
 

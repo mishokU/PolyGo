@@ -1,7 +1,5 @@
 package com.mishok.polygo.ui.base
 
-import com.google.android.datatransport.cct.StringMerger
-
 sealed class CreateAdapterListItem {
 
     data class SearchItem(

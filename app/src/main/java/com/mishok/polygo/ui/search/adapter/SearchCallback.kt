@@ -19,7 +19,7 @@ interface OnBuildingBookmarkClickCallback {
     fun onBuildingBookmarkClick(item: CreateAdapterListItem.BuildingItem)
 }
 
-interface OnBuildingInfoItemClickCallback {
+interface OnBuildingInfoBookmarkItemClickCallback {
     fun onBuildingInfoItemClick(item: CreateAdapterListItem.BuildingInfoItem)
 }
 

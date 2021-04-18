@@ -48,9 +48,6 @@ class BuildingInfoAdapterDelegate(
 
         init {
             bookmarkImage.setOnClickListener {
-                item?.let(onClick::onBuildingInfoItemClick)
-            }
-            bookmarkImage.setOnClickListener {
                 item?.let(onClick::onBuildingInfoBookmarkClick)
             }
         }

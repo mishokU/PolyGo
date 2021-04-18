@@ -1,13 +1,13 @@
 package com.mishok.polygo.ui.building_inside
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mishok.polygo.R
 import com.mishok.polygo.base.BaseFragment
+import com.mishok.polygo.domain.mappers.toTitleModel
 import com.mishok.polygo.ui.base.CreateAdapterListItem
 import com.mishok.polygo.ui.building_inside.adapter.ChipAdapter
 import com.mishok.polygo.ui.search.adapter.SearchAdapter
@@ -46,7 +46,7 @@ class BuildingInsideFragment : BaseFragment<BuildingInsideState, BuildingInsideV
     }
 
     private fun initChips() = with(chipRecyclerView) {
-        layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.HORIZONTAL, false);
+        layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.HORIZONTAL, false)
         chipAdapter = ChipAdapter(viewModel)
         adapter = chipAdapter
         setHasFixedSize(true)
@@ -55,12 +55,8 @@ class BuildingInsideFragment : BaseFragment<BuildingInsideState, BuildingInsideV
     private fun initList() = with(itemsRecyclerView) {
         layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         searchAdapter = SearchAdapter(object : SearchCallbackWrapper() {
-            override fun onBuildingInfoItemClick(item: CreateAdapterListItem.BuildingInfoItem) {
-                viewModel.onBuildingInfoItemClick(item)
-            }
-
             override fun onBuildingInfoBookmarkClick(item: CreateAdapterListItem.BuildingInfoItem) {
-                viewModel.onBuildingInfoBookmarkClick(item)
+                viewModel.onBuildingInfoBookmarkItemClick(item)
             }
         })
         adapter = searchAdapter
@@ -72,15 +68,15 @@ class BuildingInsideFragment : BaseFragment<BuildingInsideState, BuildingInsideV
     }
 
     override fun onStateChange(state: BuildingInsideState) {
+        if (state.chips.isNotEmpty()) {
+            chipAdapter.items = state.chips.distinctBy {
+                (it as CreateAdapterListItem.ChipItem).title
+            }
+        }
         if (state.map.isNotEmpty()) {
-            val items = state.map.map {
+            searchAdapter.items = state.map.map {
                 listOf(it.key.toTitleModel()) + it.value
             }.flatten()
-            Log.d("items", items.toString())
-            //searchAdapter.items =
-        }
-        if (state.chips.isNotEmpty()) {
-            chipAdapter.items = state.chips
         }
     }
 

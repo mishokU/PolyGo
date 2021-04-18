@@ -40,7 +40,6 @@ data class LocalBuildingInfo(
             SELECT * FROM $TABLE_NAME 
         """
 
-
         //WHERE $COLUMN_BUILDING_ID = :buildingId
         const val QUERY_UPDATE_BOOKMARK = """
             UPDATE $TABLE_NAME SET $COLUMN_BOOKMARK = :state WHERE $COLUMN_ID = :buildingInfoId

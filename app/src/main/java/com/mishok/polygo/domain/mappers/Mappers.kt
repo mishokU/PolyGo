@@ -41,3 +41,15 @@ fun List<LocalBuildingInfo>.toUIBuildingInfoModel(): List<CreateAdapterListItem.
         )
     }
 }
+
+fun String.toTitleModel(): CreateAdapterListItem.BuildingTitleItem {
+    return CreateAdapterListItem.BuildingTitleItem(
+        title = this
+    )
+}
+
+fun String.toChipItem(): CreateAdapterListItem.ChipItem {
+    return CreateAdapterListItem.ChipItem(
+        title = this
+    )
+}
