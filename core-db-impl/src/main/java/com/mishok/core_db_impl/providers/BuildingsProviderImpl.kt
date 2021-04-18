@@ -36,8 +36,12 @@ class BuildingsProviderImpl @Inject constructor(
             point.latitude - LocalBuildings.DELTA_DISTANCE,
             point.latitude + LocalBuildings.DELTA_DISTANCE,
             point.longitude - LocalBuildings.DELTA_DISTANCE,
-                point.longitude + LocalBuildings.DELTA_DISTANCE
+            point.longitude + LocalBuildings.DELTA_DISTANCE
         )
+    }
+
+    override suspend fun getSearchedBookmarkBuildings(query: String): Flow<List<LocalBuildings>> {
+        return buildingDao.getSearchedBookmarkBuildings(query)
     }
 
     override suspend fun getSavedBuildings(): Flow<List<LocalBuildings>> {

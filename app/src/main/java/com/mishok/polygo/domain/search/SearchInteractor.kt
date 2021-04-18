@@ -12,4 +12,5 @@ interface SearchInteractor {
     suspend fun addSearching(list: MutableList<LocalEmployees>)
     suspend fun addBuildings(buildings: MutableList<LocalBuildings>)
     suspend fun search(query: String): Flow<List<CreateAdapterListItem>>
+    suspend fun searchBookmarks(query: String): Flow<List<CreateAdapterListItem>>
 }

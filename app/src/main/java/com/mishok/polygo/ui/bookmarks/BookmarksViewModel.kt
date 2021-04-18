@@ -61,7 +61,7 @@ class BookmarksViewModel @Inject constructor(
 
     fun search(query: String) {
         coroutineScope.launch {
-            searchInteractor.search(query).collect {
+            searchInteractor.searchBookmarks(query).collect {
                 switchDispatcher(it)
             }
         }

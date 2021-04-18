@@ -20,14 +20,14 @@ data class LocalEmployees(
     @ColumnInfo(name = COLUMN_CONTACTS)
     val contacts: String,
 
-        @ColumnInfo(name = COLUMN_POSITION)
-        val position: String,
+    @ColumnInfo(name = COLUMN_POSITION)
+    val position: String,
 
-        @ColumnInfo(name = COLUMN_SCHEDULE_URL)
-        val scheduleUrl: String,
+    @ColumnInfo(name = COLUMN_SCHEDULE_URL)
+    val scheduleUrl: String,
 
-        @ColumnInfo(name = COLUMN_BOOKMARK)
-        val saved: Boolean
+    @ColumnInfo(name = COLUMN_BOOKMARK)
+    val saved: Boolean
 
 ) {
     companion object {
@@ -51,6 +51,10 @@ data class LocalEmployees(
 
         const val QUERY_GET_SAVED = """
             SELECT * FROM $TABLE_NAME WHERE $COLUMN_BOOKMARK = 1
+        """
+
+        const val QUERY_GET_BY_QUERY_WITH_BOOKMARKS = """
+            SELECT * FROM $TABLE_NAME WHERE $COLUMN_BOOKMARK = 1 AND $COLUMN_NAME like (:query)
         """
 
         const val QUERY_GET_BY_QUERY = """

@@ -22,8 +22,14 @@ class BuildingInfoProviderImpl @Inject constructor(
         buildingInfoDao.updateBookmark(buildingInfoId, false)
     }
 
-    override suspend fun getAllBuildingInfoByBuildingId(buildingId: Long): Flow<List<LocalBuildingInfo>> {
-        return buildingInfoDao.getAllBuildingInfoByBuildingId()
+    override suspend fun getAllBuildingInfoByBuildingId(buildingId: Long)
+            : Flow<List<LocalBuildingInfo>> {
+        return buildingInfoDao.getAllBuildingInfoByBuildingId(buildingId)
+    }
+
+    override suspend fun filterBuildingInfoByCategory(buildingId: Long, category: String)
+            : Flow<List<LocalBuildingInfo>> {
+        return buildingInfoDao.filterBuildingByCategory(buildingId, category)
     }
 
 

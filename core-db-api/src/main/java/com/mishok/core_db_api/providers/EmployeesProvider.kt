@@ -14,4 +14,5 @@ interface EmployeesProvider {
 
     suspend fun getAllEmployee(): Flow<List<LocalEmployees>>
     suspend fun getSavedEmployees(): Flow<List<LocalEmployees>>
+    suspend fun getSearchedBookmarkEmployees(query: String): Flow<List<LocalEmployees>>
 }

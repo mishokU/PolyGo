@@ -8,25 +8,25 @@ import com.hannesdorfmann.adapterdelegates4.AbsListItemAdapterDelegate
 import com.mishok.polygo.R
 import com.mishok.polygo.ui.base.CreateAdapterListItem
 import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.item_chip.*
 
-class ChipDelegate(
+
+class ResetFiltersDelegate(
     private val onClick: ChipCallback
-) : AbsListItemAdapterDelegate<CreateAdapterListItem.ChipItem, Any, ChipDelegate.ViewHolder>() {
+) : AbsListItemAdapterDelegate<CreateAdapterListItem.ResetFilter, Any, ResetFiltersDelegate.ViewHolder>() {
 
     override fun isForViewType(item: Any, items: MutableList<Any>, position: Int): Boolean =
-        item is CreateAdapterListItem.ChipItem
+        item is CreateAdapterListItem.ResetFilter
 
     override fun onCreateViewHolder(parent: ViewGroup): ViewHolder {
         return ViewHolder(
             containerView = LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_chip, parent, false),
+                .inflate(R.layout.item_reset, parent, false),
             onClick = onClick
         )
     }
 
     override fun onBindViewHolder(
-        item: CreateAdapterListItem.ChipItem,
+        item: CreateAdapterListItem.ResetFilter,
         holder: ViewHolder,
         payloads: MutableList<Any>
     ) {
@@ -37,17 +37,10 @@ class ChipDelegate(
         override val containerView: View, val onClick: ChipCallback
     ) : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
-        private var item: CreateAdapterListItem.ChipItem? = null
-
-        init {
-            chip.setOnClickListener {
-                item?.let(onClick::onChipClick)
+        fun bind(item: CreateAdapterListItem.ResetFilter) {
+            containerView.setOnClickListener {
+                onClick.onResetClick()
             }
-        }
-
-        fun bind(item: CreateAdapterListItem.ChipItem) {
-            this.item = item
-            chip.text = item.title
         }
 
     }

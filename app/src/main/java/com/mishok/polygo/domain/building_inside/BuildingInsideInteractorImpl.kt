@@ -17,4 +17,14 @@ class BuildingInsideInteractorImpl @Inject constructor(
             it.toUIBuildingInfoModel()
         }
     }
+
+    override suspend fun filterBuildingInfoByCategory(category: CreateAdapterListItem.ChipItem)
+            : Flow<List<CreateAdapterListItem.BuildingInfoItem>> {
+        return buildingInfoProvider.filterBuildingInfoByCategory(
+            category.buildingId,
+            category.title
+        ).map {
+            it.toUIBuildingInfoModel()
+        }
+    }
 }

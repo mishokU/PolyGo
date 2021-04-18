@@ -48,8 +48,9 @@ fun String.toTitleModel(): CreateAdapterListItem.BuildingTitleItem {
     )
 }
 
-fun String.toChipItem(): CreateAdapterListItem.ChipItem {
+fun CreateAdapterListItem.BuildingInfoItem.toChipItem(): CreateAdapterListItem.ChipItem {
     return CreateAdapterListItem.ChipItem(
-        title = this
+        title = this.category,
+        buildingId = this.id
     )
 }

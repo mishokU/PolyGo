@@ -10,11 +10,13 @@ class ChipAdapter(
 ) : AsyncListDifferDelegationAdapter<Any>(ChipItemCallback()) {
 
     init {
-        delegatesManager.addDelegate(
-            ChipDelegate(callback)
-        )
+        sequenceOf(
+            ChipDelegate(callback),
+            ResetFiltersDelegate(callback)
+        ).forEach {
+            delegatesManager.addDelegate(it)
+        }
     }
-
 
     class ChipItemCallback : DiffUtil.ItemCallback<Any>() {
 
@@ -22,6 +24,7 @@ class ChipAdapter(
             if (oldItem.javaClass != newItem.javaClass) return false
             return when (oldItem) {
                 is CreateAdapterListItem.ChipItem -> true
+                is CreateAdapterListItem.ResetFilter -> true
                 else -> error("Incompatible item received: ${oldItem.javaClass}")
             }
         }

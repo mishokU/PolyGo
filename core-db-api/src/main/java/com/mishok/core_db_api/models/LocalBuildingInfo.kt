@@ -37,10 +37,15 @@ data class LocalBuildingInfo(
         const val COLUMN_BOOKMARK = "saved"
 
         const val QUERY_GET_BY_BUILDING_ID = """
-            SELECT * FROM $TABLE_NAME 
+            SELECT * FROM $TABLE_NAME WHERE $COLUMN_BUILDING_ID = :buildingId
         """
 
-        //WHERE $COLUMN_BUILDING_ID = :buildingId
+        const val QUERY_GET_BY_CATEGORY = """
+            SELECT * FROM $TABLE_NAME WHERE
+            $COLUMN_BUILDING_ID = :buildingId
+            AND $COLUMN_CATEGORY = :category
+        """
+
         const val QUERY_UPDATE_BOOKMARK = """
             UPDATE $TABLE_NAME SET $COLUMN_BOOKMARK = :state WHERE $COLUMN_ID = :buildingInfoId
         """

@@ -71,7 +71,7 @@ class BuildingInsideFragment : BaseFragment<BuildingInsideState, BuildingInsideV
         if (state.chips.isNotEmpty()) {
             chipAdapter.items = state.chips.distinctBy {
                 (it as CreateAdapterListItem.ChipItem).title
-            }
+            }.plus(CreateAdapterListItem.ResetFilter())
         }
         if (state.map.isNotEmpty()) {
             searchAdapter.items = state.map.map {

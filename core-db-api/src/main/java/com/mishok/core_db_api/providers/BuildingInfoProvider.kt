@@ -11,4 +11,8 @@ interface BuildingInfoProvider {
     fun removeBookmark(buildingInfoId: Long)
 
     suspend fun getAllBuildingInfoByBuildingId(buildingId: Long): Flow<List<LocalBuildingInfo>>
+    suspend fun filterBuildingInfoByCategory(
+        buildingId: Long,
+        category: String
+    ): Flow<List<LocalBuildingInfo>>
 }

@@ -21,8 +21,26 @@ class SearchInteractorImpl @Inject constructor(
 
     override suspend fun loadAllSearching(): Flow<List<CreateAdapterListItem>> {
         return combine(
-                employeesProvider.getAllEmployee(),
-                buildingsProvider.getAllBuildings()
+            employeesProvider.getAllEmployee(),
+            buildingsProvider.getAllBuildings()
+        ) { employee, buildings ->
+            employee.toUIEmployeeModel() + buildings.toUIBuildingModel()
+        }
+    }
+
+    override suspend fun search(query: String): Flow<List<CreateAdapterListItem>> {
+        return combine(
+            employeesProvider.getSearchedEmployees(query),
+            buildingsProvider.getSearchedBuildings(query),
+        ) { employee, buildings ->
+            employee.toUIEmployeeModel() + buildings.toUIBuildingModel()
+        }
+    }
+
+    override suspend fun searchBookmarks(query: String): Flow<List<CreateAdapterListItem>> {
+        return combine(
+            employeesProvider.getSearchedBookmarkEmployees(query),
+            buildingsProvider.getSearchedBookmarkBuildings(query),
         ) { employee, buildings ->
             employee.toUIEmployeeModel() + buildings.toUIBuildingModel()
         }
@@ -46,14 +64,5 @@ class SearchInteractorImpl @Inject constructor(
 
     override suspend fun addBuildings(buildings: MutableList<LocalBuildings>) {
         buildingsProvider.saveBuildings(buildings)
-    }
-
-    override suspend fun search(query: String): Flow<List<CreateAdapterListItem>> {
-        return combine(
-            employeesProvider.getSearchedEmployees(query),
-            buildingsProvider.getSearchedBuildings(query),
-        ) { employee, buildings ->
-            employee.toUIEmployeeModel() + buildings.toUIBuildingModel()
-        }
     }
 }

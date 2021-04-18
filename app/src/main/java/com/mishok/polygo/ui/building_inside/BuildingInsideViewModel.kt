@@ -36,7 +36,31 @@ class BuildingInsideViewModel @Inject constructor(
                     item.category
                 })
                 switchChipsDispatcher(it.map { item ->
-                    item.category.toChipItem()
+                    item.toChipItem()
+                })
+            }
+        }
+    }
+
+    override fun onBuildingInfoItemClick(item: CreateAdapterListItem.BuildingInfoItem) {
+
+    }
+
+    override fun onResetClick() {
+        coroutineScope.launch {
+            buildingInsideInteractor.loadBuildingInfoByBuildingId(buildingId).collect {
+                switchDispatcher(it.groupBy { item ->
+                    item.category
+                })
+            }
+        }
+    }
+
+    override fun onChipClick(chip: CreateAdapterListItem.ChipItem) {
+        coroutineScope.launch {
+            buildingInsideInteractor.filterBuildingInfoByCategory(chip).collect {
+                switchDispatcher(it.groupBy { item ->
+                    item.category
                 })
             }
         }
@@ -64,13 +88,5 @@ class BuildingInsideViewModel @Inject constructor(
         }.invokeOnCompletion {
             loadBuildingInfo(buildingId)
         }
-    }
-
-    override fun onBuildingInfoItemClick(item: CreateAdapterListItem.BuildingInfoItem) {
-
-    }
-
-    override fun onChipClick(building: CreateAdapterListItem.ChipItem) {
-
     }
 }

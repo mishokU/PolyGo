@@ -27,7 +27,7 @@ data class LocalBuildings(
     val audienceId: Long,
 
     @ColumnInfo(name = COLUMN_TIME)
-    val time: Long,
+    val time: String,
 
     @ColumnInfo(name = COLUMN_DISTANCE)
     val distance: Long,
@@ -70,6 +70,10 @@ data class LocalBuildings(
 
         const val QUERY_GET_SAVED = """
             SELECT * FROM $TABLE_NAME WHERE $COLUMN_BOOKMARK = 1
+        """
+
+        const val QUERY_GET_BY_QUERY_WITH_BOOKMARKS = """
+            SELECT * FROM $TABLE_NAME WHERE $COLUMN_BOOKMARK = 1 AND $COLUMN_TITLE like (:query)
         """
 
         const val QUERY_GET_BY_QUERY = """

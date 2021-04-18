@@ -41,7 +41,12 @@ sealed class CreateAdapterListItem {
         val title: String
     ) : CreateAdapterListItem()
 
+    data class ResetFilter(
+        val empty: Boolean = true
+    )
+
     data class ChipItem(
+        val buildingId: Long,
         val title: String
     )
 
