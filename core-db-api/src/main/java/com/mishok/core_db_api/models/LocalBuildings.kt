@@ -9,7 +9,7 @@ data class LocalBuildings(
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = COLUMN_ID)
-    val id: Long,
+    val id: Long = 0,
 
     @ColumnInfo(name = COLUMN_LONGITUDE)
     val longitude: Double,

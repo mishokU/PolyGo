@@ -49,6 +49,7 @@ class BuildingBottomSheetDialogFragment : BottomSheetDialogFragment(), HasAndroi
         buildingNameTv.text = arguments?.getString(KEY_BUILDING_NAME).toString()
         insideBuildingButton.setOnClickListener {
             this.findNavController().navigate(R.id.buildingInsideFragment)
+            this.dismiss()
         }
         showEntranceButton.setOnClickListener {
             resultListener.showBuildingEntrance()

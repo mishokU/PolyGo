@@ -8,6 +8,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="greenBackground">#01FC84</color>
     <color name="softGreen">#A7FFD5</color>
     <color name="greenRectangle">#CCFFE7</color>
     <color name="greenTextColor">#437C6D</color>

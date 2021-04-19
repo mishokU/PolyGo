@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "944052125425",
+    "project_id": "polygo-61bd9",
+    "storage_bucket": "polygo-61bd9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:944052125425:android:27a273458d6665fde13350",
+        "android_client_info": {
+          "package_name": "com.mishok.polygo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "944052125425-v52n7jp8g81s9ca5a8rm1jticas98vhs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5xTm6lPGPakVXm-cAXuiUBWPZnGxf5L0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "944052125425-v52n7jp8g81s9ca5a8rm1jticas98vhs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

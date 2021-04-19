@@ -2,11 +2,8 @@ package com.mishok.polygo.ui.radar
 
 import android.os.Bundle
 import android.view.View
-import androidx.navigation.fragment.findNavController
-import com.mishok.core_ar_api.starter.ArFeatureConfiguration
-import com.mishok.core_ar_api.starter.ArModuleApi
-import com.mishok.core_ar_api.starter.ArModuleStarter
-import com.mishok.core_ar_impl.ArModuleFactory
+import android.view.animation.Animation
+import android.view.animation.RotateAnimation
 import com.mishok.polygo.R
 import com.mishok.polygo.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_radar.*
@@ -24,6 +21,28 @@ class RadarFragment : BaseFragment<RadarState, RadarViewModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
+        startAnimation()
+    }
+
+    private fun startAnimation() {
+        // Create an animation instance
+        val an: Animation = RotateAnimation(
+            0.0f,
+            360.0f,
+            (backgroundImage.measuredWidth / 4).toFloat(),
+            (backgroundImage.measuredHeight / 4).toFloat()
+        )
+
+        // Set the animation's parameters
+        // Set the animation's parameters
+        an.duration = 10000 // duration in ms
+        an.repeatCount = -1 // -1 = infinite repeated
+        an.repeatMode = Animation.REVERSE // reverses each repeat
+        an.fillAfter = true // keep rotation after animation
+
+        // Apply animation to image view
+        // Apply animation to image view
+        backgroundImage.animation = an
     }
 
     private fun initViews() {
