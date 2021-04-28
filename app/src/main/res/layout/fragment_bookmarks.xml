@@ -29,7 +29,7 @@
             android:textColor="@color/greenTextColor"
             android:textSize="18sp"
             android:textStyle="bold"
-            tools:text="Закладки" />
+            android:text="@string/bookmarks" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -52,6 +52,15 @@
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 android:textStyle="normal" />
+
+            <ImageView
+                android:id="@+id/crossMarkIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginEnd="16dp"
+                android:layout_gravity="end|center_vertical"
+                android:src="@drawable/ic_delete_search" />
 
         </androidx.cardview.widget.CardView>
 

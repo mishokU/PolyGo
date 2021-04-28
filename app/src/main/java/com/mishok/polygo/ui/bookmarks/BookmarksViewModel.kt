@@ -55,14 +55,18 @@ class BookmarksViewModel @Inject constructor(
 
     private suspend fun switchDispatcher(it: List<CreateAdapterListItem>) {
         withContext(Dispatchers.Main) {
-            state = state.copy(list = it)
+            state = state.copy(
+                list = it,
+                clearText = false,
+                crossMark = false
+            )
         }
     }
 
     fun search(query: String) {
         coroutineScope.launch {
             searchInteractor.searchBookmarks(query).collect {
-                switchDispatcher(it)
+                switchSearchDispatcher(it)
             }
         }
     }
@@ -98,4 +102,30 @@ class BookmarksViewModel @Inject constructor(
     fun resetEmployee() {
         state = state.copy(employee = null)
     }
+
+    private suspend fun switchSearchDispatcher(it: List<CreateAdapterListItem>) {
+        withContext(Dispatchers.Main) {
+            state = state.copy(
+                list = it,
+                clearText = false,
+                crossMark = true
+            )
+        }
+    }
+
+
+    fun showCrossMark() {
+        state = state.copy(
+            crossMark = true,
+            clearText = false
+        )
+    }
+
+    fun hideCrossMark() {
+        state = state.copy(
+            crossMark = false,
+            clearText = true
+        )
+    }
+
 }

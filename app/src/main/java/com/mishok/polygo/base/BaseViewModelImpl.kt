@@ -5,11 +5,13 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
+import com.mishok.core_api.tags.ModuleTags
+import com.mishok.core_ar_api.starter.ArFeatureConfiguration
+import com.mishok.core_ar_impl.ArModuleFactory
 import com.mishok.polygo.base.api.BaseViewModel
 import com.mishok.polygo.base.api.BaseViewState
 import com.mishok.polygo.base.route.RouteDestination
 import com.mishok.polygo.base.route.RouteSection
-import com.mishok.polygo.ui.search.adapter.SearchCallbackWrapper
 import com.mishok.polygo.utils.SingleEvent
 import com.mishok.polygo.utils.defaultNavOptions
 
@@ -34,11 +36,23 @@ abstract class BaseViewModelImpl<VS : BaseViewState> : ViewModel(), BaseViewMode
         when {
             route is RouteDestination.Back -> withNavController { popBackStack() }
             clearStack -> withNavController { popBackStack(route.destination, false) }
-            else -> withNavController { navigate(route.destination, args, defaultNavOptions) }
+            else -> withNavController {
+                initModules(route.module)
+                navigate(route.destination, args, defaultNavOptions)
+            }
         }
     }
 
-    protected fun withNavController(block: NavController.() -> Any) {
+    private fun initModules(module: String?) {
+        when (module) {
+            ModuleTags.AR -> {
+                ArModuleFactory.starter()
+                    .startArFeature(ArFeatureConfiguration(tag = ModuleTags.AR))
+            }
+        }
+    }
+
+    private fun withNavController(block: NavController.() -> Any) {
         navigationEvent.postValue(SingleEvent(block))
     }
 }

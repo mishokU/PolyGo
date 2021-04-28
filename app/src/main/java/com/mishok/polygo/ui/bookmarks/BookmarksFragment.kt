@@ -7,13 +7,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mishok.polygo.R
 import com.mishok.polygo.base.BaseFragment
 import com.mishok.polygo.ui.base.CreateAdapterListItem
-import com.mishok.polygo.ui.employee_card.EmployeeBottomSheetDialogFragment
+import com.mishok.core_components.employee_card.EmployeeBottomSheetDialogFragment
 import com.mishok.polygo.ui.search.adapter.SearchAdapter
 import com.mishok.polygo.ui.search.adapter.SearchCallbackWrapper
 import com.mishok.polygo.utils.AutoClearedValue
 import com.mishok.polygo.utils.TextWatcherAdapter
 import com.mishok.polygo.utils.filter.SearchFilter
-import kotlinx.android.synthetic.main.fragment_bookmarks.*
+import kotlinx.android.synthetic.main.fragment_bookmarks.crossMarkIcon
+import kotlinx.android.synthetic.main.fragment_bookmarks.searchField
 import kotlinx.android.synthetic.main.fragment_search.buildingFilterButton
 import kotlinx.android.synthetic.main.fragment_search.employeeFilterButton
 import kotlinx.android.synthetic.main.fragment_search.itemsRecyclerView
@@ -34,6 +35,7 @@ class BookmarksFragment : BaseFragment<BookmarksState, BookmarksViewModel>() {
         super.onViewCreated(view, savedInstanceState)
         initViews()
         initList()
+        initSearch()
         loadData()
     }
 
@@ -70,18 +72,39 @@ class BookmarksFragment : BaseFragment<BookmarksState, BookmarksViewModel>() {
         employeeFilterButton.setOnClickListener {
             viewModel.loadBookmarks(SearchFilter.EMPLOYEE)
         }
+        crossMarkIcon.setOnClickListener {
+            viewModel.hideCrossMark()
+            viewModel.loadBookmarks(SearchFilter.ALL)
+        }
+    }
+
+    private fun initSearch() {
         searchField.addTextChangedListener(object : TextWatcherAdapter() {
             override fun onTextChanged(query: CharSequence?, start: Int, before: Int, count: Int) {
-                viewModel.search(query.toString())
+                if (query.toString().isNotEmpty()) {
+                    viewModel.search(query.toString())
+                } else {
+                    viewModel.showCrossMark()
+                }
             }
         })
     }
 
     override fun onStateChange(state: BookmarksState) {
-        bookmarkAdapter.items = state.list
-        if (state.employee != null) {
-            openEmployeeCard(state.employee)
-            viewModel.resetEmployee()
+        state.apply {
+            bookmarkAdapter.items = list
+            if (employee != null) {
+                openEmployeeCard(employee)
+                viewModel.resetEmployee()
+            }
+            if (crossMark) {
+                crossMarkIcon.visibility = View.VISIBLE
+            } else {
+                crossMarkIcon.visibility = View.GONE
+            }
+            if (clearText) {
+                searchField.setText("")
+            }
         }
     }
 

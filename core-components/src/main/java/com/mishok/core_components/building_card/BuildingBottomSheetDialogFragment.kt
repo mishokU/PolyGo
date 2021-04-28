@@ -1,13 +1,12 @@
-package com.mishok.polygo.ui.building_card
+package com.mishok.core_components.building_card
 
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.mishok.polygo.R
+import com.mishok.core_components.R
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
@@ -47,8 +46,9 @@ class BuildingBottomSheetDialogFragment : BottomSheetDialogFragment(), HasAndroi
 
     private fun setUpViews() {
         buildingNameTv.text = arguments?.getString(KEY_BUILDING_NAME).toString()
+        buildingTimeTv.text = arguments?.getString(KEY_BUILDING_TIME).toString()
         insideBuildingButton.setOnClickListener {
-            this.findNavController().navigate(R.id.buildingInsideFragment)
+            resultListener.navigateToBuildingInside()
             this.dismiss()
         }
         showEntranceButton.setOnClickListener {
@@ -59,12 +59,14 @@ class BuildingBottomSheetDialogFragment : BottomSheetDialogFragment(), HasAndroi
 
     data class NavigationData(
         val buildingName: String,
+        val time: String,
         val buildingId: Long
     )
 
     companion object {
 
         const val KEY_BUILDING_NAME = "key_building_name"
+        const val KEY_BUILDING_TIME = "key_building_time"
         const val KEY_BUILDING_ID = "key_building_id"
 
         @JvmStatic
@@ -72,6 +74,7 @@ class BuildingBottomSheetDialogFragment : BottomSheetDialogFragment(), HasAndroi
             val bundle = Bundle()
             bundle.putString(KEY_BUILDING_NAME, data.buildingName)
             bundle.putLong(KEY_BUILDING_ID, data.buildingId)
+            bundle.putString(KEY_BUILDING_TIME, data.time)
             val fragment = BuildingBottomSheetDialogFragment()
             fragment.arguments = bundle
             return fragment

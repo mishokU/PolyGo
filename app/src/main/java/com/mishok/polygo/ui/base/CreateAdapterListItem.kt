@@ -24,6 +24,7 @@ sealed class CreateAdapterListItem {
     data class BuildingItem(
         val id: Long,
         val title: String,
+        val time: String,
         val latitude: Double,
         val longitude: Double,
         val inBookmark: Boolean

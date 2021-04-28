@@ -5,6 +5,8 @@ import android.content.Context
 import com.markodevcic.peko.Peko
 import com.markodevcic.peko.PermissionResult
 import com.mishok.polygo.base.BaseViewModelImpl
+import com.mishok.polygo.base.route.RouteDestination
+import com.mishok.polygo.base.route.RouteSection
 import com.mishok.polygo.domain.map.MapInteractor
 import com.mishok.polygo.ui.base.CreateAdapterListItem
 import com.yandex.mapkit.geometry.Point
@@ -21,6 +23,10 @@ class MapsViewModel @Inject constructor(
 ) : BaseViewModelImpl<MapsState>() {
 
     override val initialState: MapsState = MapsState()
+
+    fun navigateToBuildingInside() {
+        navigateTo(RouteDestination.BuildingInside)
+    }
 
     fun checkOnNearCorp(point: Point) {
         coroutineScope.launch {
@@ -52,5 +58,4 @@ class MapsViewModel @Inject constructor(
     fun disableMoveCamera() {
         state = state.copy(moveCamera = false)
     }
-
 }

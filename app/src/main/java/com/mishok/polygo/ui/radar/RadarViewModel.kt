@@ -22,6 +22,7 @@ class RadarViewModel @Inject constructor(
 
     fun openAR() {
         navigateTo(RouteDestination.ArFragment)
+        state = state.copy(isCamera = false)
     }
 
     fun requestPermission(context: Context) {

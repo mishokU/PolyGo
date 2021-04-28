@@ -59,11 +59,12 @@
             android:text="часы работы:" />
 
         <TextView
-            android:id="@+id/employeeDescription"
+            android:id="@+id/buildingTimeTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
+            android:layout_gravity="center_horizontal"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
             android:fontFamily="sans-serif"
@@ -71,7 +72,7 @@
             android:textColor="@color/greenTextColor"
             android:textSize="12sp"
             android:textStyle="normal"
-            android:text="пн-пт:9:00 - 18:00 сб-вс 10.00-16:00" />
+            android:text="пн-пт:9:00 - " />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/showEntranceButton"

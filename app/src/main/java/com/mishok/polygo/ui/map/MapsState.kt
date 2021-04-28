@@ -11,6 +11,7 @@ data class MapsState(
         longitude = MapsFragment.POLITECH_LONGITUDE,
         latitude = MapsFragment.POLITECH_LATITUDE,
         id = 0,
+        time = "Без времени",
         inBookmark = false
     ),
     val isFineLocationGranted: Boolean = false,

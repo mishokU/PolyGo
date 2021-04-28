@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import com.mishok.polygo.R
 import com.mishok.polygo.base.BaseFragment
-import com.mishok.polygo.base.FragmentConfiguration
 import kotlinx.android.synthetic.main.fragment_start.*
 import javax.inject.Inject
 

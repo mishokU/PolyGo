@@ -7,9 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mishok.polygo.R
 import com.mishok.polygo.base.BaseFragment
 import com.mishok.polygo.ui.base.CreateAdapterListItem
-import com.mishok.polygo.ui.employee_card.EmployeeBottomSheetDialogFragment
+import com.mishok.core_components.employee_card.EmployeeBottomSheetDialogFragment
 import com.mishok.polygo.ui.search.adapter.SearchAdapter
-import com.mishok.polygo.ui.search.adapter.SearchCallback
 import com.mishok.polygo.ui.search.adapter.SearchCallbackWrapper
 import com.mishok.polygo.utils.AutoClearedValue
 import com.mishok.polygo.utils.TextWatcherAdapter
@@ -33,6 +32,7 @@ class SearchFragment : BaseFragment<SearchState, SearchViewModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
+        initSearch()
         initList()
         loadData()
     }
@@ -70,18 +70,39 @@ class SearchFragment : BaseFragment<SearchState, SearchViewModel>() {
         employeeFilterButton.setOnClickListener {
             viewModel.loadSearching(SearchFilter.EMPLOYEE)
         }
+        crossMarkIcon.setOnClickListener {
+            viewModel.hideCrossMark()
+            viewModel.loadSearching(SearchFilter.ALL)
+        }
+    }
+
+    private fun initSearch() {
         searchField.addTextChangedListener(object : TextWatcherAdapter() {
             override fun onTextChanged(query: CharSequence?, start: Int, before: Int, count: Int) {
-                viewModel.search(query.toString())
+                if (query.toString().isNotEmpty()) {
+                    viewModel.search(query.toString())
+                } else {
+                    viewModel.showCrossMark()
+                }
             }
         })
     }
 
     override fun onStateChange(state: SearchState) {
-        searchAdapter.items = state.list
-        if (state.employee != null) {
-            openEmployeeCard(state.employee)
-            viewModel.resetEmployee()
+        state.apply {
+            searchAdapter.items = list
+            if (this.employee != null) {
+                openEmployeeCard(this.employee)
+                viewModel.resetEmployee()
+            }
+            if (this.crossMark) {
+                crossMarkIcon.visibility = View.VISIBLE
+            } else {
+                crossMarkIcon.visibility = View.GONE
+            }
+            if (this.clearText) {
+                searchField.setText("")
+            }
         }
     }
 
@@ -96,5 +117,4 @@ class SearchFragment : BaseFragment<SearchState, SearchViewModel>() {
             )
         ).show(childFragmentManager, "employee")
     }
-
 }

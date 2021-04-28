@@ -23,6 +23,7 @@ fun List<LocalBuildings>.toUIBuildingModel(): List<CreateAdapterListItem> {
         CreateAdapterListItem.BuildingItem(
             id = it.id,
             title = it.title,
+            time = it.time,
             longitude = it.longitude,
             latitude = it.latitude,
             inBookmark = it.saved
@@ -33,11 +34,11 @@ fun List<LocalBuildings>.toUIBuildingModel(): List<CreateAdapterListItem> {
 fun List<LocalBuildingInfo>.toUIBuildingInfoModel(): List<CreateAdapterListItem.BuildingInfoItem> {
     return map {
         CreateAdapterListItem.BuildingInfoItem(
-            id = it.id,
-            title = it.title,
             description = it.category,
+            category = it.category,
             inBookmark = it.saved,
-            category = it.category
+            id = it.buildingId,
+            title = it.title,
         )
     }
 }

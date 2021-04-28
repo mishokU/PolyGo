@@ -52,7 +52,7 @@ data class LocalBuildings(
         const val COLUMN_DISTANCE = "distance"
         const val COLUMN_BOOKMARK = "saved"
 
-        const val DELTA_DISTANCE = 5
+        const val DELTA_DISTANCE = 0.0015
 
         const val QUERY_GET_ALL = """
             SELECT * FROM $TABLE_NAME

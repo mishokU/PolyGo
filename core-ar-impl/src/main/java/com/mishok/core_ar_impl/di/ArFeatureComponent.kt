@@ -3,22 +3,23 @@ package com.mishok.core_ar_impl.di
 import com.mishok.core_api.di.CoreApi
 import com.mishok.core_ar_api.starter.ArFeatureConfiguration
 import com.mishok.core_ar_api.starter.ArModuleApi
-import com.mishok.core_ar_impl.ui.BaseArFragment
+import com.mishok.core_ar_impl.ui.PolyGoArFragment
 import com.mishok.core_db_api.di.DbCoreApi
 import dagger.BindsInstance
 import dagger.Component
+import dagger.android.AndroidInjectionModule
 import javax.inject.Singleton
 
+@Singleton
 @Component(
     dependencies = [ArFeatureDependencies::class],
     modules = [
         ArFeatureModule::class
     ]
 )
-@Singleton
 interface ArFeatureComponent : ArModuleApi {
 
-    fun inject(fragment: BaseArFragment)
+    fun inject(fragment: PolyGoArFragment)
 
     @Component(
         dependencies = [

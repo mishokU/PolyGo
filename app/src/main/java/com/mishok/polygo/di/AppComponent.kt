@@ -33,6 +33,8 @@ interface AppComponent :
         DbCoreApi,
         AndroidInjector<PolyGoApplication> {
 
+    override fun inject(instance: PolyGoApplication)
+
     @Component.Builder
     interface Builder {
 
@@ -44,6 +46,4 @@ interface AppComponent :
 
         fun build(): AppComponent
     }
-
-    override fun inject(instance: PolyGoApplication)
 }

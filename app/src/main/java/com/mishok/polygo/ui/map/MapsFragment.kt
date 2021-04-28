@@ -5,11 +5,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.mishok.core_api.utils.PolyGoLocationManager
+import com.mishok.core_components.building_card.BuildingBottomSheetDialogFragment
+import com.mishok.core_components.building_card.BuildingListener
 import com.mishok.polygo.R
 import com.mishok.polygo.base.BaseFragment
 import com.mishok.polygo.ui.base.CreateAdapterListItem
-import com.mishok.polygo.ui.building_card.BuildingBottomSheetDialogFragment
-import com.mishok.polygo.ui.building_card.BuildingListener
 import com.yandex.mapkit.Animation
 import com.yandex.mapkit.MapKitFactory
 import com.yandex.mapkit.geometry.Point
@@ -46,6 +46,7 @@ class MapsFragment : BaseFragment<MapsState, MapsViewModel>(), BuildingListener 
             BuildingBottomSheetDialogFragment.newInstance(
                 BuildingBottomSheetDialogFragment.NavigationData(
                     buildingId = building.id,
+                    time = building.time,
                     buildingName = building.title
                 )
             ).show(childFragmentManager, "building")
@@ -112,6 +113,10 @@ class MapsFragment : BaseFragment<MapsState, MapsViewModel>(), BuildingListener 
             moveCamera(building.latitude, building.longitude)
             true
         }
+    }
+
+    override fun navigateToBuildingInside() {
+        viewModel.navigateToBuildingInside()
     }
 
     companion object {

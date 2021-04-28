@@ -58,7 +58,11 @@ class SearchViewModel @Inject constructor(
 
     private suspend fun switchDispatcher(it: List<CreateAdapterListItem>) {
         withContext(Dispatchers.Main) {
-            state = state.copy(list = it)
+            state = state.copy(
+                list = it,
+                clearText = false,
+                crossMark = false
+            )
         }
     }
 
@@ -97,9 +101,33 @@ class SearchViewModel @Inject constructor(
     fun search(query: String) {
         coroutineScope.launch {
             searchInteractor.search(query).collect {
-                switchDispatcher(it)
+                switchSearchDispatcher(it)
             }
         }
+    }
+
+    private suspend fun switchSearchDispatcher(it: List<CreateAdapterListItem>) {
+        withContext(Dispatchers.Main) {
+            state = state.copy(
+                list = it,
+                clearText = false,
+                crossMark = true
+            )
+        }
+    }
+
+    fun showCrossMark() {
+        state = state.copy(
+            crossMark = true,
+            clearText = false
+        )
+    }
+
+    fun hideCrossMark() {
+        state = state.copy(
+            crossMark = false,
+            clearText = true
+        )
     }
 
 }

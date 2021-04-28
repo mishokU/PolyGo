@@ -1,16 +1,13 @@
-package com.mishok.polygo.ui.employee_card
+package com.mishok.core_components.employee_card
 
-import android.app.Dialog
 import android.content.Context
-import android.content.DialogInterface
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.mishok.polygo.R
+import com.mishok.core_components.R
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
@@ -49,7 +46,7 @@ class EmployeeBottomSheetDialogFragment : BottomSheetDialogFragment(), HasAndroi
         employeeName.text = arguments?.get(KEY_NAME).toString()
         employeeDescription.text = arguments?.get(KEY_POSITION).toString()
         employeeEmailButton.text = arguments?.get(KEY_EMAIL).toString()
-
+        loadEmployeeAvatar()
         //Open gmail to write message
         employeeEmailButton.setOnClickListener {
 
@@ -59,6 +56,12 @@ class EmployeeBottomSheetDialogFragment : BottomSheetDialogFragment(), HasAndroi
         employeeScheduleButton.setOnClickListener {
 
         }
+    }
+
+    private fun loadEmployeeAvatar() {
+        Glide.with(requireContext())
+            .load(arguments?.get(KEY_AVATAR))
+            .into(employeeImage)
     }
 
     data class NavigationData(
