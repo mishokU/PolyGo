@@ -52,6 +52,10 @@ dependencies {
     // Add the Firebase Crashlytics SDK.
     implementation 'com.google.firebase:firebase-crashlytics-ktx:17.4.1'
 
+    implementation 'com.google.ar.sceneform.ux:sceneform-ux:1.15.0'
+    implementation "com.google.ar.sceneform:animation:1.15.0"
+
+
     implementation "com.google.android.gms:play-services-location:18.0.0"
 
 

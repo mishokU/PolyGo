@@ -5,22 +5,19 @@ import android.app.ActivityManager
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.ar.sceneform.rendering.ModelRenderable
 import com.google.ar.sceneform.ux.ArFragment
 import com.mishok.common_registry.ComponentRegistry
 import com.mishok.core_api.tags.ModuleTags
 import com.mishok.core_ar_impl.R
 import com.mishok.core_ar_impl.di.ArFeatureComponent
-import com.mishok.core_ar_impl.render.BaseArRender
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasAndroidInjector
-import dagger.android.support.AndroidSupportInjection
-import dagger.android.support.DaggerFragment
+import com.mishok.core_ar_api.renderer.BaseArRender
+import kotlinx.android.synthetic.main.fragment_base_ar.*
 import javax.inject.Inject
 
 
@@ -58,19 +55,27 @@ class PolyGoArFragment : Fragment() {
     }
 
     private fun initScene() {
-        arFragment = childFragmentManager.findFragmentById(R.id.arFragment) as ArFragment
+        arFragment = childFragmentManager.findFragmentById(R.id.arFragmentView) as ArFragment
         arFragment.apply {
             arSceneView.planeRenderer.isVisible = true
             planeDiscoveryController.hide()
-            setOnSessionInitializationListener {
-                render.initRender(arFragment, requireContext())
-                render.start()
-            }
+            render.initRender(arFragment, requireContext())
+            render.start()
         }
     }
 
     private fun initViews() {
+        doorArButton.setOnClickListener {
+            render.drawDoor()
+        }
 
+        closeARButton.setOnClickListener {
+            this.findNavController().popBackStack()
+        }
+
+        myLocationArButton.setOnClickListener {
+
+        }
     }
 
     override fun onDestroyView() {

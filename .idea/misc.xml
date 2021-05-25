@@ -12,6 +12,7 @@
         <entry key="..\:/PolyGo/app/src/main/res/layout/fragment_building_inside.xml" value="0.2" />
         <entry key="..\:/PolyGo/app/src/main/res/layout/fragment_radar.xml" value="0.264" />
         <entry key="..\:/PolyGo/app/src/main/res/layout/fragment_search.xml" value="0.264" />
+        <entry key="..\:/PolyGo/app/src/main/res/layout/fragment_start.xml" value="0.19635416666666666" />
         <entry key="..\:/PolyGo/app/src/main/res/layout/item_bookmark.xml" value="0.23854166666666668" />
         <entry key="..\:/PolyGo/app/src/main/res/layout/item_chip.xml" value="0.25416666666666665" />
         <entry key="..\:/PolyGo/app/src/main/res/layout/item_reset.xml" value="0.4" />
@@ -19,10 +20,13 @@
         <entry key="..\:/PolyGo/app/src/main/res/layout/item_title.xml" value="0.23854166666666668" />
         <entry key="..\:/PolyGo/core-ar-impl/src/main/res/drawable/ic_door_img.xml" value="0.2703125" />
         <entry key="..\:/PolyGo/core-ar-impl/src/main/res/drawable/ic_my_location.xml" value="0.28229166666666666" />
+        <entry key="..\:/PolyGo/core-ar-impl/src/main/res/drawable/item_path_ar_background.xml" value="0.22708333333333333" />
         <entry key="..\:/PolyGo/core-ar-impl/src/main/res/layout/fragment_base_ar.xml" value="0.4" />
         <entry key="..\:/PolyGo/core-ar-impl/src/main/res/layout/fragment_blank.xml" value="0.26614583333333336" />
         <entry key="..\:/PolyGo/core-ar-impl/src/main/res/layout/fragment_bottom_buttons.xml" value="0.26614583333333336" />
         <entry key="..\:/PolyGo/core-ar-impl/src/main/res/layout/fragment_host.xml" value="0.25416666666666665" />
+        <entry key="..\:/PolyGo/core-ar-impl/src/main/res/layout/item_door_ar_layout.xml" value="0.25416666666666665" />
+        <entry key="..\:/PolyGo/core-ar-impl/src/main/res/layout/item_path_ar_layout.xml" value="0.2109375" />
         <entry key="..\:/PolyGo/core-components/src/main/res/drawable/dark_green_gradient.xml" value="0.22083333333333333" />
         <entry key="..\:/PolyGo/core-components/src/main/res/layout/fragment_bottom_sheet_building.xml" value="0.2046875" />
         <entry key="..\:/PolyGo/core-components/src/main/res/layout/fragment_bottom_sheet_item.xml" value="0.2046875" />

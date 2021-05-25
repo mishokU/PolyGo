@@ -8,7 +8,8 @@
     <fragment
         android:id="@+id/startFragment"
         android:name="com.mishok.polygo.ui.start.StartFragment"
-        android:label="StartFragment">
+        android:label="StartFragment"
+        tools:layout="@layout/fragment_start">
         <action
             android:id="@+id/action_startFragment_to_mapsFragment"
             app:destination="@id/mapsFragment" />
@@ -65,16 +66,19 @@
 
     <fragment
         android:id="@+id/employeeBottomSheetDialogFragment"
+        tools:layout="@layout/fragment_bottom_sheet_item"
         android:name="com.mishok.core_components.employee_card.EmployeeBottomSheetDialogFragment"
         android:label="EmployeeBottomSheetDialogFragment" />
 
     <fragment
         android:id="@+id/buildingInsideFragment"
+        tools:layout="@layout/fragment_building_inside"
         android:name="com.mishok.polygo.ui.building_inside.BuildingInsideFragment"
         android:label="BuildingInsideFragment" />
 
     <fragment
         android:id="@+id/buildingBottomSheetDialogFragment"
+        tools:layout="@layout/fragment_bottom_sheet_building"
         android:name="com.mishok.core_components.building_card.BuildingBottomSheetDialogFragment"
         android:label="BuildingBottomSheetDialogFragment">
         <action
@@ -85,6 +89,7 @@
     <fragment
         android:id="@+id/polyGoArFragment"
         android:layout="@layout/fragment_base_ar"
+        tools:layout="@layout/fragment_base_ar"
         android:name="com.mishok.core_ar_impl.ui.PolyGoArFragment"
         android:label="PolyGoArFragment" />
 

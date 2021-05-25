@@ -5,10 +5,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <fragment
-        android:id="@+id/arFragment"
+        android:id="@+id/arFragmentView"
         android:name="com.google.ar.sceneform.ux.ArFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,6 +32,7 @@
         android:orientation="horizontal">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/doorArButton"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_weight="1"
@@ -54,6 +69,7 @@
             app:cornerRadius="25dp" />
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/myLocationArButton"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_weight="1"
