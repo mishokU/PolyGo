@@ -11,7 +11,8 @@ import com.mishok.core_db_impl.dao.*
         LocalSearching::class,
         LocalBuildings::class,
         LocalBuildingInfo::class,
-        LocalBuildingFilters::class
+        LocalBuildingFilters::class,
+        LocalBuildingPath::class
     ], version = 1, exportSchema = false
 )
 abstract class PolyGoDatabase : RoomDatabase() {
@@ -25,6 +26,8 @@ abstract class PolyGoDatabase : RoomDatabase() {
     abstract fun buildingInfoDao(): BuildingInfoDao
 
     abstract fun buildingFiltersDao(): BuildingFiltersDao
+
+    abstract fun buildingPathDao(): BuildingPathDao
 
     companion object {
         const val DATABASE_NAME = "poly_go_db"

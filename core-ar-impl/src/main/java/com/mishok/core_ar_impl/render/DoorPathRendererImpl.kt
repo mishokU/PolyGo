@@ -2,6 +2,7 @@ package com.mishok.core_ar_impl.render
 
 import android.content.Context
 import android.util.Log
+import androidx.lifecycle.Observer
 import com.google.ar.core.Anchor
 import com.google.ar.sceneform.AnchorNode
 import com.google.ar.sceneform.math.Quaternion
@@ -10,12 +11,14 @@ import com.google.ar.sceneform.rendering.Renderable
 import com.google.ar.sceneform.rendering.ViewRenderable
 import com.google.ar.sceneform.ux.ArFragment
 import com.google.ar.sceneform.ux.TransformableNode
+import com.mishok.core_ar_api.domain.DoorPathRepository
 import com.mishok.core_ar_api.renderer.DoorPathRenderer
 import com.mishok.core_ar_impl.R
+import kotlinx.coroutines.CoroutineScope
 import javax.inject.Inject
 
 class DoorPathRendererImpl @Inject constructor(
-
+    private val doorPathRepository: DoorPathRepository
 ) : DoorPathRenderer {
 
     private lateinit var fragment: ArFragment
@@ -31,18 +34,16 @@ class DoorPathRendererImpl @Inject constructor(
         drawItemDoorPath()
     }
 
-    override fun calculatePath(): List<Pair<Float, Float>> {
-        return listOf(
-            Pair(0f, 0f),
-            Pair(1f, 1f)
-        )
-    }
-
     override fun drawItems(viewRenderable: ViewRenderable) {
-        val path = calculatePath()
-        path.forEach { position ->
-            addNodeToScene(viewRenderable, position = position)
-        }
+        doorPathRepository.getDoorPathByBuildingId(0)
+        doorPathRepository.pathCoordinates.observe(fragment, { path ->
+            path.forEach { position ->
+                addNodeToScene(
+                    viewRenderable,
+                    position = Pair(position.xCoordinate, position.yCoordinate)
+                )
+            }
+        })
     }
 
     override fun drawItemDoorPath() {

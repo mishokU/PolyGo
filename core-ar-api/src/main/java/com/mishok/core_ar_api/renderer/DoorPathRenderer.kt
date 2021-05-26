@@ -9,8 +9,7 @@ interface DoorPathRenderer {
 
     fun init(fragment: ArFragment, context: Context, baseAnchor: Anchor?)
 
-    fun calculatePath(): List<Pair<Float, Float>>
-
     fun drawItems(viewRenderable: ViewRenderable)
+
     fun drawItemDoorPath()
 }

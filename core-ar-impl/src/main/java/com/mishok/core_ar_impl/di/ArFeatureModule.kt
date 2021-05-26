@@ -1,9 +1,11 @@
 package com.mishok.core_ar_impl.di
 
+import com.mishok.core_ar_api.domain.DoorPathRepository
 import com.mishok.core_ar_api.starter.ArModuleStarter
 import com.mishok.core_ar_api.renderer.BaseArRender
 import com.mishok.core_ar_impl.render.BaseArRenderImpl
 import com.mishok.core_ar_api.renderer.DoorPathRenderer
+import com.mishok.core_ar_impl.domain.DoorPathRepositoryImpl
 import com.mishok.core_ar_impl.render.DoorPathRendererImpl
 import com.mishok.core_ar_impl.starter.ArModuleStarterImpl
 import dagger.Binds
@@ -21,4 +23,6 @@ interface ArFeatureModule {
     @Binds
     fun bindDoorPathRenderable(impl: DoorPathRendererImpl): DoorPathRenderer
 
+    @Binds
+    fun bindDoorPathRepository(impl: DoorPathRepositoryImpl): DoorPathRepository
 }

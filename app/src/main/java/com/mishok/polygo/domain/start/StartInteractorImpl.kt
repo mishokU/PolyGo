@@ -3,12 +3,10 @@ package com.mishok.polygo.domain.start
 import android.content.SharedPreferences
 import com.google.android.gms.maps.MapFragment
 import com.mishok.core_db_api.models.LocalBuildingInfo
+import com.mishok.core_db_api.models.LocalBuildingPath
 import com.mishok.core_db_api.models.LocalBuildings
 import com.mishok.core_db_api.models.LocalEmployees
-import com.mishok.core_db_api.providers.BuildingFiltersProvider
-import com.mishok.core_db_api.providers.BuildingInfoProvider
-import com.mishok.core_db_api.providers.BuildingsProvider
-import com.mishok.core_db_api.providers.EmployeesProvider
+import com.mishok.core_db_api.providers.*
 import com.mishok.polygo.ui.map.MapsFragment
 import com.mishok.polygo.utils.putBoolean
 import dagger.internal.MapFactory
@@ -21,6 +19,7 @@ class StartInteractorImpl @Inject constructor(
     private val employeesProvider: EmployeesProvider,
     private val buildingInfoProvider: BuildingInfoProvider,
     private val sharedPreferencesProvider: SharedPreferences,
+    private val buildingPathProvider: BuildingPathProvider,
     private val buildingInfoFiltersProvider: BuildingFiltersProvider,
     private val coroutineScope: CoroutineScope
 ) : StartInteractor {
@@ -36,6 +35,7 @@ class StartInteractorImpl @Inject constructor(
                 employeesProvider.saveEmployees(listLocalEmployees())
                 buildingInfoProvider.saveBuildingInfo(listBuildingInside())
                 buildingsProvider.saveBuildings(listLocalBuildings())
+                buildingPathProvider.saveBuildingPaths(listBuildingPaths())
             }
         }
     }
@@ -156,6 +156,46 @@ class StartInteractorImpl @Inject constructor(
                 title = "ffejwe 111111",
                 location = "fejfweo 111111111",
                 saved = false
+            )
+        )
+    }
+
+    private fun listBuildingPaths(): List<LocalBuildingPath> {
+        return listOf(
+            LocalBuildingPath(
+                buildingId = 0,
+                xCoordinate = 60.00875936205342f,
+                yCoordinate = 30.370794098977107f
+            ),
+            LocalBuildingPath(
+                buildingId = 0,
+                xCoordinate = 60.008658f,
+                yCoordinate = 30.370942f
+            ),
+            LocalBuildingPath(
+                buildingId = 0,
+                xCoordinate = 60.008611f,
+                yCoordinate = 30.371230f
+            ),
+            LocalBuildingPath(
+                buildingId = 0,
+                xCoordinate = 60.008591f,
+                yCoordinate = 30.371385f
+            ),
+            LocalBuildingPath(
+                buildingId = 0,
+                xCoordinate = 60.008489f,
+                yCoordinate = 30.371407f
+            ),
+            LocalBuildingPath(
+                buildingId = 0,
+                xCoordinate = 60.008401f,
+                yCoordinate = 30.371351f
+            ),
+            LocalBuildingPath(
+                buildingId = 0,
+                xCoordinate = 60.008314f,
+                yCoordinate = 30.371293f
             )
         )
     }

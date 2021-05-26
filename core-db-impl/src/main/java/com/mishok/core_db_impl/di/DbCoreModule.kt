@@ -31,4 +31,7 @@ class DbCoreModule {
     @Provides
     fun provideBuildingFiltersDao(db: PolyGoDatabase) = db.buildingFiltersDao()
 
+    @Provides
+    fun provideBuildingPathDao(db: PolyGoDatabase) = db.buildingPathDao()
+
 }

@@ -23,4 +23,7 @@ interface DbProvidersModule {
     @Binds
     fun bindBuildingFiltersProvider(impl: BuildingFiltersProviderImpl): BuildingFiltersProvider
 
+    @Binds
+    fun bindBuildingPathProvider(impl: BuildingPathProviderImpl): BuildingPathProvider
+
 }

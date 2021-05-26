@@ -8,19 +8,21 @@ import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import com.mishok.core_api.di.GooglePlayAvailable
 import com.mishok.core_api.utils.AppCodeProvider
+import com.mishok.core_api.utils.CoroutineScopeMain
 import com.mishok.core_api.utils.LocaleManager
 import com.mishok.core_api.utils.PolyGoLocationManager
 import com.mishok.core_impl.utils.LocaleManagerImpl
 import com.mishok.core_impl.utils.PolyGoLocationManagerImpl
 import dagger.Module
 import dagger.Provides
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import javax.inject.Singleton
 
 
 @Module
 class CoreModule {
 
-    @Module
     companion object {
 
         @Provides
@@ -52,11 +54,18 @@ class CoreModule {
             PolyGoLocationManagerImpl(context)
 
         @Provides
-        @JvmStatic
         @GooglePlayAvailable
         fun providePlayServicesAvailability(context: Context): Boolean {
             return GoogleApiAvailability.getInstance()
                 .isGooglePlayServicesAvailable(context) == ConnectionResult.SUCCESS
         }
+
+        @Provides
+        @Singleton
+        fun provideCoroutineScopeIO(): CoroutineScope = CoroutineScope(Dispatchers.IO)
+
+        @CoroutineScopeMain
+        @Provides
+        fun provideCoroutineScopeMain(): CoroutineScope = CoroutineScope(Dispatchers.Main)
     }
 }

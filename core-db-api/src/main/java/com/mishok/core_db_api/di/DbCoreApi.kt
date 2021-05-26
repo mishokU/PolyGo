@@ -13,4 +13,7 @@ interface DbCoreApi {
     fun buildingInfoProvider(): BuildingInfoProvider
 
     fun buildingFilterProvider(): BuildingFiltersProvider
+
+    fun buildingPathProvider(): BuildingPathProvider
+
 }

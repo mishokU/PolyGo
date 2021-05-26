@@ -10,7 +10,6 @@ import javax.inject.Singleton
 @Module
 class AppModule {
 
-    @Module
     companion object {
 
         @Provides
