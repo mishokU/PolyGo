@@ -1,12 +1,15 @@
+rootProject.name = "PolyGo"
+
 include(
         ":app",
         ":core-api",
+        ":core-ar-api",
+        ":core-ar-impl",
+        ":core-components",
+        ":common-registry",
+        ":core-db-impl",
+        ":core-db-api",
         ":core-impl"
 )
-rootProject.name = "PolyGo"
-include ':core-ar-api'
-include ':core-ar-impl'
-include ':core-db-api'
-include ':core-db-impl'
-include ':common-registry'
-include ':core-components'
+
+

@@ -1,0 +1,32 @@
+ext {
+    versions = [
+            kotlin: "1.5.0",
+            dagger: "2.27",
+            room: "2.2.5",
+            material: "1.0.0",
+            sceneForm: "1.17.1",
+            appcompat: "1.4.0-alpha02",
+            gradle: "7.0.0-beta03"
+    ]
+
+    libraries = [
+            kotlinSdk: "androidx.core:core-ktx:${versions.kotlin}",
+            lifecycleSdk: "",
+            roomSdk: "",
+            daggerSdk: "",
+            materialSdk: "",
+            composeSdk: "",
+            appCompatSdk: "androidx.appcompat:appcompat:${versions.appcompat}",
+    ]
+//    kotlin_version = '1.4.32'
+//    lifecycleVersion = '2.2.0'
+//    roomVersion = '2.2.5'
+//    dagger = '2.27'
+//    navigationVersion = "2.0.0"
+//    fabricVersion = '1.25.4'
+//    threetenabpVersion = '1.2.3'
+//    threetenbpVersion = '1.4.3'
+//    materialVersion = '1.0.0'
+//    timberVersion = "4.7.1"
+//    compose_version = '1.0.0-beta01'
+}

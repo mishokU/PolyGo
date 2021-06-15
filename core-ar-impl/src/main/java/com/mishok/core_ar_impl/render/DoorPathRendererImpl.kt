@@ -37,10 +37,18 @@ class DoorPathRendererImpl @Inject constructor(
     override fun drawItems(viewRenderable: ViewRenderable) {
         doorPathRepository.getDoorPathByBuildingId(0)
         doorPathRepository.pathCoordinates.observe(fragment, { path ->
-            path.forEach { position ->
+            val list = listOf(
+                Pair(0f, 0f),
+                Pair(0f, 1f),
+                Pair(0f, 2f),
+                Pair(0f, 3f),
+                Pair(0f, 4f),
+                Pair(0.5f, 4f),
+            )
+            list.forEach { position ->
                 addNodeToScene(
                     viewRenderable,
-                    position = Pair(position.xCoordinate, position.yCoordinate)
+                    position = Pair(position.first, position.second)
                 )
             }
         })

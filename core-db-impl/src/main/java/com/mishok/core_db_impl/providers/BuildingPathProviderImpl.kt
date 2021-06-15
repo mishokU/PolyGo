@@ -4,6 +4,7 @@ import com.mishok.core_db_api.models.LocalBuildingPath
 import com.mishok.core_db_api.providers.BuildingPathProvider
 import com.mishok.core_db_impl.dao.BuildingPathDao
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class BuildingPathProviderImpl @Inject constructor(
@@ -15,7 +16,7 @@ class BuildingPathProviderImpl @Inject constructor(
     }
 
     override fun getPathByBuildingId(buildingId: Long): Flow<List<LocalBuildingPath>> {
-        return buildingPathDao.getPathByBuildingId(buildingId)
+        return buildingPathDao.getPathByBuildingId(buildingId).map { it }
     }
 
 }

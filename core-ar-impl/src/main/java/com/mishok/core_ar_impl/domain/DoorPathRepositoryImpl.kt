@@ -9,6 +9,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class DoorPathRepositoryImpl @Inject constructor(
@@ -22,7 +23,9 @@ class DoorPathRepositoryImpl @Inject constructor(
     override fun getDoorPathByBuildingId(buildingId: Long) {
         CoroutineScope(Dispatchers.IO).launch {
             buildingPathProvider.getPathByBuildingId(buildingId).collect {
-                _pathCoordinates.postValue(it)
+                withContext(Dispatchers.Main) {
+                    _pathCoordinates.value = it
+                }
             }
         }
     }

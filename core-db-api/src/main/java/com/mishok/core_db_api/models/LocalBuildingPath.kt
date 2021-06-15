@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey
 data class LocalBuildingPath(
 
     @ColumnInfo(name = COLUMN_ID)
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
 
     @ColumnInfo(name = COLUMN_BUILDING_ID)
