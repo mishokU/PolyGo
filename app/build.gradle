@@ -7,14 +7,16 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
+
+    compileSdkVersion versions.compile
+
     buildToolsVersion "30.0.2"
 
     defaultConfig {
         testApplicationId "ru.mishok.polygo.test"
         applicationId "com.mishok.polygo"
-        minSdkVersion 24
-        targetSdkVersion 30
+        minSdkVersion versions.min
+        targetSdkVersion versions.target
         versionCode 1
         versionName "1.0."
 
@@ -44,8 +46,11 @@ android {
         targetCompatibility JavaVersion.VERSION_11
     }
 
+    packagingOptions {
+        exclude "META-INF/DEPENDENCIES"
+    }
+
     buildFeatures {
-        compose true
         viewBinding true
     }
 
@@ -57,12 +62,6 @@ android {
         jvmTarget = JavaVersion.VERSION_11.toString()
         useIR = true
     }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion '1.0.0-beta01'
-        kotlinCompilerVersion '1.4.32'
-    }
-    dynamicFeatures = [':buildSrc']
 }
 
 kotlin {
@@ -79,7 +78,6 @@ apply from: '../dependencies.gradle'
 
 dependencies {
 
-
     implementation project(':core-api')
     implementation project(':core-impl')
     implementation project(':core-db-api')
@@ -90,97 +88,40 @@ dependencies {
     implementation project(':core-components')
 
     implementation libraries.kotlinSdk
-    implementation 'androidx.appcompat:appcompat:1.4.0-alpha02'
-    implementation 'com.google.android.material:material:1.3.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation libraries.appCompatSdk
+    implementation libraries.materialSdk
+    implementation libraries.navigationFragmentSdk
+    implementation libraries.navigaitonUISdk
+    implementation libraries.roomRuntimeSdk
+    implementation libraries.roomSdk
+    implementation libraries.googleMapsSdk
+    implementation libraries.lifecycleSdk
+    implementation libraries.googleTagManagerSdk
+    implementation libraries.firebaseDatabaseSdk
+    implementation libraries.googleBaseSdk
+    implementation libraries.daggerAndroidSdk
+    implementation libraries.daggerAndroidSupportSdk
+    implementation libraries.daggerSdk
+    implementation libraries.circleImageViewSdk
+    implementation libraries.lottieSdk
+    implementation libraries.glideSdk
+    implementation libraries.firebaseCrashSdk
+    implementation libraries.lifecycleExtentionSdk
+    implementation libraries.lifecycleLiveDataSdk
+    implementation libraries.lifecycleViewModelSdk
+    implementation libraries.rxBindingSdk
+    implementation libraries.rxPermissionsSdk
+    implementation libraries.yandexMapKitSdk
+    implementation libraries.yandexMapDirectionsSdk
+    implementation libraries.yandexMapPlacesSdk
+    implementation libraries.delegateAdapterSdk
+    implementation libraries.timberSdk
 
-    // UI
-    implementation "com.google.android.material:material:1.3.0"
+    kapt libraries.roomCompilerSdk
+    kapt libraries.daggerCompilerSdk
+    kapt libraries.daggerAndroidProcessorSdk
+    kapt libraries.lifecycleCompilerSdk
+    kapt libraries.glideCompilerSdk
 
-
-    //Navigation
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
-
-    //Room
-    implementation "androidx.room:room-runtime:2.2.5"
-    implementation "androidx.room:room-ktx:2.2.5"
-    implementation 'com.google.android.gms:play-services-maps:17.0.1'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
-    implementation 'com.google.android.gms:play-services-tagmanager-v4-impl:17.0.0'
-    implementation 'com.google.firebase:firebase-database:20.0.0'
-
-    kapt "androidx.room:room-compiler:2.2.5"
-
-    implementation 'com.google.android.gms:play-services-base:17.6.0'
-
-    //Dagger
-    implementation "com.google.dagger:dagger-android:2.35.1"
-    implementation "com.google.dagger:dagger-android-support:2.35.1"
-    implementation "com.google.dagger:dagger:2.35.1"
-
-    kapt "com.google.dagger:dagger-compiler:2.33"
-    kapt "com.google.dagger:dagger-android-processor:2.27"
-
-    //For circle images
-    implementation 'de.hdodenhof:circleimageview:3.1.0'
-
-    //Lottie files
-    implementation "com.airbnb.android:lottie:3.0.0"
-
-    //Glide
-    implementation 'com.github.bumptech.glide:glide:4.11.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
-    kapt 'com.github.bumptech.glide:compiler:4.11.0'
-
-    // Add the Firebase Crashlytics SDK.
-    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.0.1'
-
-    // ViewModel and LiveData
-    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
-
-    implementation 'com.jakewharton.rxbinding4:rxbinding:4.0.0'
-
-    //noinspection LifecycleAnnotationProcessorWithJava8
-    kapt 'androidx.lifecycle:lifecycle-compiler:2.3.1'
-
-    //Android runtime permissions
-    implementation 'com.markodevcic:peko:2.1.2'
-
-    // Основная библиотека MapKit.
-    implementation 'com.yandex.android:mapkit:3.5.0'
-    implementation 'com.yandex.android:directions:3.3.1'
-    implementation 'com.yandex.android:places:3.3.1'
-
-    implementation 'com.hannesdorfmann:adapterdelegates4-kotlin-dsl:4.3.0'
-
-    //Compose
-    implementation 'androidx.compose.ui:ui:1.0.0-beta08'
-    // Tooling support (Previews, etc.)
-    implementation 'androidx.compose.ui:ui-tooling:1.0.0-beta08'
-    // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
-    implementation 'androidx.compose.foundation:foundation:1.0.0-beta08'
-    // Material Design
-    implementation 'androidx.compose.material:material:1.0.0-beta08'
-    // Material design icons
-    implementation 'androidx.compose.material:material-icons-core:1.0.0-beta08'
-    implementation 'androidx.compose.material:material-icons-extended:1.0.0-beta08'
-    // Integration with activities
-    implementation 'androidx.activity:activity-compose:1.3.0-beta01'
-    // Integration with ViewModels
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha06'
-    // Integration with observables
-    implementation 'androidx.compose.runtime:runtime-livedata:1.0.0-beta08'
-    implementation 'androidx.compose.runtime:runtime-rxjava2:1.0.0-beta08'
-    //Compose animation
-    implementation "androidx.compose.animation:animation:1.0.0-beta08"
-
-    // UI Tests
-    androidTestImplementation 'androidx.compose.ui:ui-test-junit4:1.0.0-beta08'
-
-    implementation 'com.jakewharton.timber:timber:4.7.1'
-
+    annotationProcessor libraries.glideCompilerSdk
 }

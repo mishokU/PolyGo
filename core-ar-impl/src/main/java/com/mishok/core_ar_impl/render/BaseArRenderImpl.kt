@@ -1,6 +1,8 @@
 package com.mishok.core_ar_impl.render
 
 import android.content.Context
+import android.graphics.Point
+import android.net.Uri
 import com.google.ar.sceneform.AnchorNode
 import com.google.ar.sceneform.rendering.ModelRenderable
 import com.google.ar.sceneform.rendering.Renderable
@@ -11,7 +13,11 @@ import javax.inject.Inject
 import com.google.ar.sceneform.FrameTime
 
 import android.util.Log
+import android.view.View
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.google.ar.core.*
+import com.google.ar.sceneform.assets.RenderableSource
 import com.google.ar.sceneform.math.Vector3
 import com.google.ar.sceneform.rendering.ViewRenderable
 import com.mishok.core_ar_api.renderer.BaseArRender
@@ -27,13 +33,15 @@ class BaseArRenderImpl @Inject constructor(
     private var doorRenderable: ViewRenderable? = null
     private var baseAnchor: Anchor? = null
 
+    lateinit var baseFragment: Fragment
     lateinit var fragment: ArFragment
     lateinit var context: Context
 
     var doorPressed = false
 
-    override fun initRender(arFragment: ArFragment, context: Context) {
+    override fun initRender(arFragment: ArFragment, fragment: Fragment, context: Context) {
         this.fragment = arFragment
+        this.baseFragment = fragment
         this.context = context
     }
 
@@ -44,6 +52,46 @@ class BaseArRenderImpl @Inject constructor(
     override fun drawDoor() {
         doorPressed = true
         doorRenderable = null
+    }
+
+    private fun getScreenCenter(): Point {
+        return Point(512 / 2, 512 / 2)
+    }
+
+    override fun addObject(model: Uri) {
+        val frame = fragment.arSceneView.arFrame
+        val point = getScreenCenter()
+        if (frame != null) {
+            val hits = frame.hitTest(point.x.toFloat(), point.y.toFloat())
+            for (hit in hits) {
+                val trackable = hit.trackable
+                if (trackable is Plane && trackable.isPoseInPolygon(hit.hitPose)) {
+                    placeObject(fragment, hit.createAnchor(), model)
+                    break
+                }
+            }
+        }
+    }
+
+    private fun placeObject(fragment: ArFragment, anchor: Anchor, model: Uri) {
+        ModelRenderable.builder()
+            .setSource(
+                fragment.context, RenderableSource.builder().setSource(
+                    fragment.context,
+                    model,
+                    RenderableSource.SourceType.GLTF2
+                ).build()
+            )
+            .setRegistryId(model)
+            .build()
+            .thenAccept {
+                addNodeToScene(fragment, anchor, it)
+            }
+            .exceptionally {
+                Toast.makeText(context, "Could not fetch model from $model", Toast.LENGTH_SHORT)
+                    .show()
+                return@exceptionally null
+            }
     }
 
     override fun drawNearBuildingDoor() {
@@ -101,6 +149,16 @@ class BaseArRenderImpl @Inject constructor(
     private fun createViewRenderable(renderable: ViewRenderable?): Renderable? {
         doorRenderable = renderable
         return doorRenderable
+    }
+
+    private fun addNodeToScene(fragment: ArFragment, anchor: Anchor, renderable: ModelRenderable) {
+        val anchorNode = AnchorNode(anchor)
+        // TransformableNode means the user to move, scale and rotate the model
+        val transformableNode = TransformableNode(fragment.transformationSystem)
+        transformableNode.renderable = renderable
+        transformableNode.setParent(anchorNode)
+        fragment.arSceneView.scene.addChild(anchorNode)
+        transformableNode.select()
     }
 
     /***

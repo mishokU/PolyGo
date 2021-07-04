@@ -1,25 +1,17 @@
-plugins {
-    id 'com.android.library'
-    id 'kotlin-android'
-    id 'kotlin-kapt'
-}
-
-apply from: '../dependencies.gradle'
+apply from: "../androidLibrary.gradle"
 
 dependencies {
-    //Dagger
-    implementation "com.google.dagger:dagger-android:2.27"
-    implementation "com.google.dagger:dagger-android-support:2.27"
-    implementation "com.google.dagger:dagger:2.33"
 
-    kapt "com.google.dagger:dagger-compiler:2.33"
-    kapt "com.google.dagger:dagger-android-processor:2.27"
+    implementation libraries.daggerSdk
+    implementation libraries.daggerAndroidSdk
+    implementation libraries.daggerAndroidSupportSdk
+    implementation libraries.appCompatSdk
+    implementation libraries.materialSdk
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:${versions.kotlin}"
-    implementation 'androidx.core:core-ktx:1.5.0'
-    implementation 'androidx.appcompat:appcompat:1.3.0'
-    implementation 'com.google.android.material:material:1.3.0'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    kapt libraries.daggerCompilerSdk
+    kapt libraries.daggerAndroidProcessorSdk
+
+    testImplementation testLibraries.jUnitSdk
+    androidTestImplementation testLibraries.androidJUnitSdk
+    androidTestImplementation testLibraries.androidEspressoSdk
 }

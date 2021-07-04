@@ -3,6 +3,7 @@ package com.mishok.core_ar_impl.ui
 import android.app.Activity
 import android.app.ActivityManager
 import android.content.Context
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -59,7 +60,7 @@ class PolyGoArFragment : Fragment() {
         arFragment.apply {
             arSceneView.planeRenderer.isVisible = true
             planeDiscoveryController.hide()
-            render.initRender(arFragment, requireContext())
+            render.initRender(arFragment, this@PolyGoArFragment, requireContext())
             render.start()
         }
     }
@@ -74,7 +75,7 @@ class PolyGoArFragment : Fragment() {
         }
 
         myLocationArButton.setOnClickListener {
-
+            render.addObject(Uri.parse(modelPath))
         }
     }
 
@@ -106,6 +107,8 @@ class PolyGoArFragment : Fragment() {
     }
 
     companion object {
+        private val modelPath =
+            "https://poly.googleusercontent.com/downloads/0BnDT3T1wTE/85QOHCZOvov/Mesh_Beagle.gltf"
         private val TAG: String = PolyGoArFragment::class.java.simpleName
         private val MIN_OPENGL_VERSION = 3.0
     }

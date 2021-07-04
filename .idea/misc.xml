@@ -4,8 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/PolyGo/app/src/main/res/drawable/ic_door_img.xml" value="0.28229166666666666" />
+        <entry key="..\:/PolyGo/app/src/main/res/drawable/ic_explore_white_24dp.xml" value="0.2703125" />
         <entry key="..\:/PolyGo/app/src/main/res/drawable/ic_launcher_polygo_background.xml" value="0.2703125" />
         <entry key="..\:/PolyGo/app/src/main/res/drawable/ic_reset_button.xml" value="0.1734375" />
+        <entry key="..\:/PolyGo/app/src/main/res/layout/activity_test_main.xml" value="0.25416666666666665" />
         <entry key="..\:/PolyGo/app/src/main/res/layout/fragment_bookmarks.xml" value="0.25416666666666665" />
         <entry key="..\:/PolyGo/app/src/main/res/layout/fragment_bottom_sheet_building.xml" value="0.25416666666666665" />
         <entry key="..\:/PolyGo/app/src/main/res/layout/fragment_bottom_sheet_item.xml" value="0.264" />

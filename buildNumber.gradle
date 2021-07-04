@@ -1,0 +1,4 @@
+ext.getBuildNumber = {
+    def executed = 'git rev-list --count HEAD'.execute().text
+    executed == "" ? 1 : executed.toInteger()
+}
