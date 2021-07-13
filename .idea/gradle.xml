@@ -20,6 +20,8 @@
             <option value="$PROJECT_DIR$/core-db-api" />
             <option value="$PROJECT_DIR$/core-db-impl" />
             <option value="$PROJECT_DIR$/core-impl" />
+            <option value="$PROJECT_DIR$/feature-stream-api" />
+            <option value="$PROJECT_DIR$/feature-stream-impl" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

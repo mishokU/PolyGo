@@ -13,3 +13,5 @@ include(
 )
 
 
+include ':feature-stream-api'
+include ':feature-stream-impl'
