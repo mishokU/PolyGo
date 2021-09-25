@@ -16,8 +16,6 @@ import android.os.ParcelFileDescriptor;
 import android.util.Log;
 
 
-import com.mishok.feature_stream_impl.org.appspot.apprtc.util.VideoRenderer;
-
 import org.webrtc.AudioSource;
 import org.webrtc.AudioTrack;
 import org.webrtc.CameraVideoCapturer;
@@ -43,6 +41,7 @@ import org.webrtc.StatsReport;
 import org.webrtc.VideoCapturer;
 import org.webrtc.VideoDecoderFactory;
 import org.webrtc.VideoEncoderFactory;
+import org.webrtc.VideoRenderer;
 import org.webrtc.VideoSink;
 import org.webrtc.VideoSource;
 import org.webrtc.VideoTrack;
